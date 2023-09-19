@@ -17,10 +17,11 @@
 \setcounter{tocdepth}{3}
 
 \logo{logo-blue.png}
-\cover{cover.png}
+\cover{cover_0913.png}
 
 % 本文档命令
 \usepackage{array}
+\usepackage{arydshln}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 
 % 修改标题页的橙色带
@@ -42,11 +43,138 @@
 
 \mainmatter
 
-\chapter{线性代数}
+\chapter{矩阵与变换}
 
-本部分扩展自\href{https://github.com/afshinea/stanford-cs-229-machine-learning/blob/master/zh/refresher-algebra-calculus.pdf}{斯坦福大学CS229小抄《线性代数与微积分复习》}。
+\begin{introduction}
+  \item 从方程组到矩阵
+  \item 从线性变换到矩阵
+  \item 矩阵的运算
+  \item 矩阵的性质
+\end{introduction}
 
+参考资料：
+\begin{enumerate}
+    \item \href{https://github.com/afshinea/stanford-cs-229-machine-learning/blob/master/zh/refresher-algebra-calculus.pdf}{Machine Learning cheatsheets for Stanford's CS 229 - VIP Refresher: Linear Algebra and Calculus};
+    \item \href{https://math.mit.edu/~gs/linearalgebra/ila5/indexila5.html}{Introduction to Linear Algebra, Fifth Edition (2016)};
+    \item 高中数学人教版选修4-2:矩阵与变换.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{从方程组到矩阵}
+\label{sec:origin_of_matrix}
+
+\begin{note}
+本节旨在帮助学生了解矩阵产生的原因，它源于人们在解方程组时对简洁表达的需求。
+\end{note}
+
+\subsection{高斯消元法}
+\label{subsec:origin_of_matrix-from_equation-set-to-matrix}
+
+考虑以下二元一次方程组:
+
+\[
+\left\{
+\begin{array}{l}
+2x_1 + 3x_2 = 5\\
+4x_1 + 5x_2 = 7
+\end{array}
+\right.
+\]
+
+对应的系数矩阵和增广矩阵分别是:
+
+\[
+A=\left(\begin{array}{ll}
+2 & 3 \\
+4 & 5
+\end{array}\right),
+[A \mid B]=\left(\begin{array}{cc|c}
+2 & 3 & 5 \\
+4 & 5 & 7
+\end{array}\right)
+\]
+
+下面，我们在增广矩阵实施高斯消元法，从而达到解方程的目的:
+
+\begin{enumerate}
+    \item 首先,我们用第一行的系数来将第二行的系数化为$0$,具体操作如下:
+    \begin{enumerate}
+        \item 用第二行的第一个系数$4$除以第一行的第一个系数$2$,得到商数$2$;
+        \item 将第一行整体乘以此商数（$2$）,得到$(4,6,10)$;
+        \item 再用第二行减去第一行,则第二行的第一个元素变为$0$。这时增广矩阵变为：
+        \[
+        \left(\begin{array}{cc|c}
+        2 & 3 & 5 \\
+        0 & -1 & -3
+        \end{array}\right)
+        \]
+        \item 在第二行两边乘以$-1$
+    \end{enumerate}
+    \item 现在用第二行中$x_2$的系数来将第一行中$x_2$的系数化为$0$，具体操作如下：
+    \begin{enumerate}
+        \item 用第一行的第二个系数$3$除以第二行的第二个系数$1$，得到商数$3$;
+        \item 将第二行整体乘以此商数（$3$）,得到$(0,3,9)$;
+        \item 再用第一行减去第二行,则第一行的第二个元素变为$0$。这时增广矩阵变为：
+        \[
+        \left(\begin{array}{cc|c}
+        2 & 0 & -4 \\
+        0 & 1 & 3
+        \end{array}\right)
+        \]
+        \item 在第一行两边乘以$\frac{1}{2}$，得到增广矩阵：
+        \[
+        \left(\begin{array}{cc|c}
+        1 & 0 & -2 \\
+        0 & 1 & 3
+        \end{array}\right)
+        \]
+    \end{enumerate}
+\end{enumerate}
+
+该式还原为方程组为
+
+\[
+\left\{
+\begin{array}{l}
+1 \cdot x_1 + 0 \cdot x_2 = -2\\
+0 \cdot x_1 + 1\cdot x_2 = 3
+\end{array}
+\right.
+\]
+
+
+最终得到$x_1=-2$，$x_2=3$，这就是原方程组的解。
+
+矩阵提供了一种组织方程组系数的方式，通过矩阵运算可以方便地求解方程组。这启发了矩阵理论的产生和发展。
+
+\subsection{使用Python解方程组}
+\label{subsec:origin_of_matrix-solve-equation-set-with-python}
+
+使用Python可以很轻松地解出第\ref{subsec:origin_of_matrix-from_equation-set-to-matrix}节中的方程组。
+
+\begin{lstlisting}[language=python]
+import numpy as np
+
+# 定义系数矩阵
+A = np.array([[2, 3], [4, 5]])
+
+# 定义常数向量
+b = np.array([5, 7])
+
+# 使用线性代数模块中的solve函数求解方程组
+x = np.linalg.solve(A, b)
+
+# 打印解向量
+print("解向量 x:", x)
+# 解向量 x: [-2.  3.]
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{通用符号}
+
+\begin{note}
+    本节最重要却最容易忽略的一点：数学文本中，如无特殊说明，则一般认为向量都是\textcolor{red}{列向量}。
+\end{note}
 
 \subsection{向量}
 我们记$\boldsymbol{x}\in \mathbb{R}^n$为一个 $n$ 维的向量, 其中 $x_i \in \mathbb{R}$ 是第 $i$ 维的元素:
@@ -130,7 +258,108 @@ $$
 
 被称为上三角矩阵。
 
-\section{矩阵运算}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{从线性变换到矩阵}
+%参考高中数学选修4-2中的例子
+
+\begin{note}
+    本节的核心观点：矩阵与线性变换通过一次方程组建立联系。
+\end{note}
+
+本节将以矩阵为工具, 研究一些几何变换, 并以平面图形的变换为背景, 讨论二阶矩阵的乘法及性质, 用变换的观点理解解二元一次方程组的意义, 初步展示矩阵应用的广泛性。
+
+\subsection{旋转变换}
+
+如图 \ref{fig:旋转变换} 所示, 在直角坐标系 $O x y$ 内, 每个点都绕原点 $O$ 按逆时针方向旋转 $180^{\circ}$. 设点 $P(x, y)$ 经过旋转后变成点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$，则 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=-x, \\
+y^{\prime}=-y .
+\end{array}\right.
+\label{eq:旋转变换}
+\end{equation}
+
+我们将式(\ref{eq:旋转变换})称为旋转角为 $180^{\circ}$ 的旋转变换的表达式, 它建 立了平面内的每个点 $P$ 到其对应点 $P^{\prime}$ 的对应关系, 我们称 $P^{\prime}$ 是 $P$ 在这个旋转变换作用下的像.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % 绘制坐标轴
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+    
+    % 绘制旋转前的点P
+    \coordinate (P) at (1,1);
+    \fill (P) circle (2pt) node[anchor=south west] {$P(x, y)$};
+    
+    % 绘制旋转后的点P'
+    \coordinate (P') at (-1,-1);
+    \fill (P') circle (2pt) node[anchor=north east] {$P'(x', y')$};
+    
+    % 绘制连接线和旋转弧
+    \draw[dashed] (P) -- (P');
+    \draw[->] (0,0) +(45:0.3) arc (45:225:0.3);
+    
+    % 添加标签
+    \node at (-0.5,0.5) {$180^\circ$};
+\end{tikzpicture}
+\caption{旋转变换示意图\label{fig:旋转变换}}
+\end{figure}
+
+我们可以对式\ref{eq:旋转变换}进行简单改写，如式\ref{eq:旋转变换的方程}所示：
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=-1 \cdot x + 0\cdot y, \\
+y^{\prime}= 0\cdot x + -1 \cdot y .
+\end{array}\right.
+\label{eq:旋转变换的方程}
+\end{equation}
+
+故其系数矩阵为：
+
+\begin{equation}
+\left(\begin{array}{rr}
+-1  & 0 \\
+0  & -1
+\end{array}\right)
+\label{eq:旋转变换示例矩阵}
+\end{equation}
+
+显然，在二维平面内旋转$180^{\circ}$这一变换可以由式\ref{eq:旋转变换示例矩阵}唯一确定。反过来，该矩阵也可以唯一确定这个变换。因此我们把这个矩阵称为该变换对应的\textcolor{third}{\bf 变换矩阵}。
+
+\begin{exercise}
+ 
+在直角坐标系 $O x y$ 内, 将每个点绕原点 $O$ 按逆时针方向旋转 $30^{\circ}$ 的变换称为旋转角是 $30^{\circ}$ 的旋转变换.
+
+\begin{itemize}
+    \item 求点 $A(1,0)$ 在这个旋转变换作用下的像 $A^{\prime}$;
+    \item 写出这个旋转变换的表达式.
+\end{itemize}
+\end{exercise}
+
+\begin{solution}
+\begin{itemize}
+    \item 点 $A(1,0)$ 在这个旋转变换作用下的像为$A^{\prime}\left(\frac{\sqrt{3}}{2}, \frac{1}{2}\right)$;
+    \item $\left\{\begin{array}{l}x^{\prime}=\frac{\sqrt{3}}{2} x-\frac{1}{2} y, \\ y^{\prime}=\frac{1}{2} x+\frac{\sqrt{3}}{2} y .\end{array}\right.$
+\end{itemize}
+\end{solution}
+
+\vspace{0.5cm}
+
+事实上, 在直角坐标系 $O x y$ 内, 将任意一点$P(x, y)$绕原点 $O$ 按逆时针方向旋转 $\alpha$ 角得到点$P^{\prime}(x^{\prime}, y^{\prime})$的旋转变换的坐标变换公式是
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=x \cos \alpha-y \sin \alpha, \\
+y^{\prime}=x \sin \alpha+y \cos \alpha .
+\end{array}\right.    
+\end{equation}
+
+
+
+\section{矩阵的运算}
 
 \begin{note}
 这一节主要是要让学生明白向量/矩阵的乘法核心是\textcolor{red}{“行乘列”}。
@@ -322,6 +551,8 @@ AB = \begin{bmatrix}
 
 \textcolor{red}{\bf 讲到这里记得回去解释单位矩阵的定义。}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{矩阵算子}
 
 \subsection{矩阵的转置}
