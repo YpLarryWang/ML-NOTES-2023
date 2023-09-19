@@ -67,34 +67,119 @@
 本节旨在帮助学生了解矩阵产生的原因，它源于人们在解方程组时对简洁表达的需求。
 \end{note}
 
-\subsection{高斯消元法}
-\label{subsec:origin_of_matrix-from_equation-set-to-matrix}
+\subsection{二元一次方程组}
+\label{subsec:二元一次方程组}
 
-考虑以下二元一次方程组:
+让我们首先回顾一下二元一次方程组的基本概念。一个二元一次方程组由两个含有两个变量的一次方程组成。一般形式如下：
 
-\[
+\begin{equation}
+\left\{
+\begin{array}{l}
+ax_1 + bx_2 = c\\
+dx_1 + ex_2 = f
+\end{array}
+\right.
+\label{eq:二元一次方程组通式}
+\end{equation}
+
+其中，\(x_1\) 和 \(x_2\) 是我们要找的未知数，而 \(a\)、\(b\)、\(c\)、\(d\)、\(e\) 和 \(f\) 是已知的常数。
+
+要解这样的方程组，我们通常会使用以下两种方法之一：
+\begin{enumerate}
+    \item \textbf{代数方法}：这种方法包括“代入法”和“消元法”。
+    \begin{enumerate}
+        \item 在代入法中，我们从一个方程中解出一个变量的表达式，然后将其代入另一个方程；
+        \item 在消元法中，我们通过加减两个方程来消除一个变量，从而找到另一个变量的值。
+    \end{enumerate}
+    \item \textbf{图形方法}：在这种方法中，我们将每个方程视为二维空间中的一条直线。方程组的解就是这两条直线的交点。
+\end{enumerate}
+
+
+下面，我们使用\textbf{消元法}来解以下二元一次方程组：
+
+\begin{equation}
 \left\{
 \begin{array}{l}
 2x_1 + 3x_2 = 5\\
 4x_1 + 5x_2 = 7
 \end{array}
 \right.
+\label{eq:二元一次方程组示例}
+\end{equation}
+
+我们的目标是找到满足这两个方程的\(x_1\)和\(x_2\)的值。我们可以通过以下步骤来实现这一目标：
+
+\begin{enumerate}
+    \item 首先，我们可以使用第一个方程来消去第二个方程中的\(x_1\)。为此，我们可以将第一个方程的两边都乘以2，得到新的方程：
+    \[
+    4x_1 + 6x_2 = 10
+    \]
+    \item 接着，我们将新得到的方程从第二个方程中减去，从而消去\(x_1\)：
+    \[
+    4x_1 + 5x_2 - (4x_1 + 6x_2) = 7 - 10
+    \]
+    这将给我们一个只包含\(x_2\)的方程：
+    \[
+    -x_2 = -3
+    \]
+    从中我们可以找到\(x_2\)的值：
+    \[
+    x_2 = 3
+    \]
+    \item 事实上，\(x_2 = 3\)可以看成一个方程，我们可以使用它来消去第一个方程中的\(x_2\)：
+    \[
+    (2x_1 + 3x_2) + (-3) \cdot x_2 = 5 + (-3) \cdot 3
+    \]
+    这将给我们：
+    \[
+    2x_1 = 5 - 9
+    \]
+    从中我们可以找到\(x_1\)的值：
+    \[
+    2x_1 = -4
+    \]
+    \[
+    x_1 = -2
+    \]
+\end{enumerate}
+
+所以，该方程组的解是：
+\[
+x_1 = -2, \quad x_2 = 3
 \]
 
-对应的系数矩阵和增广矩阵分别是:
 
-\[
-A=\left(\begin{array}{ll}
+在下一节中，我们将介绍如何使用高斯消元法和矩阵来更简洁地表达求解过程。
+
+\vspace{0.5cm}
+
+\begin{note}
+    用方程$\alpha$减去方程$\beta$指：用方程$\alpha$的左边减去方程$\beta$的左边，用方程$\alpha$的右边减去方程$\beta$的右边。
+\end{note}
+
+\subsection{系数矩阵和增广矩阵}
+\label{subsec:系数矩阵和增广矩阵}
+
+考虑二元一次方程组\ref{eq:二元一次方程组示例}。我们将方程组中方程的所有系数按照它们在整理好的方程中的位置取出来写成如式\ref{eq:系数矩阵示例}的一张数表。有了这张数表我们就可以更加简洁地表达方程组中未知数的系数，因此我们将其称为方程组的\textcolor{third}{\bf 系数矩阵}，我们将其记为大写字母$A$。
+
+\begin{equation}
+  A = \left(\begin{array}{ll}
 2 & 3 \\
 4 & 5
-\end{array}\right),
-[A \mid B]=\left(\begin{array}{cc|c}
+\end{array}\right)
+\label{eq:系数矩阵示例}
+\end{equation}
+
+如果我们在系数矩阵右边增加一列，用于记录方程的右端项（right hand side, RHS），并且用一根竖线隔开表示系数的数表和表示右端项的数列，得到的整个新数表称为方程组\ref{eq:二元一次方程组示例}的\textcolor{third}{\bf 增广矩阵}，如式\ref{eq:增广矩阵示例}所示：
+\begin{equation}
+    [A \mid B]=\left(\begin{array}{cc|c}
 2 & 3 & 5 \\
 4 & 5 & 7
 \end{array}\right)
-\]
+\label{eq:增广矩阵示例}
+\end{equation}
 
-下面，我们在增广矩阵实施高斯消元法，从而达到解方程的目的:
+下面，我们对增广矩阵实施第\ref{subsec:二元一次方程组}节中所使用的消元法，从而达到解方程的目的:
 
 \begin{enumerate}
     \item 首先,我们用第一行的系数来将第二行的系数化为$0$,具体操作如下:
@@ -102,12 +187,13 @@ A=\left(\begin{array}{ll}
         \item 用第二行的第一个系数$4$除以第一行的第一个系数$2$,得到商数$2$;
         \item 将第一行整体乘以此商数（$2$）,得到$(4,6,10)$;
         \item 再用第二行减去第一行,则第二行的第一个元素变为$0$。这时增广矩阵变为：
-        \[
-        \left(\begin{array}{cc|c}
+        \begin{equation}
+            \left(\begin{array}{cc|c}
         2 & 3 & 5 \\
         0 & -1 & -3
         \end{array}\right)
-        \]
+        \label{eq:行阶梯形矩阵}
+        \end{equation}
         \item 在第二行两边乘以$-1$
     \end{enumerate}
     \item 现在用第二行中$x_2$的系数来将第一行中$x_2$的系数化为$0$，具体操作如下：
@@ -122,12 +208,13 @@ A=\left(\begin{array}{ll}
         \end{array}\right)
         \]
         \item 在第一行两边乘以$\frac{1}{2}$，得到增广矩阵：
-        \[
-        \left(\begin{array}{cc|c}
+        \begin{equation}
+            \left(\begin{array}{cc|c}
         1 & 0 & -2 \\
         0 & 1 & 3
         \end{array}\right)
-        \]
+        \label{eq:简化行阶梯形矩阵}
+        \end{equation}
     \end{enumerate}
 \end{enumerate}
 
@@ -145,12 +232,57 @@ A=\left(\begin{array}{ll}
 
 最终得到$x_1=-2$，$x_2=3$，这就是原方程组的解。
 
-矩阵提供了一种组织方程组系数的方式，通过矩阵运算可以方便地求解方程组。这启发了矩阵理论的产生和发展。
+矩阵提供了一种组织方程组系数和常数项的方式，通过矩阵运算可以方便地求解方程组。这启发了矩阵理论的产生和发展。
+
+
+\subsection{高斯-若尔当消元法}
+\label{subsec:高斯-若尔当消元法}
+
+回顾我们在第\ref{subsec:系数矩阵和增广矩阵}节中的操作，我们在增广矩阵上进行消元法时，仅仅使用了两种操作：
+\begin{itemize}
+    \item 把某行乘以一非零常数；
+    \item 把第 $i$ 行加上第 $j$ 行的 $k$ 倍；
+\end{itemize}
+
+可见这些操作都是对矩阵的“行”进行的，因此我们称它们为\textcolor{third}{\bf 行变换}。
+
+注意到，在进行消元法的过程中，我们得到的增广矩阵\ref{eq:行阶梯形矩阵}的非零元素看起来像是一个“倒过来的楼梯”，其第一行左起第一个非零元下方都是零，第二行左起第一个非零元在第一行左起第一个非零元的右侧，我们称这样的矩阵是\textcolor{third}{\bf 行阶梯形矩阵}。
+
+\begin{definition}[行阶梯形矩阵]
+    如果一个矩阵满足下面的条件，我们称其为{\bf 行阶梯形矩阵}（Row Echelon Form）：
+    \begin{enumerate}
+        \item 所有仅包含零的行都位于矩阵的最底部；
+        \item 在每一个非零行中，最左边的非零元素（称主元）总是出现在上一行主元的右侧；
+        \item *包含非零元素的行中，首个非零元素必须为$1$.
+    \end{enumerate}
+    其中第三个条件是可选的，不同文献中有不同的定义方式，不必纠结。
+\end{definition}
+
+事实上，得到增广矩阵\ref{eq:行阶梯形矩阵}后，我们已经不再需要继续消元了。从第二行我们可以很容易的得到$-x_2=-3$，从而解出$x_2=3$。从第一行我们得到方程$2x_1+3x_2=5$，这时候我们使用\textbf{回代法}，将$x_2=3$代到方程$2x_1+3x_2=5$中得到$2x_1+3\cdot 3=5$，从而解出$x_1=-2$。
+
+一般地，我们称\textcolor{second}{“先通过行变换将矩阵化为上三角形，然后直接通过回代法找到方程组的解”}这样的解方程的方法为\textcolor{third}{\bf 高斯消元法}。可以证明，任何矩阵都可以通过高斯消元法转换为简化行阶梯形形式
+
+此外，当消元法进行到尾声时，我们得到的增广矩阵\ref{eq:简化行阶梯形矩阵}非常有特点，其每一行的第一个非零元素全是$1$，且这些行的第一个元素$1$所在列的其余元素全为零，我们称这样的矩阵是\textcolor{third}{\bf 简化行阶梯形矩阵}。显然，根据简化行阶梯形矩阵我们很容易得到方程组的解。
+
+\begin{definition}[简化行阶梯形]
+    如果一个矩阵满足下面的条件，我们称其为{\bf 简化行阶梯形}（Reduced Row Echelon Form, RREF）：
+\begin{enumerate}
+    \item 所有零行都位于矩阵的底部；
+    \item 在每一个非零行中，第一个非零元素（称主元）总是出现在上一行主元的右侧；
+    \item 每一个非零行的主元都是$1$；
+    \item \textcolor{red}{一个主元所在的列的其他元素都是$0$}。
+\end{enumerate}
+
+简化行阶梯形和行阶梯形矩阵的主要区别在于最后一条。
+
+\end{definition}
+
+一般地，我们称\textcolor{second}{“先通过行变换将矩阵化为上三角形，然后进一步做行变换，将其化为简化行阶梯形矩阵进而直接\textbf{读出}方程组的解”}这样的解方程的方法为\textcolor{third}{\bf 高斯-若尔当消元法}。可以证明，任何矩阵都可以通过高斯-若尔当消元法转换为简化行阶梯形形式。高斯-若尔当消元法实际上是高斯消元法的一个扩展。
 
 \subsection{使用Python解方程组}
-\label{subsec:origin_of_matrix-solve-equation-set-with-python}
+\label{subsec:使用Python解方程组}
 
-使用Python可以很轻松地解出第\ref{subsec:origin_of_matrix-from_equation-set-to-matrix}节中的方程组。
+使用Python可以很轻松地解出方程组\ref{eq:二元一次方程组示例}。
 
 \begin{lstlisting}[language=python]
 import numpy as np
@@ -261,14 +393,26 @@ $$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{从线性变换到矩阵}
 %参考高中数学选修4-2中的例子
+\label{sec:从线性变换到矩阵}
 
 \begin{note}
-    本节的核心观点：矩阵与线性变换通过一次方程组建立联系。
+    矩阵与线性变换通过一次方程组建立联系。事实上，在直角坐标系 $O x y$ 中, 所有满足“线性”性质的几何变换都具有形式
+$$
+\left\{\begin{array}{l}
+x^{\prime}=a x+b y, \\
+y^{\prime}=c x+d y,
+\end{array}\right.
+$$
+
+其中 $a, b, c, d$ 均为常数. 该变换可以由二阶矩阵 $\left(\begin{array}{ll}a & b \\ c & d\end{array}\right)$ 完全确定.
 \end{note}
 
 本节将以矩阵为工具, 研究一些几何变换, 并以平面图形的变换为背景, 讨论二阶矩阵的乘法及性质, 用变换的观点理解解二元一次方程组的意义, 初步展示矩阵应用的广泛性。
 
-\subsection{旋转变换}
+\subsection{几种特殊几何变换}
+
+\subsubsection{旋转变换}
+\label{subsubsec:旋转变换}
 
 如图 \ref{fig:旋转变换} 所示, 在直角坐标系 $O x y$ 内, 每个点都绕原点 $O$ 按逆时针方向旋转 $180^{\circ}$. 设点 $P(x, y)$ 经过旋转后变成点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$，则 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
 
@@ -280,7 +424,7 @@ y^{\prime}=-y .
 \label{eq:旋转变换}
 \end{equation}
 
-我们将式(\ref{eq:旋转变换})称为旋转角为 $180^{\circ}$ 的旋转变换的表达式, 它建 立了平面内的每个点 $P$ 到其对应点 $P^{\prime}$ 的对应关系, 我们称 $P^{\prime}$ 是 $P$ 在这个旋转变换作用下的像.
+我们将式(\ref{eq:旋转变换})称为旋转角为 $180^{\circ}$ 的\textcolor{third}{\bf 旋转变换}的表达式, 它建立了平面内的每个点 $P$ 到其对应点 $P^{\prime}$ 的对应关系, 我们称 $P^{\prime}$ 是 $P$ 在这个旋转变换作用下的像.
 
 \begin{figure}[h]
 \centering
@@ -333,6 +477,8 @@ y^{\prime}= 0\cdot x + -1 \cdot y .
  
 在直角坐标系 $O x y$ 内, 将每个点绕原点 $O$ 按逆时针方向旋转 $30^{\circ}$ 的变换称为旋转角是 $30^{\circ}$ 的旋转变换.
 
+\vspace{0.5cm}
+
 \begin{itemize}
     \item 求点 $A(1,0)$ 在这个旋转变换作用下的像 $A^{\prime}$;
     \item 写出这个旋转变换的表达式.
@@ -357,7 +503,112 @@ y^{\prime}=x \sin \alpha+y \cos \alpha .
 \end{array}\right.    
 \end{equation}
 
+\subsubsection{反射变换}
+\label{subsubsec:反射变换}
 
+如图 \ref{fig:反射变换} 所示, 在直角坐标系 $O x y$ 内, 关于 $x$ 轴的反射变换把任意一点 $P(x, y)$ 变成它关于 $x$ 轴的对称点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$。此时 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=-x, \\
+y^{\prime}=y .
+\end{array}\right.
+\label{eq:反射变换}
+\end{equation}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % 绘制坐标轴
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+    
+    % 绘制旋转前的点P
+    \coordinate (P) at (1,1);
+    \fill (P) circle (2pt) node[anchor=south west] {$P(x, y)$};
+    
+    % 绘制旋转后的点P'
+    \coordinate (P') at (-1,1);
+    \fill (P') circle (2pt) node[anchor=north east] {$P'(x', y')$};
+    
+    % 绘制连接线和旋转弧
+    \draw[dashed] (P) -- (P');
+    
+\end{tikzpicture}
+\caption{反射变换示意图\label{fig:反射变换}}
+\end{figure}
+
+我们将式(\ref{eq:反射变换})称为关于 $x$ 轴的\textcolor{third}{\bf 反射变换}的表达式。我们可以对式\ref{eq:反射变换}进行简单改写，如式\ref{eq:反射变换的方程}所示：
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=1 \cdot x + 0\cdot y, \\
+y^{\prime}= 0\cdot x + -1 \cdot y .
+\end{array}\right.
+\label{eq:反射变换的方程}
+\end{equation}
+
+故其系数矩阵为：
+
+\begin{equation}
+\left(\begin{array}{rr}
+1  & 0 \\
+0  & -1
+\end{array}\right)
+\label{eq:反射变换示例矩阵}
+\end{equation}
+
+% 我们把矩阵\ref{eq:反射变换示例矩阵}称为该变换对应的\textcolor{third}{\bf 变换矩阵}。
+
+\vspace{0.5cm}
+
+\begin{exercise}
+\begin{enumerate}
+    \item 关于 \textbf{$y$ 轴}的反射变换把直角坐标系 $O x y$ 内的任意一点 $P(x, y)$ 变成它关于 $y$ 轴的对称点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$. 相应的坐标变换公式和变换矩阵分别是什么？
+    \item 关于 \textbf{直线$y=x$}的反射变换把直角坐标系 $O x y$ 内的任意一点 $P(x, y)$ 变成它关于直线$y=x$的对称点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$. 相应的坐标变换公式和变换矩阵分别是什么？
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+
+\begin{enumerate}
+    \item 关于 \textbf{$y$ 轴}的反射变换，其相应的坐标变换公式是
+$$
+\left\{\begin{array}{c}
+x^{\prime}=-x, \\
+y^{\prime}=y .
+\end{array}\right.
+$$
+
+对应的变换矩阵是：
+
+$$
+ \left(\begin{array}{cc}-1 & 0 \\ 0 & 1\end{array}\right)
+$$
+\item 关于 \textbf{直线$y=x$} 的反射变换，其相应的坐标变换公式是
+$$
+\left\{\begin{array}{c}
+x^{\prime}=y, \\
+y^{\prime}=x .
+\end{array}\right.
+$$
+
+对应的变换矩阵是：
+
+$$
+ \left(\begin{array}{cc}0 & 1 \\ 1 & 0\end{array}\right)
+$$
+\end{enumerate}
+\end{solution}
+
+\subsubsection{伸缩变换}
+\label{subsubsec:伸缩变换}
+
+\subsubsection{投影变换}
+\label{subsubsec:投影变换}
+
+\subsubsection{切变变换}
+\label{subsubsec:切变变换}
 
 \section{矩阵的运算}
 
