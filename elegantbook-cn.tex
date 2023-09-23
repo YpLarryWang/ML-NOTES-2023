@@ -32,6 +32,9 @@
 \usepackage{blindtext}
 \usepackage{hyperref}
 
+\definecolor{mygray}{gray}{0.9}
+\definecolor{headergray}{gray}{0.7}
+
 \addbibresource[location=local]{reference.bib} % 参考文献，不要删除
 
 \begin{document}
@@ -396,8 +399,51 @@ $$
 
 \subsection{几种特殊几何变换}
 
+\subsubsection{恒等变换}
+\label{subsubsec:恒等变换}
+
+相传，在古希腊德尔斐的阿波罗神庙中，刻有“认识你自己”这句箴言，它鼓励人们深入探索自我，以实现更深层次的理解和个人成长。
+
+这句古老的箴言也在数学中找到了回音。我们在定义任何数学对象之间的关系时，一定要先思考这种关系在对象和它自身之间是否是存在的。比如，实数相等和不相等的关系，就需要建立在每个实数都和它自身相等的基础上。
+
+我们在研究平面上的几何变换时也有类似的概念，这就是本节要介绍的\textcolor{third}{\bf 恒等变换}，它是一种将一个对象变换为其自身的变换。这意味着，在这种变换下，对象保持不变。
+
+ 在直角坐标系 $O x y$ 内, 恒等变换将每个点都映射为它自身（即相当于没有发生变化）. 设点 $P(x, y)$ 经过恒等变换后变成点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$，则 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=x, \\
+y^{\prime}=y .
+\end{array}\right.
+\label{eq:恒等变换的表达式}
+\end{equation}
+
+我们将式(\ref{eq:恒等变换的表达式})称为恒等变换的表达式。对式\ref{eq:恒等变换的表达式}进行简单改写，如式\ref{eq:恒等变换的方程}所示：
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=x + 0\cdot y, \\
+y^{\prime}= 0\cdot x + y .
+\end{array}\right.
+\label{eq:恒等变换的方程}
+\end{equation}
+
+故其系数矩阵为：
+
+\begin{equation}
+\left(\begin{array}{rr}
+1  & 0 \\
+0  & 1
+\end{array}\right)
+\label{eq:恒等变换矩阵}
+\end{equation}
+
+可见，恒等变换的表达式的系数矩阵正好是一个单位矩阵，因此我们将单位矩阵称为恒等变换的\textcolor{third}{变换矩阵}。单位矩阵也唯一确定了一种变换，即恒等变换。因此，在讨论数学问题时，你常常能听到人们指着单位矩阵说：“这是一个恒等变换”。
+
 \subsubsection{旋转变换}
 \label{subsubsec:旋转变换}
+
+在第\ref{subsubsec:恒等变换}节中，我们已经得到了平面上的点到它自身的变换，现在我们可以开始研究平面上的点到其他与它不同的点的变换了。
 
 如图 \ref{fig:旋转变换} 所示, 在直角坐标系 $O x y$ 内, 每个点都绕原点 $O$ 按逆时针方向旋转 $180^{\circ}$. 设点 $P(x, y)$ 经过旋转后变成点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$，则 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
 
@@ -406,10 +452,10 @@ $$
 x^{\prime}=-x, \\
 y^{\prime}=-y .
 \end{array}\right.
-\label{eq:旋转变换}
+\label{eq:旋转变换的表达式}
 \end{equation}
 
-我们将式(\ref{eq:旋转变换})称为旋转角为 $180^{\circ}$ 的\textcolor{third}{\bf 旋转变换}的表达式, 它建立了平面内的每个点 $P$ 到其对应点 $P^{\prime}$ 的对应关系, 我们称 $P^{\prime}$ 是 $P$ 在这个旋转变换作用下的像.
+我们将式(\ref{eq:旋转变换的表达式})称为旋转角为 $180^{\circ}$ 的\textcolor{third}{\bf 旋转变换}的表达式, 它建立了平面内的每个点 $P$ 到其对应点 $P^{\prime}$ 的对应关系, 我们称 $P^{\prime}$ 是 $P$ 在这个旋转变换作用下的像.
 
 \begin{figure}[h]
 \centering
@@ -436,7 +482,7 @@ y^{\prime}=-y .
 \caption{旋转变换示意图\label{fig:旋转变换}}
 \end{figure}
 
-我们可以对式\ref{eq:旋转变换}进行简单改写，如式\ref{eq:旋转变换的方程}所示：
+我们可以对式\ref{eq:旋转变换的表达式}进行简单改写，如式\ref{eq:旋转变换的方程}所示：
 
 \begin{equation}
 \left\{\begin{array}{l}
@@ -456,7 +502,7 @@ y^{\prime}= 0\cdot x + -1 \cdot y .
 \label{eq:旋转变换示例矩阵}
 \end{equation}
 
-显然，在二维平面内旋转$180^{\circ}$这一变换可以由式\ref{eq:旋转变换示例矩阵}唯一确定。反过来，该矩阵也可以唯一确定这个变换。因此我们把这个矩阵称为该变换对应的\textcolor{third}{\bf 变换矩阵}。
+显然，在二维平面内旋转$180^{\circ}$这一变换可以由式\ref{eq:旋转变换示例矩阵}唯一确定。反过来，该矩阵也可以唯一确定这个变换。
 
 \begin{exercise}
  
@@ -498,7 +544,7 @@ y^{\prime}=x \sin \alpha+y \cos \alpha .
 x^{\prime}=-x, \\
 y^{\prime}=y .
 \end{array}\right.
-\label{eq:反射变换}
+\label{eq:反射变换的表达式}
 \end{equation}
 
 \begin{figure}[h]
@@ -523,7 +569,7 @@ y^{\prime}=y .
 \caption{反射变换示意图\label{fig:反射变换}}
 \end{figure}
 
-我们将式(\ref{eq:反射变换})称为关于 $x$ 轴的\textcolor{third}{\bf 反射变换}的表达式。我们可以对式\ref{eq:反射变换}进行简单改写，如式\ref{eq:反射变换的方程}所示：
+我们将式(\ref{eq:反射变换的表达式})称为关于 $x$ 轴的\textcolor{third}{\bf 反射变换}的表达式。我们可以对式\ref{eq:反射变换的表达式}进行简单改写，如式\ref{eq:反射变换的方程}所示：
 
 \begin{equation}
 \left\{\begin{array}{l}
@@ -588,6 +634,54 @@ $$
 
 \subsubsection{伸缩变换}
 \label{subsubsec:伸缩变换}
+
+在直角坐标系 $O x y$ 内，将任意一点 $P(x, y)$ 的纵坐标变为原来的 2 ，横坐标不变，得到点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$。此时 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=x \\
+y^{\prime}=2 y
+\end{array}\right.
+\label{eq:伸缩变换的表达式}
+\end{equation}
+
+像这样的，将直角坐标系 $O x y$ 内每个点的横坐标变为原来的 $k_1$ 倍, 纵坐标变为原来的 $k_2$ 倍, 其中 $k_1, k_2$ 均为非零常数, 我们称这样的几何变换为\textcolor{third}{\bf 伸缩变换} (stretching)，式(\ref{eq:伸缩变换的表达式})称为该伸缩变换的表达式。我们可以对式(\ref{eq:伸缩变换的表达式})进行改写，得到式：
+
+\begin{equation}
+\left\{\begin{array}{l}
+x^{\prime}=x  + 0 \cdot y\\
+y^{\prime}=0 \cdot x + 2 y
+\end{array}\right.
+\label{eq:伸缩变换的方程}
+\end{equation}
+
+故其系数矩阵为：
+
+\begin{equation}
+\left(\begin{array}{rr}
+1  & 0 \\
+0  & 2
+\end{array}\right)
+\label{eq:伸缩变换示例矩阵}
+\end{equation}
+
+一般地，将每个点的横坐标变为原来的 $k_1$ 倍, 纵坐标变为原来的 $k_2$ 倍 $\left(k_1, k_2\right.$ 均为非零常数) 的伸缩变换, 其坐标变换公式是
+
+\begin{equation}
+    \left\{\begin{array}{l}
+x^{\prime}=k_1 x, \\
+y^{\prime}=k_2 y .
+\end{array}\right.
+\label{伸缩变换一般表达式}
+\end{equation}
+
+对应的变换矩阵为 
+
+\begin{equation}
+\left(\begin{array}{cc}k_1 & 0 \\ 0 & k_2\end{array}\right).
+\label{伸缩变换一般矩阵}
+\end{equation}
+
 
 \subsubsection{投影变换}
 \label{subsubsec:投影变换}
@@ -896,18 +990,193 @@ $$
 
 \section{函数的定义和性质}
 \subsection{函数的定义}
+
+\begin{note}
+    函数是一种数学关系，它将一个集合的元素映射到另一个集合的元素。
+\end{note}
+
 \begin{definition}[函数]
-函数是一种数学工具，它将一个输入值映射到一个输出值。函数可以用公式表示，例如 $f(x) = x^2$。这个公式表示，当输入值为 $x$ 时，输出值为 $x$ 的平方。例如当输入值为 $2$ 时，输出值为 $2$ 的平方也就是$4$。
+给定两个\textcolor{red}{实数集} $D$ 和 $M$, 若有\textcolor{red}{对应法则} $f$, 使对 $D$ 内每一个数 $x$,都有\textcolor{red}{唯一}的一个数 $y \in M$ 与它相对应,则称 $f$ 是定义在数集 $D$上的\textcolor{third}{\bf 函数}，记作
+\begin{equation}
+\begin{aligned}
+    f:D & \rightarrow M, \\
+    x & \mapsto y.
+\end{aligned}
+\end{equation}
+
+数集$D$称为函数$f$的\textcolor{third}{\bf 定义域}，$x$所对应的数$y$称为$f$在点$x$的\textcolor{third}{\bf 函数值}，常记为$f(x)$.全体函数值的集合
+
+\begin{equation*}
+    f(D) = \{y\mid y=f(x),x\in D\} (\subset M)
+\end{equation*}
+
+成为函数$f$的\textcolor{third}{\bf 值域}.
+
 \end{definition}
 
-\subsection{函数的定义域和值域}
+% 其中，$f(x)$ 表示函数 $f$ 对于\textcolor{third}{\bf 输入} $x$ 的\textcolor{third}{\bf 输出}；$D(f)$ 表示函数的\textcolor{third}{\bf 定义域}（domain），即函数可以接受的输入值的集合；$R(f)$ 表示函数的\textcolor{third}{\bf 值域}（range），即函数实际输出的值的集合。
+
+
+%TODO%
+关于函数的定义，我们做如下几点说明：
+
+\begin{enumerate}
+    \item 什么是函数相同？相同的函数形式可能不同；
+    \item 使运算式子有意义的自变量值的全体，成为存在域。函数的定义域常取存在域；
+    \item 函数是一种映射关系，要素有原象和象；
+    \item 在函数定义中, 对每一个 $x \in D$, 只能有唯一的一个 $y$ 值与它对应, 这样 定义的函数称为\textcolor{third}{\bf 单值函数}. 若同一个 $x$ 值可以对应多于一个的 $y$ 值, 则称这种函数为\textcolor{third}{\bf 多值函数}. 在本讲义范围内, 我们只讨论单值函数.
+\end{enumerate}
+
+\subsection{具有某些特性的函数}
+
+\subsubsection{有界函数}
+
+\begin{definition}[有上 (下) 界函数]
+    设 $f$ 为定义在 $D$ 上的函数. 若存在数 $M(L)$, 使得对每一个 $x \in D$ 有
+    $$
+    f(x) \leqslant M(f(x) \geqslant L),
+    $$
+    则称 $f$ 为 $D$ 上的\textcolor{third}{\bf 有上 (下) 界函数}, $M(L)$ 称为 $f$ 在 $D$ 上的一个\textcolor{third}{\bf 上 (下) 界}.
+\end{definition}
+
+根据定义, $f$ 在 $D$ 上有上 (下) 界, 意味着值域 $f(D)$ 是一个有上 (下) 界的数 集. 又若 $M(L)$ 为 $f$ 在 $D$ 上的上 (下) 界, 则任何大于 (小于) $M(L)$ 的数也是 $f$ 在 $D$ 上的上(下) 界.
+
+\begin{definition}[有界函数]
+    设 $f$ 为定义在 $D$ 上的函数. 若存在正数 $M$, 使得对每一个 $x \in D$ 有
+    \begin{equation}
+    \mid f(x)\mid \leqslant M \text {, }
+    \label{eq:有界函数的定义}
+    \end{equation}
+    
+    则称 $f$ 为 $D$ 上的\textcolor{third}{\bf 有界函数}.
+\end{definition}
+
+$f$ 在 $D$ 上有界的充要条件是 $f$ 在 $D$ 上既有上界又有下界. (\ref{eq:有界函数的定义})式的几何意义 是: 若 $f$ 为 $D$ 上的有界函数, 则 $f$ 的图像完全落在直线 $y=M$ 与 $y=-M$ 之间.
+
+\vspace{0.5cm}
+\begin{exercise}
+    证明正弦函数 $\sin x$ 和余弦函数 $\cos x$ 为 $\mathbf{R}$ 上的有界函数。
+\end{exercise}
+\vspace{0.5cm}
+
+关于函数 $f$ 在数集 $D$ 上无上界、无下界或无界的定义, 可按上述相应定义的否定说法来叙述. 例如, 设 $f$ 为定义在 $D$ 上的函数, 若对任何 $M$ (无论 $M$ 多大), 都存在 $x_0 \in D$, 使得 $f\left(x_0\right)>M$, 则称 $f$ 为 $D$ 上的无上界函数.
+
+\vspace{0.5cm}
+\begin{exercise}
+    证明 $f(x)=\frac{1}{x}$ 为 $(0,1]$ 上的无上界函数.
+\end{exercise}
+\vspace{0.5cm}
+
+\subsubsection{单调函数}
+
+如果一个函数 \( f(x) \) 在某个区间 \( I \) （interval）内单调增加或单调减少，那么该函数在该区间内具有单调性。
 
 \begin{itemize}
-    \item 函数的定义域是指函数可以接受的输入值的集合。在上面的例子中，函数 $f(x) = x^2$ 的定义域是所有实数。有些函数的定义域可能会受到限制，例如 $\sqrt{x}$ 只能接受非负实数作为输入。
-
-    \item 函数的值域是指函数可能输出的值的集合。在上面的例子中，函数 $f(x) = x^2$ 的值域是所有非负实数。有些函数的值域可能会受到限制，例如 $\sin x$ 的值域是 $[-1, 1]$。
-
+    \item \textbf{单调递增}\quad 如果 \( x_1 < x_2 \) 则 \( f(x_1) < f(x_2) \);
+    \item \textbf{单调递减}\quad 如果 \( x_1 < x_2 \) 则 \( f(x_1) > f(x_2) \).
 \end{itemize}
+
+若不等号严格成立，就称为严格单调递增（减）函数。
+
+\subsubsection{奇偶性}
+
+奇函数和偶函数是两种特殊类型的函数，它们具有特定的对称性质。
+
+\begin{definition}[奇函数]
+    如果一个函数 \( f(x) \) 满足 \( f(x) = -f(-x) \)，那么它被称为奇函数。奇函数关于原点对称。
+\end{definition}
+
+\begin{definition}[偶函数]
+    如果一个函数 \( f(x) \) 满足 \( f(x) = f(-x) \)，那么它被称为偶函数。偶函数关于 y 轴对称。
+\end{definition}
+
+
+\subsubsection{周期性}
+如果一个函数 \( f(x) \) 满足 \( f(x + P) = f(x) \)，其中 \( P \) 是一个常数，那么该函数是周期函数，\( P \) 被称为函数的周期。
+\[ f(x + P) = f(x) \]
+
+
+\subsection{初等函数}
+
+我们在中学接触过的基本初等函数有以下六类：
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5} % 用于增加行高
+\begin{tabular}{c|c}
+\hline
+\rowcolor{gray!50}
+\textbf{函数类型} & \textbf{函数表达式} \\
+\hline
+常量函数 & $y=c \quad (c$ 是常数$)$ \\
+\hline
+幂函数 & $y=x^\alpha \quad (\alpha$ 为实数$)$ \\
+\hline
+指数函数 & $y=a^x \quad (a>0, a \neq 1)$ \\
+\hline
+对数函数 & $y=\log_a x \quad (a>0, a \neq 1)$ \\
+\hline
+\multirow{4}{*}{三角函数} & $y=\sin x$ (正弦函数) \\
+ & $y=\cos x$ (余弦函数) \\
+ & $y=\tan x$ (正切函数) \\
+ & $y=\cot x$ (余切函数) \\
+\hline
+\multirow{4}{*}{反三角函数} & $y=\arcsin x$ (反正弦函数) \\
+ & $y=\arccos x$ (反余弦函数) \\
+ & $y=\arctan x$ (反正切函数) \\
+ & $y=\operatorname{arccot} x$ (反余切函数) \\
+\hline
+\end{tabular}
+\end{table}
+
+这里我们要指出,幂函数 $y=x^\alpha$ 和指数函数 $y=a^x$ 都涉及乘幂, 而在中学数 课程中只给出了有理指数乘幂的定义. 下面我们借助确界来定义无理指数幂,
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}[scale=0.8]
+  % Define custom colors
+  \definecolor{myred}{rgb}{0.8, 0.2, 0.2}
+  \definecolor{myblue}{rgb}{0.2, 0.2, 0.8}
+  \definecolor{mygreen}{rgb}{0.0, 0.5, 0.0}
+  \definecolor{myorange}{rgb}{1.0, 0.5, 0.0}
+  \definecolor{mybrown}{rgb}{0.6, 0.4, 0.2}
+  \definecolor{mypurple}{rgb}{0.6, 0.2, 0.6}
+
+  % Draw axes
+  \draw[->, thick] (-6,0) -- (6,0) node[right] {$x$};
+  \draw[->, thick] (0,-6) -- (0,6) node[above] {$y$};
+  
+  % Draw grid
+  \draw[gray!50, very thin] (-5.9,-5.9) grid[step=1cm] (5.9,5.9);
+  
+  % Plot constant function f(x) = 1
+  \draw[myred, thick, domain=-5:5, samples=2] plot (\x, {1}) node[right] {$f(x)=1$};
+  
+  % Plot linear function f(x) = x
+  \draw[myblue, thick, domain=-4.7:4.7, samples=2] plot (\x, {\x}) node[right] {$f(x)=x$};
+  
+  % Plot quadratic function f(x) = x^2
+  \draw[mygreen, thick, domain=-2.25:2.25, samples=50] plot (\x, {\x*\x}) node[right] {$f(x)=x^2$};
+
+  % Plot quadratic function f(x) = x^3
+  \draw[mypurple, thick, domain=-1.7:1.7, samples=50] plot (\x, {\x*\x*\x}) node[left] {$f(x)=x^3$};
+  
+  % Plot exponential function f(x) = e^x
+  \draw[myorange, thick, domain=-2:1.75, samples=50] plot (\x, {exp(\x)}) node[right] {$f(x)=e^x$};
+  
+  % Plot logarithmic function f(x) = ln(x)
+  \draw[mybrown, thick, domain=0.1:5, samples=50] plot (\x, {ln(\x)}) node[right] {$f(x)=\ln(x)$};
+
+  % Mark points
+  % \filldraw [black] (1,0) circle (2pt) node[anchor=north west] {(1, 0)};
+  \filldraw [black] (0,0) circle (2pt) node[anchor=north west] {(0, 0)};
+  % \filldraw [black] (0,1) circle (2pt) node[anchor=north east] {(0, 1)};
+  \filldraw [black] (1,1) circle (2pt) node[anchor=south west] {(1, 1)};
+
+\end{tikzpicture}
+\caption{基本初等函数的图像}
+    \label{fig:basic-elem-func}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
