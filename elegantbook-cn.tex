@@ -463,6 +463,10 @@ y^{\prime}=-y .
     % 绘制坐标轴
     \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
     \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+
+    % 绘制原点O
+    \coordinate (O) at (0,0);
+    \fill (O) circle (0pt) node[anchor=north east] {$O$};
     
     % 绘制旋转前的点P
     \coordinate (P) at (1,1);
@@ -552,7 +556,11 @@ y^{\prime}=y .
 \begin{tikzpicture}[scale=1.5]
     % 绘制坐标轴
     \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
-    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+    \draw[->] (0,-0.5) -- (0,1.5) node[above] {$y$};
+
+    % 绘制原点O
+    \coordinate (O) at (0,0);
+    \fill (O) circle (0pt) node[anchor=north east] {$O$};
     
     % 绘制旋转前的点P
     \coordinate (P) at (1,1);
@@ -574,7 +582,7 @@ y^{\prime}=y .
 \begin{equation}
 \left\{\begin{array}{l}
 x^{\prime}=1 \cdot x + 0\cdot y, \\
-y^{\prime}= 0\cdot x + -1 \cdot y .
+y^{\prime}= 0\cdot x + (-1) \cdot y .
 \end{array}\right.
 \label{eq:反射变换的方程}
 \end{equation}
@@ -635,7 +643,7 @@ $$
 \subsubsection{伸缩变换}
 \label{subsubsec:伸缩变换}
 
-在直角坐标系 $O x y$ 内，将任意一点 $P(x, y)$ 的纵坐标变为原来的 2 ，横坐标不变，得到点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$。此时 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
+如图\ref{fig:伸缩变换}所示，在直角坐标系 $O x y$ 内，将任意一点 $P(x, y)$ 的纵坐标变为原来的两倍，横坐标不变，得到点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$。此时 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
 
 \begin{equation}
 \left\{\begin{array}{l}
@@ -665,29 +673,183 @@ y^{\prime}=0 \cdot x + 2 y
 \label{eq:伸缩变换示例矩阵}
 \end{equation}
 
-一般地，将每个点的横坐标变为原来的 $k_1$ 倍, 纵坐标变为原来的 $k_2$ 倍 $\left(k_1, k_2\right.$ 均为非零常数) 的伸缩变换, 其坐标变换公式是
 
-\begin{equation}
-    \left\{\begin{array}{l}
-x^{\prime}=k_1 x, \\
-y^{\prime}=k_2 y .
-\end{array}\right.
-\label{伸缩变换一般表达式}
-\end{equation}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % 绘制坐标轴
+    \draw[->] (-0.5,0) -- (2,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,1.5) node[above] {$y$};
 
-对应的变换矩阵为 
+    % 绘制原点O
+    \coordinate (O) at (0,0);
+    \fill (O) circle (0pt) node[anchor=north east] {$O$};
+    
+    % 绘制旋转前的点P
+    \coordinate (P) at (1,0.5);
+    \fill (P) circle (2pt) node[anchor=north west] {$P(x, y)$};
+    
+    % 绘制旋转后的点P'
+    \coordinate (P') at (1,1);
+    \fill (P') circle (2pt) node[anchor=south west] {$P'(x, 2y)$};
+    
+    % 绘制连接线和旋转弧
+    \draw[dashed] (P) -- (P');
+    % \draw[->] (0.5,0.5) -- (0.5,1);
+    
+\end{tikzpicture}
+\caption{伸缩变换示意图\label{fig:伸缩变换}}
+\end{figure}
 
-\begin{equation}
-\left(\begin{array}{cc}k_1 & 0 \\ 0 & k_2\end{array}\right).
-\label{伸缩变换一般矩阵}
-\end{equation}
+\begin{exercise}
+
+    将直角坐标系 $O x y$ 内每个点的横坐标变为原来的 $k_1$ 倍, 纵坐标变为原来的 $k_2$ 倍 $\left(k_1, k_2\right.$ 均为非零常数) 的伸缩变换, 其坐标变换公式是
+    
+    \begin{equation}
+        \left\{\begin{array}{l}
+    x^{\prime}=k_1 x, \\
+    y^{\prime}=k_2 y .
+    \end{array}\right.
+    \label{伸缩变换一般表达式}
+    \end{equation}
+    
+    对应的变换矩阵为 
+    
+    \begin{equation}
+    \left(\begin{array}{cc}k_1 & 0 \\ 0 & k_2\end{array}\right).
+    \label{伸缩变换一般矩阵}
+    \end{equation}
+
+\end{exercise}
+
+注意到，当$k_1=k_2$时，伸缩变换退化为\textcolor{third}{\bf 平移变换}。
 
 
 \subsubsection{投影变换}
 \label{subsubsec:投影变换}
 
+设 $l$ 是平面内一条给定的直线. 对平面内的任意一点 $P$ 作直线 $l$ 的垂线, 垂足为点 $P^{\prime}$, 则称点 $P^{\prime}$ 为点 $P$ 在直线 $l$ 上的\textcolor{third}{\bf 投影} (projection). 将平面上每一点 $P$ 变成它在直线 $l$ 上的投影 $P^{\prime}$, 这个变换称为关于直线 $l$ 的\textcolor{third}{\bf 投影变换}  .
+
+如图 \ref{fig:投影变换}, 在直角坐标系 $O x y$ 内, 过任意一点 $P$ 作 $x$ 轴的垂线, 垂足为点 $P^{\prime}$, 我们称点 $P^{\prime}$ 为点 $P$ 在 $x$ 轴上的  投影. 如果一个变换把直角坐标系内的每一点变成它在 $x$ 轴上 的投影, 那么称这个变换为关于 $x$ 轴的投影变换.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % 绘制坐标轴
+    \draw[->] (-0.5,0) -- (2,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,1.5) node[above] {$y$};
+    
+    % 绘制原点O
+    \coordinate (O) at (0,0);
+    \fill (O) circle (0pt) node[anchor=north east] {$O$};
+    
+    % 绘制旋转前的点P
+    \coordinate (P) at (1,1);
+    \fill (P) circle (2pt) node[anchor=south west] {$P(x, y)$};
+    
+    % 绘制旋转后的点P'
+    \coordinate (P') at (1,0);
+    \fill (P') circle (2pt) node[anchor=south west] {$P'(x', y')$};
+    
+    % 绘制连接线和旋转弧
+    \draw[-] (O) -- (P);
+    \draw[dashed] (P) -- (P');
+    
+\end{tikzpicture}
+\caption{投影变换示意图\label{fig:投影变换}}
+\end{figure}
+
+设在关于 $x$ 轴的投影变换的作用下, 点 $P(x, y)$ 变成 点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$。
+此时 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
+
+$$
+\left\{\begin{array}{l}
+x^{\prime}=x, \\
+y^{\prime}=0 .
+\end{array}\right.
+$$
+
+即
+
+$$
+\left\{\begin{array}{l}
+x^{\prime}= 1 \cdot x + 0 \cdot y, \\
+y^{\prime}= 0 \cdot x + 0 \cdot y.
+\end{array}\right.
+$$
+
+对应的二阶矩阵为 $\left(\begin{array}{ll}1 & 0 \\ 0 & 0\end{array}\right)$.
+
 \subsubsection{切变变换}
 \label{subsubsec:切变变换}
+
+\textcolor{third}{\bf 切变变换}（shearing）是一种特殊的几何变换，用于改变物体的形状。它在一个方向上按照一定的比例“拉伸”或“压缩”物体，同时在与这个方向垂直的另一方向上保持物体不变。在二维平面上，切变变换主要有两种：
+
+\begin{itemize}
+    \item \textbf{水平切变}：在水平方向上拉伸或压缩物体，与物体在垂直方向上的位置成比例。垂直方向上的形状不会改变。如图\ref{fig:shearing-wiki}\footnote{图源：\url{https://en.wikipedia.org/wiki/Shear\_mapping}}所示。
+    \item \textbf{垂直切变}：在垂直方向上拉伸或压缩物体，与物体在水平方向上的位置成比例。水平方向上的形状不会改变。
+\end{itemize}
+
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figure/matrix/shearing.png}
+    \caption{平面的水平剪切，将蓝色转变为红色，黑点为原点}
+    \label{fig:shearing-wiki}
+\end{figure}
+
+
+如图 \ref{fig:切变变换}, 在直角坐标系 $O x y$ 内, 将每一点 $P(x$, $y$ ) 沿着与 $x$ 轴平行的方向平移 $k y$ 个单位变成点 $P^{\prime}$, 其中 $k$ 是非零常数, 这就是水平切变（或平行于 $x$ 轴的切变变换）.
+设 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$, 则
+此时 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
+
+$$
+\left\{\begin{array}{c}
+x^{\prime}=x+k y, \\
+y^{\prime}=y .
+\end{array}\right.
+$$
+
+从而, 对应的二阶矩阵为 $\left(\begin{array}{ll}1 & k \\ 0 & 1\end{array}\right)$.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % 绘制坐标轴
+    \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,1.5) node[above] {$y$};
+    
+    % 绘制原点O
+    \coordinate (O) at (0,0);
+    \fill (O) circle (0pt) node[anchor=north east] {$O$};
+    
+    % 绘制旋转前的点P
+    \coordinate (P) at (0.5,1);
+    \fill (P) circle (2pt) node[anchor=south west] {$P(x, y)$};
+    
+    % 绘制旋转后的点P'
+    \coordinate (P') at (1.5,1);
+    \fill (P') circle (2pt) node[anchor=south west] {$P'(x+ky, y)$};
+    
+    % 绘制连接线和旋转弧
+    \draw[dashed] (P) -- (P');
+    
+\end{tikzpicture}
+\caption{切变变换示意图\label{fig:切变变换}}
+\end{figure}
+
+\begin{exercise}
+
+    平行于 $y$ 轴的切变变换是指将直角坐标系内的每一点 $P(x, y)$ 沿着与 $y$ 轴 平行的方向平移 $k x$ 个单位 (其中 $k$ 是非零常数) 的线性变换. 其坐标变换公式为
+    $$
+    \left\{\begin{array}{c}
+    x^{\prime}=x, \\
+    y^{\prime}=k x+y .
+    \end{array}\right.
+    $$
+    对应的矩阵为 $\left(\begin{array}{ll}1 & 0 \\ k & 1\end{array}\right)$.
+        
+\end{exercise}
 
 \section{矩阵的运算}
 
@@ -988,7 +1150,7 @@ $$
 
 在本章中，我们将初步探讨函数和优化的基本理论，为你打开一扇理解和掌握这两个强大工具的大门，从而在实际应用中找到最佳的解决方案。
 
-\section{函数的定义和性质}
+\section{函数的概念和性质}
 \subsection{函数的定义}
 
 \begin{note}
@@ -1010,7 +1172,7 @@ $$
     f(D) = \{y\mid y=f(x),x\in D\} (\subset M)
 \end{equation*}
 
-成为函数$f$的\textcolor{third}{\bf 值域}.
+称为函数$f$的\textcolor{third}{\bf 值域}.
 
 \end{definition}
 
@@ -1022,8 +1184,8 @@ $$
 
 \begin{enumerate}
     \item 什么是函数相同？相同的函数形式可能不同；
-    \item 使运算式子有意义的自变量值的全体，成为存在域。函数的定义域常取存在域；
-    \item 函数是一种映射关系，要素有原象和象；
+    \item 使运算式子有意义的自变量值的全体，称为存在域。函数的定义域常取存在域；
+    \item 函数是一种映射关系，原象和象是映射关系的要素；
     \item 在函数定义中, 对每一个 $x \in D$, 只能有唯一的一个 $y$ 值与它对应, 这样 定义的函数称为\textcolor{third}{\bf 单值函数}. 若同一个 $x$ 值可以对应多于一个的 $y$ 值, 则称这种函数为\textcolor{third}{\bf 多值函数}. 在本讲义范围内, 我们只讨论单值函数.
 \end{enumerate}
 
@@ -1031,15 +1193,34 @@ $$
 
 \subsubsection{有界函数}
 
-\begin{definition}[有上 (下) 界函数]
-    设 $f$ 为定义在 $D$ 上的函数. 若存在数 $M(L)$, 使得对每一个 $x \in D$ 有
-    $$
-    f(x) \leqslant M(f(x) \geqslant L),
-    $$
-    则称 $f$ 为 $D$ 上的\textcolor{third}{\bf 有上 (下) 界函数}, $M(L)$ 称为 $f$ 在 $D$ 上的一个\textcolor{third}{\bf 上 (下) 界}.
+\begin{definition}[有界集]
+    设 $S$ 为 $\mathbf{R}$ 中的一个数集. 若存在数 $M(L)$, 使得对一切 $x \in S$, 都有 $x$ $\leqslant M(x \geqslant L)$, 则称 $S$ 为\textcolor{third}{\bf 有上界(下界) 的数集}, 数 $M(L)$ 称为 $S$ 的一个\textcolor{third}{\bf 上界（下界）}.
+    若数集 $S$ 既有上界又有下界, 则称 $S$ 为\textcolor{third}{\bf 有界集}. 若 $S$ 不是\textcolor{third}{\bf 有界集}, 则称 $S$ 为\textcolor{third}{\bf 无界集}.
 \end{definition}
 
-根据定义, $f$ 在 $D$ 上有上 (下) 界, 意味着值域 $f(D)$ 是一个有上 (下) 界的数 集. 又若 $M(L)$ 为 $f$ 在 $D$ 上的上 (下) 界, 则任何大于 (小于) $M(L)$ 的数也是 $f$ 在 $D$ 上的上(下) 界.
+\begin{exercise}
+    证明数集 $\mathbf{N}_{+}=\{n \mid n$ 为正整数 $\}$ 有下界而无上界.
+\end{exercise}
+
+\begin{definition}[有上界函数]
+    设 $f$ 为定义在 $D$ 上的函数. 若存在数 $M$, 使得对每一个 $x \in D$ 有
+    $$
+    f(x) \leqslant M,
+    $$
+    则称 $f$ 为 $D$ 上的\textcolor{third}{\bf 有上界函数}, $M$ 称为 $f$ 在 $D$ 上的一个\textcolor{third}{\bf 上界}.
+\end{definition}
+
+$f$ 在 $D$ 上有上界, 意味着值域 $f(D)$ 是一个有上界的数集. 又若 $M$ 为 $f$ 在 $D$ 上的上界, 则任何大于 $M$ 的数也是 $f$ 在 $D$ 上的上界.
+
+\begin{definition}[有下界函数]
+    设 $f$ 为定义在 $D$ 上的函数. 若存在数 $M(L)$, 使得对每一个 $x \in D$ 有
+    $$
+    f(x) \geqslant L,
+    $$
+    则称 $f$ 为 $D$ 上的\textcolor{third}{\bf 有下界函数}, $L$ 称为 $f$ 在 $D$ 上的一个\textcolor{third}{\bf 下界}.
+\end{definition}
+
+$f$ 在 $D$ 上有下界, 意味着值域 $f(D)$ 是一个有下界的数集. 又若 $L$ 为 $f$ 在 $D$ 上的下界, 则任何小于 $L$ 的数也是 $f$ 在 $D$ 上的下界.
 
 \begin{definition}[有界函数]
     设 $f$ 为定义在 $D$ 上的函数. 若存在正数 $M$, 使得对每一个 $x \in D$ 有
@@ -1069,38 +1250,95 @@ $f$ 在 $D$ 上有界的充要条件是 $f$ 在 $D$ 上既有上界又有下界.
 
 \subsubsection{单调函数}
 
-如果一个函数 \( f(x) \) 在某个区间 \( I \) （interval）内单调增加或单调减少，那么该函数在该区间内具有单调性。
+\begin{definition}
+    设 $f$ 为定义在 $D$ 上的函数. 若对任何 $x_1, x_2 \in D$, 当 $x_1<x_2$ 时,总有
+    \begin{enumerate}
+        \item $f\left(x_1\right) \leqslant f\left(x_2\right)$, 则称 $f$ 为 $D$ 上的\textcolor{third}{\bf 增函数}, 特别当成立严格不等式 $f\left(x_1\right)<f\left(x_2\right)$ 时, 称 $f$ 为 $D$ 上的\textcolor{third}{\bf 严格增函数}；
+        \item $f\left(x_1\right) \geqslant f\left(x_2\right)$, 则称 $f$ 为 $D$ 上的\textcolor{third}{\bf 减函数}, 特别当成立严格不等式 $f\left(x_1\right)> f\left(x_2\right)$ 时, 称 $f$ 为 $D$ 上的\textcolor{third}{\bf 严格减函数}.
+    \end{enumerate}
+\end{definition}
 
-\begin{itemize}
-    \item \textbf{单调递增}\quad 如果 \( x_1 < x_2 \) 则 \( f(x_1) < f(x_2) \);
-    \item \textbf{单调递减}\quad 如果 \( x_1 < x_2 \) 则 \( f(x_1) > f(x_2) \).
-\end{itemize}
+增函数和减函数统称为\textcolor{third}{\bf 单调函数}, 严格增函数和严格减函数统称为\textcolor{third}{\bf 严格单调函数}.
 
-若不等号严格成立，就称为严格单调递增（减）函数。
+% 如果一个函数 \( f(x) \) 在某个区间 \( I \) （interval）内单调增加或单调减少，那么该函数在该区间内具有单调性。
 
-\subsubsection{奇偶性}
+% \begin{itemize}
+%     \item \textbf{单调递增}\quad 如果 \( x_1 < x_2 \) 则 \( f(x_1) < f(x_2) \);
+%     \item \textbf{单调递减}\quad 如果 \( x_1 < x_2 \) 则 \( f(x_1) > f(x_2) \).
+% \end{itemize}
+
+% 若不等号严格成立，就称为严格单调递增（减）函数。
+
+\subsubsection{奇函数和偶函数}
 
 奇函数和偶函数是两种特殊类型的函数，它们具有特定的对称性质。
 
 \begin{definition}[奇函数]
-    如果一个函数 \( f(x) \) 满足 \( f(x) = -f(-x) \)，那么它被称为奇函数。奇函数关于原点对称。
+    如果一个定义在关于原点对称的数集$D$上的函数 \( f(x) \) 满足 \( f(x) = -f(-x) \)，那么它被称为\textcolor{third}{\bf 奇函数}。
 \end{definition}
+
+显然，奇函数关于原点对称。
 
 \begin{definition}[偶函数]
-    如果一个函数 \( f(x) \) 满足 \( f(x) = f(-x) \)，那么它被称为偶函数。偶函数关于 y 轴对称。
+    如果一个定义在关于原点对称的数集$D$上函数 \( f(x) \) 满足 \( f(x) = f(-x) \)，那么它被称为\textcolor{third}{\bf 偶函数}。
 \end{definition}
 
+显然，偶函数关于 $y$ 轴对称。
 
-\subsubsection{周期性}
-如果一个函数 \( f(x) \) 满足 \( f(x + P) = f(x) \)，其中 \( P \) 是一个常数，那么该函数是周期函数，\( P \) 被称为函数的周期。
-\[ f(x + P) = f(x) \]
 
+\subsubsection{周期函数}
+
+\begin{definition}[周期函数]
+    设 $f$ 为定义在数集 $D$ 上的函数. 若存在 $\sigma>0$, 使得对 一切 $x\in D, x \pm \sigma \in D$, 有 $f(x \pm \sigma)=f(x)$, 则称 $f$ 为\textcolor{third}{\bf 周期函数}, $\sigma$ 称为 $f$ 的一个\textcolor{third}{\bf 周期}. 
+\end{definition}
+
+显然, 若 $\sigma$ 为 $f$ 的周期, 则 $n \sigma(n$ 为正整数 $)$ 也是 $f$ 的周期. 若在周期,则称此最小周期为 $f$ 的\textcolor{third}{\bf 基本周期}, 或简称\textcolor{third}{\bf 周期}.
+
+\begin{exercise}
+
+    \begin{enumerate}
+        \item $\sin x$ 的周期为 $2 \pi, \tan x$ 的周期为 $\pi$.
+    
+        \item 如图\ref{fig:f(x)=x-[x]的图像}所示，函数
+        $$
+        f(x)=x-[x], x \in \mathbf{R}
+        $$
+        的周期为 1. 
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}[scale=0.5]
+    % Axis
+    \draw[->] (-5.5,0) -- (5.5,0) node[right] {\( x \)};
+    \draw[->] (0,-0.3) -- (0,2) node[right] {\( f(x) \)};
+    
+    % Ticks
+    \foreach \x in {-5,-4,...,5} {
+        \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
+    }
+
+    
+    \draw (0.1, 1) -- (-0.1, 1) node[right] {1};
+    
+    % Function plot
+    \foreach \n in {-5,-4,...,4} {
+        \draw[blue] (\n, 0) -- (\n+1, 1);
+    }
+\end{tikzpicture}
+\caption{$f(x)=x-[x]$的图像}
+\label{fig:f(x)=x-[x]的图像}
+\end{figure}
+
+\item 常量函数 $f(x)=c$ 是以任何正数为周期的周期函数,但不存在基本周期.
+        \end{enumerate}
+\end{exercise}
 
 \subsection{初等函数}
 
-我们在中学接触过的基本初等函数有以下六类：
+我们在中学接触过的基本初等函数有如表\ref{tab:基本初等函数分类表}所示的六类。它们的函数图像如图\ref{fig:basic-elem-func}所示。
 
 \begin{table}[h]
+\caption{基本初等函数分类表}
 \centering
 \renewcommand{\arraystretch}{1.5} % 用于增加行高
 \begin{tabular}{c|c}
@@ -1127,11 +1365,10 @@ $f$ 在 $D$ 上有界的充要条件是 $f$ 在 $D$ 上既有上界又有下界.
  & $y=\operatorname{arccot} x$ (反余切函数) \\
 \hline
 \end{tabular}
+\label{tab:基本初等函数分类表}
 \end{table}
 
-这里我们要指出,幂函数 $y=x^\alpha$ 和指数函数 $y=a^x$ 都涉及乘幂, 而在中学数 课程中只给出了有理指数乘幂的定义. 下面我们借助确界来定义无理指数幂,
-
-\begin{figure}
+\begin{figure}[!h]
     \centering
 \begin{tikzpicture}[scale=0.8]
   % Define custom colors
@@ -1178,6 +1415,17 @@ $f$ 在 $D$ 上有界的充要条件是 $f$ 在 $D$ 上既有上界又有下界.
     \label{fig:basic-elem-func}
 \end{figure}
 
+幂函数 $y=x^\alpha$ 和指数函数 $y=a^x$ 都涉及乘幂, 而在中学数 课程中只给出了有理指数乘幂的定义. 这里我们指出，无理数也可以作为幂指数。\textcolor{second}{无理指数幂和有理指数幂一起构成了实数指数幂，并保持有理指数幂的基本性质。}
+
+
+\begin{definition}[初等函数]
+    由基本初等函数经过\textcolor{red}{有限次四则运算与复合运算}所得到的函数, 统称为\textcolor{third}{\bf 初等函数}.
+\end{definition}
+
+
+\subsection{复合函数}
+
+\subsection{反函数}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Elegant\LaTeX{} 系列模板介绍}
