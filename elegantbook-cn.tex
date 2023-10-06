@@ -35,6 +35,14 @@
 \definecolor{mygray}{gray}{0.9}
 \definecolor{headergray}{gray}{0.7}
 
+% Define custom colors
+\definecolor{myred}{rgb}{0.8, 0.2, 0.2}
+\definecolor{myblue}{rgb}{0.2, 0.2, 0.8}
+\definecolor{mygreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{myorange}{rgb}{1.0, 0.5, 0.0}
+\definecolor{mybrown}{rgb}{0.6, 0.4, 0.2}
+\definecolor{mypurple}{rgb}{0.6, 0.2, 0.6}
+
 \addbibresource[location=local]{reference.bib} % 参考文献，不要删除
 
 \begin{document}
@@ -851,6 +859,140 @@ $$
         
 \end{exercise}
 
+\subsection{线性变换及其基本性质}
+
+\begin{definition}[线性变换]
+  \textcolor{third}{\bf 线性变换}是一种保持直线性质的变换。它们不改变直线的形状、平行性和交叉点的位置。
+\end{definition}
+
+\begin{note}
+  让学生回顾之前展示的每个变换，并提醒他们每个变换都保持了直线的性质。
+\end{note}
+
+\vspace*{0.5cm}
+
+\begin{exercise}
+
+  \begin{enumerate}
+    \item   设向量 $\boldsymbol{\alpha}=\left(\begin{array}{l}1 \\ 2\end{array}\right), \boldsymbol{\beta}=\left(\begin{array}{l}2 \\ 1\end{array}\right)$. 
+            如图 \ref{fig:vector-addition-reflection}, 先利用平行四边形法则求 $\boldsymbol{\alpha}+\boldsymbol{\beta}$, 再对向量 $(\boldsymbol{\alpha}+\boldsymbol{\beta})$ 进行关于 $x$ 轴的反射变换; 
+            或者, 先对向量 $\boldsymbol{\alpha}, \boldsymbol{\beta}$ 做关于 $x$ 轴的反射变换, 
+            再利用平行四边形法则求反射变换后的两个向量的和.请回答下列问题：
+
+            \begin{enumerate}
+              \item 这两个过程的结果相同吗?
+              \item 如果把求$\boldsymbol{\alpha}$的反射的变换记作$\text{Reflect}_{x}(\boldsymbol{\alpha})$，
+              把求$\boldsymbol{\beta}$的反射的变换记作$\text{Reflect}_{x}(\boldsymbol{\beta})$，
+              把求$\boldsymbol{\alpha}+\boldsymbol{\beta}$的反射的变换记作$\text{Reflect}_{x}(\boldsymbol{\alpha}+\boldsymbol{\beta})$，
+              那么，这些变换的坐标变换矩阵分别是什么？这些变换的矩阵有什么关系？
+            \end{enumerate}
+
+            \begin{figure}[!h]
+            \centering
+            \begin{tikzpicture}[scale=1, transform shape]
+
+              % First diagram: Vector addition first, then reflection
+              \begin{scope}[shift={(0,0)}]
+                % Draw axes
+                \draw[thick,->] (-2,0) -- (4,0) node[anchor=north west] {$x$};
+                \draw[thick,->] (0,-3.5) -- (0,3.5) node[anchor=south east] {$y$};
+              
+                % Draw original vectors alpha and beta
+                \draw[thick,->,blue] (0,0) -- (1,2) node[anchor=south] {$\boldsymbol{\alpha}$};
+                \draw[thick,->,red] (0,0) -- (2,1) node[anchor=west] {$\boldsymbol{\beta}$};
+
+                \draw[thick,-,blue,dashed] (1,2) -- (3,3);
+                \draw[thick,-,red,dashed] (2,1) -- (3,3);
+              
+                % Draw alpha + beta
+                \draw[thick,->,mygreen] (0,0) -- (3,3) node[anchor=south] {$\boldsymbol{\alpha}+\boldsymbol{\beta}$};
+              
+                % Draw reflection of alpha + beta
+                \draw[thick,->,mygreen,dashed] (0,0) -- (3,-3) node[anchor=north] {$\text{Reflect}_{x}(\boldsymbol{\alpha}+\boldsymbol{\beta})$};
+
+                \draw[thick,-,black,dashed] (3,3) -- (3,-3);
+
+                % Add a right-angle symbol (perpendicular mark)
+                \draw (3,0) -- (3,0.1) -- (3+0.1,0.1) -- (3+0.1,0);
+
+              \end{scope}
+              
+              % Second diagram: Reflection first, then vector addition
+              \begin{scope}[shift={(7,0)}]
+                % Draw axes
+                \draw[thick,->] (-2,0) -- (4,0) node[anchor=north west] {$x$};
+                \draw[thick,->] (0,-3.5) -- (0,3.5) node[anchor=south east] {$y$};
+
+                % Draw original vectors alpha and beta
+                \draw[thick,->,blue] (0,0) -- (1,2) node[anchor=south] {$\boldsymbol{\alpha}$};
+                \draw[thick,->,red] (0,0) -- (2,1) node[anchor=west] {$\boldsymbol{\beta}$};
+              
+                % Draw reflection of alpha and beta
+                \draw[thick,->,blue,dashed] (0,0) -- (1,-2) node[anchor=east] {$\text{Reflect}_{x}(\boldsymbol{\alpha})$};
+                \draw[thick,->,red,dashed] (0,0) -- (2,-1) node[anchor=west] {$\text{Reflect}_{x}(\boldsymbol{\beta})$};
+
+                \draw[thick,-,blue,dashed] (1,-2) -- (3,-3);
+                \draw[thick,-,red,dashed] (2,-1) -- (3,-3);
+
+                \draw[thick,-,black,dashed] (1,2) -- (1,-2);
+                \draw[thick,-,black,dashed] (2,1) -- (2,-1);
+                
+                % Add a right-angle symbol (perpendicular mark)
+                \draw (1,0) -- (1,0.1) -- (1+0.1,0.1) -- (1+0.1,0);
+                \draw (2,0) -- (2,0.1) -- (2+0.1,0.1) -- (2+0.1,0);
+
+                % Draw addition of reflected alpha and beta
+                \draw[thick,->,mygreen] (0,0) -- (3,-3) node[anchor=north] {$\text{Reflect}_{x}(\boldsymbol{\alpha}) + \text{Reflect}_{x}(\boldsymbol{\beta})$};
+
+              \end{scope}
+
+            \end{tikzpicture}
+            \caption{向量加法与反射变换}
+            \label{fig:vector-addition-reflection}
+            \end{figure}
+
+  \item 设向量 $\boldsymbol{u}=\left(\begin{array}{l}1 \\ 2\end{array}\right)$ ，
+        如图 \ref{fig:vector-scaling}, 先用$2$与该向量进行数量乘法，再使向量在 \( x \)-轴方向的坐标变为原来的 3 倍，同时使 \( y \)-轴方向的坐标变为原来的 2 倍；
+        或者，先使向量在 \( x \)-轴方向的坐标变为原来的 3 倍，同时使 \( y \)-轴方向的坐标变为原来的 2 倍，再用$2$与该向量进行数量乘法。
+        请回答下列问题：
+
+        \begin{enumerate}
+          \item 这两个过程的结果相同吗?
+          \item 如果把求$\boldsymbol{u}$的反射的变换记作$\text{Stretch}_{x}(\boldsymbol{u})$，
+          把求$2\boldsymbol{u}$的反射的变换记作$\text{Stretch}_{x}(2\boldsymbol{u})$，
+          那么，这些变换的坐标变换矩阵分别是什么？这些变换的矩阵有什么关系？
+        \end{enumerate}
+
+        \begin{figure}[!h]
+          \centering
+          \begin{tikzpicture}[scale=1, transform shape]
+
+            % Draw axes
+            \draw[thick,->] (-1,0) -- (13,0) node[right] {$x$};
+            \draw[thick,->] (0,-1) -- (0,9) node[above] {$y$};
+          
+            % Original vector v
+            \draw[thick,->,blue] (0,0) -- (2,1) node[above] {$\boldsymbol{v}$};
+            
+            % Scaled vector 2v
+            \draw[thick,->,red] (0,0) -- (4,2) node[above] {$2\boldsymbol{v}$};
+          
+            % Transformed vector T(v)
+            \draw[thick,->,green] (0,0) -- (6,2) node[above] {$T(\boldsymbol{v})$};
+          
+            % Transformed vector T(2v)
+            \draw[thick,->,orange] (0,0) -- (12,4) node[above] {$T(2\boldsymbol{v})$};
+          
+          \end{tikzpicture}
+          \caption{向量伸缩变换}
+          \label{fig:vector-scaling}
+        \end{figure}
+
+  \end{enumerate}
+
+\end{exercise}
+
+
 \section{矩阵的运算}
 
 \begin{note}
@@ -1371,13 +1513,6 @@ $f$ 在 $D$ 上有界的充要条件是 $f$ 在 $D$ 上既有上界又有下界.
 \begin{figure}[!h]
     \centering
 \begin{tikzpicture}[scale=0.8]
-  % Define custom colors
-  \definecolor{myred}{rgb}{0.8, 0.2, 0.2}
-  \definecolor{myblue}{rgb}{0.2, 0.2, 0.8}
-  \definecolor{mygreen}{rgb}{0.0, 0.5, 0.0}
-  \definecolor{myorange}{rgb}{1.0, 0.5, 0.0}
-  \definecolor{mybrown}{rgb}{0.6, 0.4, 0.2}
-  \definecolor{mypurple}{rgb}{0.6, 0.2, 0.6}
 
   % Draw axes
   \draw[->, thick] (-6,0) -- (6,0) node[right] {$x$};
