@@ -165,13 +165,17 @@ x_1 = -2, \quad x_2 = 3
 \vspace{0.5cm}
 
 \begin{note}
-    用方程$\alpha$减去方程$\beta$指：用方程$\alpha$的左边减去方程$\beta$的左边，用方程$\alpha$的右边减去方程$\beta$的右边。
+    用方程$u$减去方程$v$指：用方程$u$的左边减去方程$v$的左边，用方程$u$的右边减去方程$v$的右边。
 \end{note}
 
 \subsection{系数矩阵和增广矩阵}
 \label{subsec:系数矩阵和增广矩阵}
 
-考虑二元一次方程组\ref{eq:二元一次方程组示例}。我们将方程组中方程的所有系数按照它们在整理好的方程中的位置取出来写成如式\ref{eq:系数矩阵示例}的一张数表。有了这张数表我们就可以更加简洁地表达方程组中未知数的系数，因此我们将其称为方程组的\textcolor{third}{\bf 系数矩阵}，我们将其记为大写字母$A$。
+考虑二元一次方程组\ref{eq:二元一次方程组示例}。
+我们将方程组中方程的所有系数按照它们在整理好的方程中的位置取出来写成如式\ref{eq:系数矩阵示例}的一张数表。
+有了这张数表我们就可以更加简洁地表达方程组中未知数的系数，
+因此我们将其称为方程组的\textcolor{third}{\bf 系数矩阵}，我们将其记为大写字母$A$。
+由于矩阵$A$的尺寸是$2\times 2$，因此我们称其为$2\times 2$矩阵，或者$2$阶（方形）矩阵。
 
 \begin{equation}
   A = \left(\begin{array}{ll}
@@ -406,6 +410,7 @@ $$
 本节将以矩阵为工具, 研究一些几何变换, 并以平面图形的变换为背景, 讨论二阶矩阵的乘法及性质, 用变换的观点理解解二元一次方程组的意义, 初步展示矩阵应用的广泛性。
 
 \subsection{几种特殊几何变换}
+\label{subsec:几种特殊几何变换}
 
 \subsubsection{恒等变换}
 \label{subsubsec:恒等变换}
@@ -537,13 +542,13 @@ y^{\prime}= 0\cdot x + -1 \cdot y .
 
 \vspace{0.5cm}
 
-事实上, 在直角坐标系 $O x y$ 内, 将任意一点$P(x, y)$绕原点 $O$ 按逆时针方向旋转 $\alpha$ 角得到点$P^{\prime}(x^{\prime}, y^{\prime})$的旋转变换的坐标变换公式是
+事实上, 在直角坐标系 $O x y$ 内, 将任意一点$P(x, y)$绕原点 $O$ 按逆时针方向旋转 $\theta$ 角得到点$P^{\prime}(x^{\prime}, y^{\prime})$的旋转变换的坐标变换公式是
 
 \begin{equation}
 \left\{\begin{array}{l}
-x^{\prime}=x \cos \alpha-y \sin \alpha, \\
-y^{\prime}=x \sin \alpha+y \cos \alpha .
-\end{array}\right.    
+x^{\prime}=x \cos \theta-y \sin \theta, \\
+y^{\prime}=x \sin \theta+y \cos \theta .
+\end{array}\right.\label{eq:旋转变换的坐标变换公式}
 \end{equation}
 
 \subsubsection{反射变换}
@@ -871,19 +876,40 @@ $$
 
 \vspace*{0.5cm}
 
+为了研究线性变换的性质, 我们先定义平面向量的加法和数量乘法。
+
+\begin{definition}[平面向量的加法]
+  设向量 $\boldsymbol{u}=\left(\begin{array}{l}x_1 \\ y_1\end{array}\right), \boldsymbol{v}=\left(\begin{array}{l}x_2 \\ y_2\end{array}\right)$, 
+  规定向量 $\boldsymbol{u}$ 与 $\boldsymbol{v}$ 的和 $\boldsymbol{u}+\boldsymbol{v}=\left(\begin{array}{l}x_1+x_2 \\ y_1+y_2\end{array}\right)$.
+\end{definition}
+
+\begin{note}
+向量加法就是高中学的平行四边形法则。
+\end{note}
+
+\begin{definition}[平面向量的数量乘法]
+  设向量 $\boldsymbol{u}=\left(\begin{array}{l}x \\ y\end{array}\right)$, 
+  规定实数 $\lambda$ 与向量 $\boldsymbol{u}$ 的乘积 $\lambda \boldsymbol{u}=\left(\begin{array}{l}\lambda x \\ \lambda y\end{array}\right)$; 
+\end{definition}
+
+平面向量的数量乘法被称为"数量乘法"是因为它涉及到一个向量与一个数（或者我们可以称之为标量）相乘的操作。这个数可以是任何实数。
+
+当我们将一个向量与一个数相乘时，数乘的结果是一个新的向量，它的方向与原始向量相同（或相反），但长度（或称为模）被缩小或拉大了。这个操作影响到向量的大小，所以我们称之为"数量乘法"。
+
+
 \begin{exercise}
 
   \begin{enumerate}
-    \item   设向量 $\boldsymbol{\alpha}=\left(\begin{array}{l}1 \\ 2\end{array}\right), \boldsymbol{\beta}=\left(\begin{array}{l}2 \\ 1\end{array}\right)$. 
-            如图 \ref{fig:vector-addition-reflection}, 先利用平行四边形法则求 $\boldsymbol{\alpha}+\boldsymbol{\beta}$, 再对向量 $(\boldsymbol{\alpha}+\boldsymbol{\beta})$ 进行关于 $x$ 轴的反射变换; 
-            或者, 先对向量 $\boldsymbol{\alpha}, \boldsymbol{\beta}$ 做关于 $x$ 轴的反射变换, 
+    \item   【高中数学人教A版选修4-2】设向量 $\boldsymbol{u}=\left(\begin{array}{l}1 \\ 2\end{array}\right), \boldsymbol{v}=\left(\begin{array}{l}2 \\ 1\end{array}\right)$. 
+            如图 \ref{fig:vector-addition-reflection}, 先利用平行四边形法则求 $\boldsymbol{u}+\boldsymbol{v}$, 再对向量 $(\boldsymbol{u}+\boldsymbol{v})$ 进行关于 $x$ 轴的反射变换; 
+            或者, 先对向量 $\boldsymbol{u}, \boldsymbol{v}$ 做关于 $x$ 轴的反射变换, 
             再利用平行四边形法则求反射变换后的两个向量的和.请回答下列问题：
 
             \begin{enumerate}
               \item 这两个过程的结果相同吗?
-              \item 如果把求$\boldsymbol{\alpha}$的反射的变换记作$\text{Reflect}_{x}(\boldsymbol{\alpha})$，
-              把求$\boldsymbol{\beta}$的反射的变换记作$\text{Reflect}_{x}(\boldsymbol{\beta})$，
-              把求$\boldsymbol{\alpha}+\boldsymbol{\beta}$的反射的变换记作$\text{Reflect}_{x}(\boldsymbol{\alpha}+\boldsymbol{\beta})$，
+              \item 如果把$\boldsymbol{u}$关于$x$轴的反射变换记作$\text{Reflect}_{x}(\boldsymbol{u})$，
+              把$\boldsymbol{v}$关于$x$轴的反射变换记作$\text{Reflect}_{x}(\boldsymbol{v})$，
+              把$\boldsymbol{u}+\boldsymbol{v}$关于$x$轴的反射变换记作$\text{Reflect}_{x}(\boldsymbol{u}+\boldsymbol{v})$，
               那么，这些变换的坐标变换矩阵分别是什么？这些变换的矩阵有什么关系？
             \end{enumerate}
 
@@ -895,29 +921,42 @@ $$
               \begin{scope}[shift={(0,0)}]
 
                 \foreach \x in {-1,0,...,4} {
-                    \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
+                  \ifnum \x = 0
+                  \else
+                        \ifnum \x = 3
+                            \draw (\x, 0.1) -- (\x, -0.1) node[below right] {\x};
+                        \else
+                            \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
+                        \fi
+                  \fi
                 }
 
                 \foreach \y in {-3,-2,...,3} {
-                    \draw (0.1, \y) -- (-0.1, \y) node[left] {\y};
+                    \ifnum \y = 0
+                    \else
+                        \draw (0.1, \y) -- (-0.1, \y) node[left] {\y};
+                    \fi
                 }
+
+                % Draw origin
+                \node at (0,0) [below left] {$O$};
 
                 % Draw axes
                 \draw[thick,->] (-1.5,0) -- (4.5,0) node[anchor=north west] {$x$};
                 \draw[thick,->] (0,-3.5) -- (0,3.5) node[anchor=south east] {$y$};
               
                 % Draw original vectors alpha and beta
-                \draw[thick,->,blue] (0,0) -- (1,2) node[anchor=south] {$\boldsymbol{\alpha}$};
-                \draw[thick,->,red] (0,0) -- (2,1) node[anchor=west] {$\boldsymbol{\beta}$};
+                \draw[thick,->,blue] (0,0) -- (1,2) node[anchor=south] {$\boldsymbol{u}$};
+                \draw[thick,->,red] (0,0) -- (2,1) node[anchor=west] {$\boldsymbol{v}$};
 
                 \draw[thick,-,blue,dashed] (1,2) -- (3,3);
                 \draw[thick,-,red,dashed] (2,1) -- (3,3);
               
                 % Draw alpha + beta
-                \draw[thick,->,mygreen] (0,0) -- (3,3) node[anchor=south] {$\boldsymbol{\alpha}+\boldsymbol{\beta}$};
+                \draw[thick,->,mygreen] (0,0) -- (3,3) node[anchor=south] {$\boldsymbol{u}+\boldsymbol{v}$};
               
                 % Draw reflection of alpha + beta
-                \draw[thick,->,mygreen,dashed] (0,0) -- (3,-3) node[anchor=north] {$\text{Reflect}_{x}(\boldsymbol{\alpha}+\boldsymbol{\beta})$};
+                \draw[thick,->,mygreen,dashed] (0,0) -- (3,-3) node[anchor=north] {$\text{Reflect}_{x}(\boldsymbol{u}+\boldsymbol{v})$};
 
                 \draw[thick,-,black,dashed] (3,3) -- (3,-3);
 
@@ -930,24 +969,46 @@ $$
               \begin{scope}[shift={(7,0)}]
 
                 \foreach \x in {-1,0,...,4} {
-                    \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
-                }
+                  \ifnum \x = 0
+                    % Do nothing when \x is 0
+                  \else
+                    \ifnum \x = 1
+                      \draw (\x, 0.1) -- (\x, -0.1) node[below right] {\x};
+                    \else
+                      \ifnum \x = 2
+                        \draw (\x, 0.1) -- (\x, -0.1) node[below right] {\x};
+                      \else
+                        \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
+                      \fi
+                    \fi
+                  \fi
+                }                
 
                 \foreach \y in {-3,-2,...,3} {
-                    \draw (0.1, \y) -- (-0.1, \y) node[left] {\y};
-                }
+                    \ifnum \y = 0
+                    \else
+                        \ifnum \y = -2
+                            \draw (0.1, \y) -- (-0.1, \y) node[above left] {\y};
+                        \else
+                            \draw (0.1, \y) -- (-0.1, \y) node[left] {\y};
+                        \fi
+                    \fi
+                  }
+
+                % Draw origin
+                \node at (0,0) [below left] {$O$};
 
                 % Draw axes
                 \draw[thick,->] (-1.5,0) -- (4.5,0) node[anchor=north west] {$x$};
                 \draw[thick,->] (0,-3.5) -- (0,3.5) node[anchor=south east] {$y$};
 
                 % Draw original vectors alpha and beta
-                \draw[thick,->,blue] (0,0) -- (1,2) node[anchor=north] {$\boldsymbol{\alpha}$};
-                \draw[thick,->,red] (0,0) -- (2,1) node[anchor=west] {$\boldsymbol{\beta}$};
+                \draw[thick,->,blue] (0,0) -- (1,2) node[anchor=south] {$\boldsymbol{u}$};
+                \draw[thick,->,red] (0,0) -- (2,1) node[anchor=west] {$\boldsymbol{v}$};
               
                 % Draw reflection of alpha and beta
-                \draw[thick,->,blue,dashed] (0,0) -- (1,-2) node[anchor=north] {$\text{Reflect}_{x}(\boldsymbol{\alpha})$};
-                \draw[thick,->,red,dashed] (0,0) -- (2,-1) node[anchor=west] {$\text{Reflect}_{x}(\boldsymbol{\beta})$};
+                \draw[thick,->,blue,dashed] (0,0) -- (1,-2) node[anchor=north east] {$\text{Reflect}_{x}(\boldsymbol{u})$};
+                \draw[thick,->,red,dashed] (0,0) -- (2,-1) node[anchor=west] {$\text{Reflect}_{x}(\boldsymbol{v})$};
 
                 \draw[thick,-,blue,dashed] (1,-2) -- (3,-3);
                 \draw[thick,-,red,dashed] (2,-1) -- (3,-3);
@@ -960,7 +1021,7 @@ $$
                 \draw (2,0) -- (2,0.1) -- (2+0.1,0.1) -- (2+0.1,0);
 
                 % Draw addition of reflected alpha and beta
-                \draw[thick,->,mygreen] (0,0) -- (3,-3) node[anchor=north] {$\text{Reflect}_{x}(\boldsymbol{\alpha}) + \text{Reflect}_{x}(\boldsymbol{\beta})$};
+                \draw[thick,->,mygreen] (0,0) -- (3,-3) node[anchor=north] {$\text{Reflect}_{x}(\boldsymbol{u}) + \text{Reflect}_{x}(\boldsymbol{v})$};
 
               \end{scope}
 
@@ -969,15 +1030,15 @@ $$
             \label{fig:vector-addition-reflection}
             \end{figure}
 
-  \item 设向量 $\boldsymbol{u}=\left(\begin{array}{l}1 \\ 2\end{array}\right)$ ，
+  \item 设向量 $\boldsymbol{u}=\left(\begin{array}{l}2 \\ 1\end{array}\right)$ ，
         如图 \ref{fig:vector-scaling}, 先用$2$与该向量进行数量乘法，再使向量在 \( x \)-轴方向的坐标变为原来的 3 倍，同时使 \( y \)-轴方向的坐标变为原来的 2 倍；
         或者，先使向量在 \( x \)-轴方向的坐标变为原来的 3 倍，同时使 \( y \)-轴方向的坐标变为原来的 2 倍，再用$2$与该向量进行数量乘法。
         请回答下列问题：
 
         \begin{enumerate}
           \item 这两个过程的结果相同吗?
-          \item 如果把求$\boldsymbol{u}$的反射的变换记作$\text{Stretch}_{x}(\boldsymbol{u})$，
-          把求$2\boldsymbol{u}$的反射的变换记作$\text{Stretch}_{x}(2\boldsymbol{u})$，
+          \item 如果把$\boldsymbol{u}$的伸缩变换记作$\text{Stretch}(\boldsymbol{u})$，
+          把$2\boldsymbol{u}$的伸缩变换记作$\text{Stretch}(2\boldsymbol{u})$，
           那么，这些变换的坐标变换矩阵分别是什么？这些变换的矩阵有什么关系？
         \end{enumerate}
 
@@ -985,13 +1046,16 @@ $$
           \centering
           \begin{tikzpicture}[scale=1, transform shape]
 
-            \foreach \x in {0,1,...,12} {
+            \foreach \x in {1,2,...,12} {
                 \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
             }
 
-            \foreach \y in {0,1,...,4} {
+            \foreach \y in {1,2,...,4} {
                 \draw (0.1, \y) -- (-0.1, \y) node[left] {\y};
             }
+
+            % 绘制原点O
+            \node at (0,0) [below left] {$O$};
 
             % Draw axes
             \draw[thick,->] (-0.5,0) -- (12.5,0) node[right] {$x$};
@@ -1019,22 +1083,82 @@ $$
 \end{exercise}
 
 \begin{theorem}[线性变换的性质]
-
-设 $A$ 是一个二阶矩阵, $\boldsymbol{\alpha}, \boldsymbol{\beta}$ 是平面上的任意两个向量, $\lambda$ 是一个任意实 数, 则
+\label{thm:线性变换的性质}
+设 $T$ 是平面上一个线性变换, $\boldsymbol{u}, \boldsymbol{v}$ 是平面上的任意两个向量, $\lambda$ 是一个任意实数, 则
 \begin{enumerate}
-  \item $\boldsymbol{A}(\lambda \boldsymbol{\alpha})=\lambda \boldsymbol{A} \boldsymbol{\alpha}$;
-  \item $\boldsymbol{A}(\boldsymbol{\alpha}+\boldsymbol{\beta})=\boldsymbol{A} \boldsymbol{\alpha}+\boldsymbol{A} \boldsymbol{\beta}$.
+  \item $T(u+v) =T(u)+T(v)$;
+  \item $T(\lambda u) =\lambda T(u)$.
 \end{enumerate}
 
 \end{theorem}
 
 综合上述两条性质, 可以得到:
 
-设 $\boldsymbol{A}$ 是一个二阶矩阵, $\boldsymbol{\alpha}, \boldsymbol{\beta}$ 是平面上的任意两个向量, $\lambda_1, \lambda_2$ 是任意两个 实数, 则
+设 $T$ 是平面上一个线性变换, $\boldsymbol{u}, \boldsymbol{v}$ 是平面上的任意两个向量, $\lambda_1, \lambda_2$ 是任意两个 实数, 则
 \begin{equation}
-  \boldsymbol{A}\left(\lambda_1 \boldsymbol{\alpha}+\lambda_2 \boldsymbol{\beta}\right)=\lambda_1 \boldsymbol{A} \boldsymbol{\alpha}+\lambda_2 \boldsymbol{A} \boldsymbol{\beta}
+  T\left(\lambda_1 \boldsymbol{u}+\lambda_2 \boldsymbol{v}\right)=\lambda_1 T (\boldsymbol{u})+\lambda_2 T (\boldsymbol{v})
 \end{equation}
 
+\begin{note}
+  在很多数学教材中使用定理\ref{thm:线性变换的性质}中的两条性质作为线性变换的定义。
+  可以验证，任何满足这两条性质的变换都能够保持直线的性质，即不改变直线的形状、平行性和交叉点的位置。
+\end{note}
+
+\subsection{用矩阵做线性变换}
+
+在第\ref{subsec:几种特殊几何变换}节中，我们通过将线性变换写成坐标变换方程的方法，
+指出平面上线性变换和二阶方阵之间存在着一一对应的关系，即我们实现了用矩阵表示线性变换。
+
+此外，我们之前提到，矩阵源于人们在解方程组是对简洁表达的需求。
+那么，不借助坐标变换方程，我们可否直接用矩阵来实现坐标变换呢？答案是肯定的.
+
+让我们回顾一下式(\ref{eq:旋转变换的坐标变换公式})，在直角坐标系 $O x y$ 内, 
+将任意一点$P(x, y)$绕原点 $O$ 按逆时针方向旋转 $\theta$ 角得到点$P^{\prime}(x^{\prime}, y^{\prime})$的旋转变换的坐标变换公式
+
+\begin{equation*}
+  \left\{\begin{array}{l}
+  x^{\prime}=x \cos \theta-y \sin \theta, \\
+  y^{\prime}=x \sin \theta+y \cos \theta .
+  \end{array}\right.    
+\end{equation*}
+
+我们进行如下规定，就可以实现用矩阵来做坐标变换
+
+% Define custom colors
+\definecolor{softgreen}{rgb}{0.7, 1.0, 0.7}
+\definecolor{softblue}{rgb}{0.7, 0.7, 1.0}
+\definecolor{coralred}{rgb}{1.0, 0.5, 0.5}
+\definecolor{softorange}{rgb}{1.0, 0.8, 0.6}
+\definecolor{softyellow}{rgb}{1.0, 1.0, 0.7}
+
+% % Define custom column types with background colors
+% \newcolumntype{S}{>{\columncolor{softgreen}}c}
+% \newcolumntype{R}{>{\columncolor{coralred}}c}
+
+\begin{equation*}
+  \left(\begin{array}{c}
+    \cellcolor{softyellow} x^{\prime} \\
+    \cellcolor{softorange} y^{\prime}
+  \end{array}\right)=\left(\begin{array}{cc}
+    \cellcolor{softgreen} \cos \theta & \cellcolor{softgreen} -\sin \theta \\
+    \cellcolor{softblue} \sin \theta & \cellcolor{softblue} \cos \theta
+    \end{array}\right) \cdot \left(\begin{array}{>{\columncolor{coralred}}c}
+  x \\
+  y
+  \end{array}\right)=\left(\begin{array}{c}
+    \cellcolor{softyellow} (\cos \theta) \cdot x + (-\sin \theta) \cdot y \\
+    \cellcolor{softorange} (\sin \theta) \cdot x + (\cos \theta) \cdot y
+    \end{array}\right)
+\end{equation*}
+
+我们把第一个等号对应的关系称为\textcolor{third}{\bf 矩阵与向量间的乘法运算}。
+将一个矩阵与一个向量相乘，就是对该向量进行该矩阵所表示的线性变换。
+
+\begin{note}
+  学生可以尝试把之前的几何变换的坐标变换公式写成矩阵与向量间的乘法运算。
+\end{note}
+
+\subsection{初等变换与矩阵的乘法}
 
 \section{矩阵的运算}
 
@@ -1533,7 +1657,7 @@ $f$ 在 $D$ 上有界的充要条件是 $f$ 在 $D$ 上既有上界又有下界.
 \hline
 常量函数 & $y=c \quad (c$ 是常数$)$ \\
 \hline
-幂函数 & $y=x^\alpha \quad (\alpha$ 为实数$)$ \\
+幂函数 & $y=x^u \quad (u$ 为实数$)$ \\
 \hline
 指数函数 & $y=a^x \quad (a>0, a \neq 1)$ \\
 \hline
@@ -1593,7 +1717,7 @@ $f$ 在 $D$ 上有界的充要条件是 $f$ 在 $D$ 上既有上界又有下界.
     \label{fig:basic-elem-func}
 \end{figure}
 
-幂函数 $y=x^\alpha$ 和指数函数 $y=a^x$ 都涉及乘幂, 而在中学数 课程中只给出了有理指数乘幂的定义. 这里我们指出，无理数也可以作为幂指数。\textcolor{second}{无理指数幂和有理指数幂一起构成了实数指数幂，并保持有理指数幂的基本性质。}
+幂函数 $y=x^u$ 和指数函数 $y=a^x$ 都涉及乘幂, 而在中学数 课程中只给出了有理指数乘幂的定义. 这里我们指出，无理数也可以作为幂指数。\textcolor{second}{无理指数幂和有理指数幂一起构成了实数指数幂，并保持有理指数幂的基本性质。}
 
 
 \begin{definition}[初等函数]
@@ -2423,7 +2547,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
 \begin{equation}
    \label{inter}
-   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
+   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi uv\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
 \end{equation}
 一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
 \end{definition}
