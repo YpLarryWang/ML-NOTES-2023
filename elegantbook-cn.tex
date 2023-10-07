@@ -824,7 +824,7 @@ $$
 \centering
 \begin{tikzpicture}[scale=1.5]
     % 绘制坐标轴
-    \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (-0.5,0) -- (1.5,0) node[right] {$x$};
     \draw[->] (0,-0.5) -- (0,1.5) node[above] {$y$};
     
     % 绘制原点O
@@ -893,8 +893,17 @@ $$
 
               % First diagram: Vector addition first, then reflection
               \begin{scope}[shift={(0,0)}]
+
+                \foreach \x in {-1,0,...,4} {
+                    \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
+                }
+
+                \foreach \y in {-3,-2,...,3} {
+                    \draw (0.1, \y) -- (-0.1, \y) node[left] {\y};
+                }
+
                 % Draw axes
-                \draw[thick,->] (-2,0) -- (4,0) node[anchor=north west] {$x$};
+                \draw[thick,->] (-1.5,0) -- (4.5,0) node[anchor=north west] {$x$};
                 \draw[thick,->] (0,-3.5) -- (0,3.5) node[anchor=south east] {$y$};
               
                 % Draw original vectors alpha and beta
@@ -919,16 +928,25 @@ $$
               
               % Second diagram: Reflection first, then vector addition
               \begin{scope}[shift={(7,0)}]
+
+                \foreach \x in {-1,0,...,4} {
+                    \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
+                }
+
+                \foreach \y in {-3,-2,...,3} {
+                    \draw (0.1, \y) -- (-0.1, \y) node[left] {\y};
+                }
+
                 % Draw axes
-                \draw[thick,->] (-2,0) -- (4,0) node[anchor=north west] {$x$};
+                \draw[thick,->] (-1.5,0) -- (4.5,0) node[anchor=north west] {$x$};
                 \draw[thick,->] (0,-3.5) -- (0,3.5) node[anchor=south east] {$y$};
 
                 % Draw original vectors alpha and beta
-                \draw[thick,->,blue] (0,0) -- (1,2) node[anchor=south] {$\boldsymbol{\alpha}$};
+                \draw[thick,->,blue] (0,0) -- (1,2) node[anchor=north] {$\boldsymbol{\alpha}$};
                 \draw[thick,->,red] (0,0) -- (2,1) node[anchor=west] {$\boldsymbol{\beta}$};
               
                 % Draw reflection of alpha and beta
-                \draw[thick,->,blue,dashed] (0,0) -- (1,-2) node[anchor=east] {$\text{Reflect}_{x}(\boldsymbol{\alpha})$};
+                \draw[thick,->,blue,dashed] (0,0) -- (1,-2) node[anchor=north] {$\text{Reflect}_{x}(\boldsymbol{\alpha})$};
                 \draw[thick,->,red,dashed] (0,0) -- (2,-1) node[anchor=west] {$\text{Reflect}_{x}(\boldsymbol{\beta})$};
 
                 \draw[thick,-,blue,dashed] (1,-2) -- (3,-3);
@@ -967,21 +985,29 @@ $$
           \centering
           \begin{tikzpicture}[scale=1, transform shape]
 
+            \foreach \x in {0,1,...,12} {
+                \draw (\x, 0.1) -- (\x, -0.1) node[below] {\x};
+            }
+
+            \foreach \y in {0,1,...,4} {
+                \draw (0.1, \y) -- (-0.1, \y) node[left] {\y};
+            }
+
             % Draw axes
-            \draw[thick,->] (-1,0) -- (13,0) node[right] {$x$};
-            \draw[thick,->] (0,-1) -- (0,9) node[above] {$y$};
+            \draw[thick,->] (-0.5,0) -- (12.5,0) node[right] {$x$};
+            \draw[thick,->] (0,-0.5) -- (0,4.5) node[above] {$y$};
           
             % Original vector v
-            \draw[thick,->,blue] (0,0) -- (2,1) node[above] {$\boldsymbol{v}$};
+            \draw[thick,->,blue] (0,0) -- (2,1) node[above] {$\boldsymbol{u}$};
             
             % Scaled vector 2v
-            \draw[thick,->,red] (0,0) -- (4,2) node[above] {$2\boldsymbol{v}$};
+            \draw[thick,->,red] (0,0) -- (4,2) node[above] {$2\boldsymbol{u}$};
           
             % Transformed vector T(v)
-            \draw[thick,->,green] (0,0) -- (6,2) node[above] {$T(\boldsymbol{v})$};
+            \draw[thick,->,mygreen] (0,0) -- (6,2) node[above] {$\text{Stretch}_{x}(\boldsymbol{u})$};
           
             % Transformed vector T(2v)
-            \draw[thick,->,orange] (0,0) -- (12,4) node[above] {$T(2\boldsymbol{v})$};
+            \draw[thick,->,orange] (0,0) -- (12,4) node[above] {$\text{Stretch}_{x}(2\boldsymbol{u})$};
           
           \end{tikzpicture}
           \caption{向量伸缩变换}
@@ -991,6 +1017,23 @@ $$
   \end{enumerate}
 
 \end{exercise}
+
+\begin{theorem}[线性变换的性质]
+
+设 $A$ 是一个二阶矩阵, $\boldsymbol{\alpha}, \boldsymbol{\beta}$ 是平面上的任意两个向量, $\lambda$ 是一个任意实 数, 则
+\begin{enumerate}
+  \item $\boldsymbol{A}(\lambda \boldsymbol{\alpha})=\lambda \boldsymbol{A} \boldsymbol{\alpha}$;
+  \item $\boldsymbol{A}(\boldsymbol{\alpha}+\boldsymbol{\beta})=\boldsymbol{A} \boldsymbol{\alpha}+\boldsymbol{A} \boldsymbol{\beta}$.
+\end{enumerate}
+
+\end{theorem}
+
+综合上述两条性质, 可以得到:
+
+设 $\boldsymbol{A}$ 是一个二阶矩阵, $\boldsymbol{\alpha}, \boldsymbol{\beta}$ 是平面上的任意两个向量, $\lambda_1, \lambda_2$ 是任意两个 实数, 则
+\begin{equation}
+  \boldsymbol{A}\left(\lambda_1 \boldsymbol{\alpha}+\lambda_2 \boldsymbol{\beta}\right)=\lambda_1 \boldsymbol{A} \boldsymbol{\alpha}+\lambda_2 \boldsymbol{A} \boldsymbol{\beta}
+\end{equation}
 
 
 \section{矩阵的运算}
