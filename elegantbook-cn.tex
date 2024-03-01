@@ -1,16 +1,16 @@
 \documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
 
-\title{机器学习讲义}
+\title{计算语言学中的数学方法}
 \subtitle{2023级用}
 
 \author{王予沛 \& \texttt{ChatGPT} \& \texttt{Claude}}
-\institute{北京师范大学数字人文系}
+\institute{北京师范大学中文信息处理研究所}
 % \date{2022/12/31}
 % \version{4.5}
 % \bioinfo{自定义}{信息}
 
-\extrainfo{本讲义扩展自
-\href{https://github.com/afshinea/stanford-cs-229-machine-learning}{斯坦福大学CS229小抄}\\
+\extrainfo{
+% 本讲义扩展自\href{https://github.com/afshinea/stanford-cs-229-machine-learning}{斯坦福大学CS229小抄}\\
 封面图片由\href{https://www.midjourney.com/home/}{Midjourney}创作
 }
 
@@ -1160,6 +1160,10 @@ $$
 
 \subsection{初等变换与矩阵的乘法}
 
+\begin{proposition}[TODO]
+    特别重要，\textcolor{red}{任意矩阵左乘初等矩阵就相当于做初等行变换，右乘初等矩阵就相当于做初等列变换。}那么如果说任何矩阵都可以通过初等行变换化为上三角，通过初等列变化化为下三角，那么就可以把任意矩阵分解成对角矩阵和一堆初等矩阵的乘积，比如$A=P_{1}^{T}P_{2}^{T}\cdots P_{s}^{T}\Lambda Q_{1} Q_{2} \cdots Q_{t}$
+\end{proposition}
+
 \section{矩阵的运算}
 
 \begin{note}
@@ -1355,6 +1359,17 @@ AB = \begin{bmatrix}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{矩阵算子}
+
+\begin{proposition}[TODO]
+
+\begin{itemize}
+    \item  矩阵转置的性质$(AB)^{T}=B^{T} A^{T}$
+    \item 逆矩阵的本质是线性变换的逆变换，举例说明，并求给出用单位阵辅助求出逆矩阵的方法，介绍转置的性质$(AB)^{-1}=B^{-1} A^{-1}$最后给出python做法；
+    \item 矩阵的行列式的计算方法（只讲二阶和三阶），并讲清楚几何意义：面积比和右手螺旋定则；
+    \item 介绍矩阵的迹，以及特殊矩阵的行列式和他们的迹的关系。
+\end{itemize}
+
+\end{proposition}
 
 \subsection{矩阵的转置}
 
@@ -1728,6 +1743,14 @@ $f$ 在 $D$ 上有界的充要条件是 $f$ 在 $D$ 上既有上界又有下界.
 \subsection{复合函数}
 
 \subsection{反函数}
+
+\chapter{概率与统计}
+
+\textbf{这里介绍概率论的最基本内容和统计学的一些内容。计划参考gilbert书的统计部分以及实验设计教材。}
+
+\chapter{机器学习基础}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Elegant\LaTeX{} 系列模板介绍}
