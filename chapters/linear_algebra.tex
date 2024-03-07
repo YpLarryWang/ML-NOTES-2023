@@ -11,6 +11,7 @@
 \begin{enumerate}
     \item \href{https://github.com/afshinea/stanford-cs-229-machine-learning/blob/master/zh/refresher-algebra-calculus.pdf}{Machine Learning cheatsheets for Stanford's CS 229 - VIP Refresher: Linear Algebra and Calculus};
     \item \href{https://math.mit.edu/~gs/linearalgebra/ila5/indexila5.html}{Introduction to Linear Algebra, Fifth Edition (2016)};
+    \item 高等代数（第四版），高等教育出版;
     \item 高中数学人教A版选修4-2:矩阵与变换.
 \end{enumerate}
 
@@ -106,7 +107,11 @@ x_1 = -2, \quad x_2 = 3
 
 在下一节中，我们将介绍如何使用高斯消元法和矩阵来更简洁地表达求解过程。
 
-\vspace{0.5cm}
+\vspace{0.3cm}
+
+\noindent 使用Python可以很轻松地解出方程组\ref{eq:二元一次方程组示例}。
+
+\lstinputlisting[language=python]{scripts/code-1-1-4.py}
 
 \begin{note}
     用方程$u$减去方程$v$指：用方程$u$的左边减去方程$v$的左边，用方程$u$的右边减去方程$v$的右边。
@@ -239,6 +244,7 @@ x_1 = -2, \quad x_2 = 3
 一般地，我们称\textcolor{second}{“先通过行变换将矩阵化为行阶梯矩阵，然后进一步做行变换，将其化为简化行阶梯形矩阵进而直接\textbf{读出}方程组的解”}这样的解方程的方法为\textcolor{third}{\bf 高斯-若尔当消元法}。可以证明，任何矩阵都可以通过高斯-若尔当消元法转换为简化行阶梯形形式。高斯-若尔当消元法实际上是高斯消元法的一个扩展。
 
 \subsection{矩阵的行列式}
+\label{subsec:矩阵的行列式}
 
 \begin{note}
     行列式来自于数学家们在求解方程组时发现的一个可以用来简化表达，并判断方程组是否有解的记号。
@@ -364,14 +370,13 @@ $$
     \item 利用其几何意义（有向面积在一般的欧几里得空间中的推广）进行定义.
 \end{itemize}
 
-本讲义中我们希望大家按照几何意义来理解行列式，但这依赖于对线性变换的基本认识，故这里按下不表，待之后讲完线性变换后再识庐山真面目。\textcolor{red}{三阶行列式计算比较好记，可以顺手补充一下。}
+本讲义中我们希望大家按照几何意义来理解行列式，我们可以将其视作在一定的线性变换（比如旋转、缩放）下，形状的面积（在二维空间）或体积（在三维空间）的缩放因子。想象你有一张纸，上面画了一个单位正方形。这个正方形的边长都是1，所以它的面积也是1。现在，如果我们用一个矩阵来表示一个变换，比如把这个正方形拉长或者压扁，或者同时进行拉长和压扁的组合，那么变换后的图形可能就不再是正方形，而是一个矩形或任意四边形。
 
-\subsection{使用Python解方程组}
-\label{subsec:使用Python解方程组}
+行列式的值，就是这个变换后的图形的面积与原来单位正方形面积的比值。如果行列式的值大于1，那么面积被放大了；如果行列式的值小于1但大于0，那么面积被缩小了；如果行列式的值是负数，这意味着除了面积或体积的缩放，还发生了一个“翻转”操作，比如在二维空间中，图形被沿原点镜像反转了。
 
-\noindent 使用Python可以很轻松地解出方程组\ref{eq:二元一次方程组示例}。
+在三维空间中，这个解释同样适用，但这次是关于体积的缩放而不仅仅是面积。如果你有一个单位立方体，通过一个矩阵表示的线性变换后，立方体可能会变成任意的平行六面体。这时候，行列式的绝对值就告诉我们变换后的平行六面体的体积是如何相对于单位立方体的体积进行缩放的。\textcolor{red}{三阶行列式计算比较好记，可以顺手补充一下。}
 
-\lstinputlisting[language=python]{scripts/code-1-1-4.py}
+简而言之，行列式给我们提供了一个数值，这个数值说明了在一个线性变换下，形状的尺寸如何改变：面积或体积是如何扩大或缩小的，以及是否发生了方向的翻转。高阶行列式的具体计算比较复杂，我们可以使用\texttt{NumPy}代劳，我们只需要理解其意义即可。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{通用符号}
@@ -448,7 +453,7 @@ l_{n, 1} & l_{n, 2} & \ldots & l_{n, n-1} & l_{n, n}
 \end{array}\right]
 $$
 
-被称为下三角矩阵; 同样的, 一个如下形状的方形矩阵:
+被称为下三角矩阵；同样的, 一个如下形状的方形矩阵:
 
 $$
 \mathbf{U}=\left[\begin{array}{ccccc}
@@ -935,104 +940,13 @@ $$
         
 \end{exercise}
 
-\subsection{线性变换及其基本性质}
+\subsection{线性变换与线性空间}
 
-\begin{proposition}[平面上保持直线性质的变换]
-\label{thm:保持直线性质的变换}
-设 $T$ 是一个平面到平面的映射（$T: \mathbb{R}^2 \rightarrow \mathbb{R}^2$）, $\boldsymbol{u}, \boldsymbol{v}$ 是平面上的任意两个向量, $\lambda$ 是一个任意实数。若从原点引出向量$\boldsymbol{u}, \boldsymbol{v}$，其末端点分别记为$P_1,P_2$，显然，只要选取合适的$\boldsymbol{u}, \boldsymbol{v}$，$P_1,P_2$就可以确定出平面上的任意直线。如果 $T$ 满足下面的条件：
-\begin{enumerate}
-    \item 保加法：$T(\boldsymbol{u}+\boldsymbol{v}) = T(\boldsymbol{u})+T(\boldsymbol{v})$;
-    \item 保数乘：$T(\lambda \boldsymbol{u}) =\lambda T(\boldsymbol{u})$.
-\end{enumerate}
-则该映射不改变直线的形状、平行性、与其他直线的交叉点的位置以及直线上点的相对距离。
-\end{proposition}
-
-\begin{proof}
-
-\underline{1. 不改变直线的形状}：直线可以表示为向量的线性组合，即对于两个向量 \(\boldsymbol{u}\) 和 \(\boldsymbol{v}\)，直线可以表示为 \(\boldsymbol{u} + t\boldsymbol{v}\)，其中 \(t\) 是标量。根据变换$T$的定义，我们有：
-
-\begin{align*}
-    T(\boldsymbol{u} + t\boldsymbol{v})
-    = & T(\boldsymbol{u}) + T(t\boldsymbol{v})\\
-    = & T(\boldsymbol{u}) + tT(\boldsymbol{v})
-\end{align*}
-
-即直线在经过这样的变换后仍然是一条直线。
-
-\underline{2. 保持平行性}：考虑两条平行直线，它们可以表示为 \(\boldsymbol{u} + t\boldsymbol{v}\) 和 \(\boldsymbol{u}' + t\boldsymbol{v}\)，注意这两条直线共享同一个方向向量 \(\boldsymbol{v}\)。因为变换$T$保持向量加法和标量乘法，变换后的直线分别是 \(T(\boldsymbol{u}) + tT(\boldsymbol{v})\) 和 \(T(\boldsymbol{u}') + tT(\boldsymbol{v})\)。因为它们仍然共享同一个方向向量 \(T(\boldsymbol{v})\)，所以变换后的直线保持平行。
-
-\underline{3. 保持交叉点位置}：假设两条直线 \(L_1\) 和 \(L_2\) 在点 \(\boldsymbol{p}\) 交叉，即存在某个 \(t_1\) 和 \(t_2\) 使得 \(\boldsymbol{u} + t_1\boldsymbol{v} = \boldsymbol{u}' + t_2\boldsymbol{v}' = \boldsymbol{p}\)。应用变换 \(T\)，我们得到 \(T(\boldsymbol{u} + t_1\boldsymbol{v}) = T(\boldsymbol{u}') + t_2T(\boldsymbol{v}') = T(\boldsymbol{p})\)。这表明变换后的直线在 \(T(\boldsymbol{p})\) 点交叉，保持了交叉点的位置。
-
-\underline{4. 保持直线上点的相对距离}：考虑直线 \(L\) 上的两点 \(\boldsymbol{p}\) 和 \(\boldsymbol{q}\)，直线上的任意一点 \(\boldsymbol{x}\) 可以表示为 \(\boldsymbol{p}\) 和 \(\boldsymbol{q}\) 的线性组合：
-\[ \boldsymbol{x} = \alpha\boldsymbol{p} + (1-\alpha)\boldsymbol{q} \]
-其中，\(\alpha\) 是一个标量。我们将线性变换 \(T\) 应用于直线 \(L\) 上的点 \(\boldsymbol{x}\)：
-\begin{align*}
-    T(\boldsymbol{x}) 
-    & = T(\alpha\boldsymbol{p} + (1-\alpha)\boldsymbol{q}) \\
-    & = \alpha T(\boldsymbol{p}) + (1-\alpha)T(\boldsymbol{q})    
-\end{align*}
-
-这表明，经过线性变换 \(T\) 后，点 \(\boldsymbol{x}\) 依然位于 \(T(\boldsymbol{p})\) 和 \(T(\boldsymbol{q})\) 定义的直线上，并且保持了与原始直线相同的比例 \(\alpha\)。
-
-\end{proof}
-
-到这里，我们证明了平面上保加法和保数乘的变换的向量映射（或称变换）不会改变直线的形状、直线之间的平行和相交关系，也不会改变直线上的点之间的相对距离，我们称这些性质是平面的“线性”性质，而变换$T$可以在变换前后保持这种“线性”性质。
-
-可以验证，在三维空间中，保加法和保数乘的变换仍然可以保持空间的线性性质，具体细节我们就略过了。现在，我们希望对“空间”的概念进行抽象，将研究对象从我们熟悉的二维、三维推广到任意维度。所以我们首先需要给出向量空间的定义。
-
-% \begin{proof}
-%     要证明线性变换保持形状、平行性和交叉点的位置，我们可以具体考虑两条直线及其在线性变换下的表现。
-
-% \underline{1. 形状保持}：假设有一条直线 \(L_1\)，其方程为 \(y = mx + n\)，其中 \(m\) 是斜率，\(n\) 是截距。我们考虑两个点 \(P_1(x_1, y_1),P_2(x_2, y_2)\) 在这条直线上，即 \(y_1 = mx_1 + n, y_2 = mx_2 + n\)。
-
-% 现在，应用变换 \(T\)，用矩阵表示为 \(\begin{pmatrix} a & b \\ c & d \end{pmatrix}\)，于是有
-% \[ T(P_1) = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x_1 \\ mx_1 + n \end{pmatrix},\quad
-% T(P_2) = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x_2 \\ mx_2 + n \end{pmatrix}
-% % = \begin{pmatrix} ax + b(mx + n) \\ cx + d(mx + n) \end{pmatrix} 
-% % = \begin{pmatrix} (a + bm) x + bn \\ (c + dm)x + dn \end{pmatrix} 
-% \]
-% 可以验证，变换后的点 \(T(P_1), T(P_2)\) 处在一条斜率为$\frac{bm}{a}$的直线上，这表明原来直线的“形状”（即“直的线”）得到了保持\textcolor{red}{（验证过程留做习题）}。
-
-% \underline{2. 平行性保持}：考虑两条平行直线 \(L_1: y = m_1x + n_1\) 和 \(L_2: y = m_2x + n_2\)，因为它们平行，所以 \(m_1 = m_2\)。
-
-% 应用变换 \(T\) 到这两条直线上，我们可以得到新的两条直线。计算出两条新直线的斜率可以发现二者仍然相等，即保持了平行性\textcolor{red}{（验证过程留做习题）}。
-
-% \underline{3. 交叉点保持}：假设两条直线 \(L_1: y = m_1x + n_1\) 和 \(L_2: y = m_2x + n_2\) 交于点 \(P(x, y)\)，即满足
-% \[ m_1x + n_1 = m_2x + n_2 \]
-% 解这个方程可以得到交点 \(P\) 的坐标。在变换 \(T\) 下，两条直线变为 \(T(L_1)\) 和 \(T(L_2)\)。
-% 可以验证，\(T(L_1)\) 和 \(T(L_2)\)的交点为$T(P)$\textcolor{red}{（验证过程留做习题）}。
-% % 由于线性变换是结构保持的，原有的交点 \(P\) 在变换后的直线上的对应点 \(T(P)\) 保持为这两条新直线的交点。换句话说，如果两条直线在变换前相交，它们在变换后仍然相交于对应的点，这是因为线性变换保持了方程组的解的结构，即交点。
-
-% \end{proof}
-
-% 证明的关键点：
-
-% \begin{itemize}
-%     \item 形状保持的证明关键在于展示变换\(T\)的作用下，直线方程仍保持为直线方程，即证明变换后的输出仍满足直线方程的一般形式。
-%     \item 平行性保持的证明依赖于展示如果两直线在变换前平行（斜率相等），则在变换后仍然平行。这可以通过比较变换后两条直线的斜率来证明。
-%     \item 交叉点保持的证明需要表明如果两直线在变换前有交点，那么在变换后它们仍然会在某点交汇，且该点是原交点变换后的点。
-% \end{itemize}
-
-\begin{definition}[线性变换]
-    \textcolor{third}{\bf 线性变换}是从一个向量空间到另一个向量空间的函数 \(f: V \rightarrow W\)，对于所有的 \(x, y \in V\) 和任意标量 \(a, b\)，满足以下两个条件：
-
-    \begin{enumerate}
-        \item \textbf{加法保持性：}\(f(x + y) = f(x) + f(y)\)
-        \item \textbf{数量乘法保持性：}\(f(ax) = af(x)\)
-    \end{enumerate}
-\end{definition}
-
-\begin{note}
-  让学生回顾之前展示的每个变换，并提醒他们每个变换都保持了直线的性质。
-\end{note}
-
-\vspace*{0.5cm}
-
-为了研究线性变换的性质, 我们先定义平面向量的加法和数量乘法。
+从高中开始我们就熟知平面直角坐标系，这是由两条相互平行、且各自向正、负两个方向无限延伸的横轴、纵轴构成的坐标体系。横轴和纵轴均可以在实数域$\mathbb{R}$上任意取值，故我们可以将平面记作$\mathbb{R}^2 = \mathbb{R}\times\mathbb{R}$。通过第\ref{subsec:几种特殊几何变换}节的例子，我们了解到，二维空间上的点之间可以通过几何变换到达彼此，同时，所得结果也一定还是二维空间中的点。如果我们从原点出发，引一条到特定点的有向箭头，就可以将点表示为向量。因此，之前所列举的几何变换做的事情都是将平面向量变换为其他平面向量。高中时，我们学习过平面向量的加法和数量乘法，我们先来复习一下。
 
 \begin{definition}[平面向量的加法]
   设向量 $\boldsymbol{u}=\left(\begin{array}{l}x_1 \\ y_1\end{array}\right), \boldsymbol{v}=\left(\begin{array}{l}x_2 \\ y_2\end{array}\right)$, 
-  规定向量 $\boldsymbol{u}$ 与 $\boldsymbol{v}$ 的和 $\boldsymbol{u}+\boldsymbol{v}=\left(\begin{array}{l}x_1+x_2 \\ y_1+y_2\end{array}\right)$.
+  向量 $\boldsymbol{u}$ 与 $\boldsymbol{v}$ 的加法满足平行四边形法则，数学表示为 $\boldsymbol{u}+\boldsymbol{v}=\left(\begin{array}{l}x_1+x_2 \\ y_1+y_2\end{array}\right)$.
 \end{definition}
 
 \begin{note}
@@ -1041,7 +955,7 @@ $$
 
 \begin{definition}[平面向量的数量乘法]
   设向量 $\boldsymbol{u}=\left(\begin{array}{l}x \\ y\end{array}\right)$, 
-  规定实数 $\lambda$ 与向量 $\boldsymbol{u}$ 的乘积 $\lambda \boldsymbol{u}=\left(\begin{array}{l}\lambda x \\ \lambda y\end{array}\right)$; 
+  规定实数 $\lambda$ 与向量 $\boldsymbol{u}$ 的乘积 $\lambda \boldsymbol{u}=\left(\begin{array}{l}\lambda x \\ \lambda y\end{array}\right)$；
 \end{definition}
 
 平面向量的数量乘法之所以被称为"数量乘法"是因为它涉及到一个向量与一个数（或者我们可以称之为标量）相乘的操作。这个数可以是任何实数。当我们将一个向量与一个数相乘时，结果是一个新的向量，它的方向与原始向量相同（或相反），但长度（或称为模）被缩小或拉大了。这个操作影响到向量的大小，所以我们称之为"数量乘法"。
@@ -1051,7 +965,7 @@ $$
 
   \begin{enumerate}
     \item   【高中数学人教A版选修4-2】设向量 $\boldsymbol{u}=\left(\begin{array}{l}1 \\ 2\end{array}\right), \boldsymbol{v}=\left(\begin{array}{l}2 \\ 1\end{array}\right)$. 
-            如图 \ref{fig:vector-addition-reflection}, 先利用平行四边形法则求 $\boldsymbol{u}+\boldsymbol{v}$, 再对向量 $(\boldsymbol{u}+\boldsymbol{v})$ 进行关于 $x$ 轴的反射变换; 
+            如图 \ref{fig:vector-addition-reflection}, 先利用平行四边形法则求 $\boldsymbol{u}+\boldsymbol{v}$, 再对向量 $(\boldsymbol{u}+\boldsymbol{v})$ 进行关于 $x$ 轴的反射变换；
             或者, 先对向量 $\boldsymbol{u}, \boldsymbol{v}$ 做关于 $x$ 轴的反射变换, 
             再利用平行四边形法则求反射变换后的两个向量的和.请回答下列问题：
 
@@ -1232,29 +1146,197 @@ $$
 
 \end{exercise}
 
-\begin{theorem}[线性变换的性质]
-\label{thm:线性变换的性质}
-设 $T$ 是平面上一个线性变换, $\boldsymbol{u}, \boldsymbol{v}$ 是平面上的任意两个向量, $\lambda$ 是一个任意实数, 则
-\begin{enumerate}
-  \item $T(u+v) =T(u)+T(v)$;
-  \item $T(\lambda u) =\lambda T(u)$.
-\end{enumerate}
-
-\end{theorem}
-
-综合上述两条性质, 可以得到:
-
-设 $T$ 是平面上一个线性变换, $\boldsymbol{u}, \boldsymbol{v}$ 是平面上的任意两个向量, $\lambda_1, \lambda_2$ 是任意两个 实数, 则
-\begin{equation}
-  T\left(\lambda_1 \boldsymbol{u}+\lambda_2 \boldsymbol{v}\right)=\lambda_1 T (\boldsymbol{u})+\lambda_2 T (\boldsymbol{v})
-\end{equation}
+现在，我们希望将第\ref{subsec:几种特殊几何变换}节中的几何变换抽象为更加一般的形式，这些一般的变换可能没有类似反射变换、旋转变换那样明确的意义，但能够保持几何图形的一些重要性质，如直线的形状、直线之间的平行性、相交直线的交点以及直线上不同点之间的相对距离等。
 
 \begin{note}
-  在很多数学教材中使用定理\ref{thm:线性变换的性质}中的两条性质作为线性变换的定义。
-  可以验证，任何满足这两条性质的变换都能够保持直线的性质，即不改变直线的形状、平行性和交叉点的位置。
+  让学生回顾之前展示的每个变换，并提醒他们每个变换都保持了直线的性质。
 \end{note}
 
+\begin{proposition}[平面上保持直线性质的变换]
+\label{thm:保持直线性质的变换}
+设 $T$ 是一个平面到平面的映射（$T: \mathbb{R}^2 \rightarrow \mathbb{R}^2$）, $\boldsymbol{u}, \boldsymbol{v}$ 是平面上的任意两个向量, $\lambda$ 是一个任意实数。若从原点引出向量$\boldsymbol{u}, \boldsymbol{v}$，其末端点分别记为$P_1,P_2$，显然，只要选取合适的$\boldsymbol{u}, \boldsymbol{v}$，$P_1,P_2$就可以确定出平面上的任意直线。如果 $T$ 满足下面的条件：
+\begin{enumerate}
+    \item 保加法：$T(\boldsymbol{u}+\boldsymbol{v}) = T(\boldsymbol{u})+T(\boldsymbol{v})$;
+    \item 保数乘：$T(\lambda \boldsymbol{u}) =\lambda T(\boldsymbol{u})$.
+\end{enumerate}
+则该映射不改变直线的形状、平行性、与其他直线的交叉点的位置以及直线上点的相对距离。
+\end{proposition}
+
+\begin{proof}
+
+\underline{1. 不改变直线的形状}：直线可以表示为向量的线性组合，即对于两个向量 \(\boldsymbol{u}\) 和 \(\boldsymbol{v}\)，直线可以表示为 \(\boldsymbol{u} + t\boldsymbol{v}\)，其中 \(t\) 是标量。根据变换$T$的定义，我们有：
+
+\begin{align*}
+    T(\boldsymbol{u} + t\boldsymbol{v})
+    = & T(\boldsymbol{u}) + T(t\boldsymbol{v})\\
+    = & T(\boldsymbol{u}) + tT(\boldsymbol{v})
+\end{align*}
+
+即直线在经过这样的变换后仍然是一条直线。
+
+\underline{2. 保持平行性}：考虑两条平行直线，它们可以表示为 \(\boldsymbol{u} + t\boldsymbol{v}\) 和 \(\boldsymbol{u}' + t\boldsymbol{v}\)，注意这两条直线共享同一个方向向量 \(\boldsymbol{v}\)。因为变换$T$保持向量加法和标量乘法，变换后的直线分别是 \(T(\boldsymbol{u}) + tT(\boldsymbol{v})\) 和 \(T(\boldsymbol{u}') + tT(\boldsymbol{v})\)。因为它们仍然共享同一个方向向量 \(T(\boldsymbol{v})\)，所以变换后的直线保持平行。
+
+\underline{3. 保持交叉点位置}：假设两条直线 \(L_1\) 和 \(L_2\) 在点 \(\boldsymbol{p}\) 交叉，即存在某个 \(t_1\) 和 \(t_2\) 使得 \(\boldsymbol{u} + t_1\boldsymbol{v} = \boldsymbol{u}' + t_2\boldsymbol{v}' = \boldsymbol{p}\)。应用变换 \(T\)，我们得到 \(T(\boldsymbol{u} + t_1\boldsymbol{v}) = T(\boldsymbol{u}') + t_2T(\boldsymbol{v}') = T(\boldsymbol{p})\)。这表明变换后的直线在 \(T(\boldsymbol{p})\) 点交叉，保持了交叉点的位置。
+
+\underline{4. 保持直线上点的相对距离}：考虑直线 \(L\) 上的两点 \(\boldsymbol{p}\) 和 \(\boldsymbol{q}\)，直线上的任意一点 \(\boldsymbol{x}\) 可以表示为 \(\boldsymbol{p}\) 和 \(\boldsymbol{q}\) 的线性组合：
+\[ \boldsymbol{x} = \alpha\boldsymbol{p} + (1-\alpha)\boldsymbol{q} \]
+其中，\(\alpha\) 是一个标量。我们将线性变换 \(T\) 应用于直线 \(L\) 上的点 \(\boldsymbol{x}\)：
+\begin{align*}
+    T(\boldsymbol{x}) 
+    & = T(\alpha\boldsymbol{p} + (1-\alpha)\boldsymbol{q}) \\
+    & = \alpha T(\boldsymbol{p}) + (1-\alpha)T(\boldsymbol{q})    
+\end{align*}
+
+这表明，经过线性变换 \(T\) 后，点 \(\boldsymbol{x}\) 依然位于 \(T(\boldsymbol{p})\) 和 \(T(\boldsymbol{q})\) 定义的直线上，并且保持了与原始直线相同的比例 \(\alpha\)。
+
+\end{proof}
+
+到这里，我们证明了平面（$\mathbb{R}^2$）上保加法和保数乘的变换的向量映射（或称变换）不会改变直线的形状、直线之间的平行和相交关系，也不会改变直线上的点之间的相对距离，我们称这些性质是平面的“线性”性质，而变换$T$可以在变换前后保持这种“线性”性质，所以，我们称变换$T$为平面上的\textcolor{third}{\bf 线性变换}。
+
+可以验证，在三维空间（$\mathbb{R}^3$）中，保加法和保数乘的变换仍然可以保持空间的线性性质，这是三维空间上的线性变换（到了$\mathbb{R}^3$中，线性变换不仅能够直线的的性质不变，还可以保持平面的性质不变）。现在，我们希望将研究对象从我们熟悉的二维、三维空间推广到任意维度。我们注意到，在二维空间中，变换$T$映射的结果向量一定还在二维空间中；在三维空间中，变换$T$映射的结果向量一定还在三维空间中。据此，我们在心中勾勒出一个任意维空间的“印象”，我们希望，\textbf{在这样的空间中，变换$T$映射的结果向量仍然属于同一空间}，这样，我们可以得到$\mathbb{R}^4, \mathbb{R}^5$直到$\mathbb{R}^n$。在Gilbert Strang的线性代数教材中就直接使用这种“印象”来定义$\mathbb{R}^n$。
+
+\begin{definition}[$\mathbb{R}^n$]
+    $\mathbb{R}^n$是包含所有具有$n$个分量的向量的空间。\\
+    The space $\mathbb{R}^n$ consists of all column vectors $v$ with $n$ components.\\
+    —— \textbf{Introduction to Linear Algebra} by \textit{Gilbert Strang}
+\end{definition}
+
+可以证明，\ref{thm:保持直线性质的变换}中的变换$T$在$\mathbb{R}^n$仍然能够保持空间的线性性质，所以变换$T$也是$\mathbb{R}^n$中的线性变换。在$\mathbb{R}^n$中，如果要保证线性变换的结果向量仍然在$\mathbb{R}^n$中，需要满足如下的条件：
+\begin{itemize}
+    \item 对向量加法满足：
+    \begin{itemize}
+        \item 加法交换律$\boldsymbol{\alpha}+\boldsymbol{\beta} = \boldsymbol{\beta}+\boldsymbol{\alpha}$；
+        \item 加法结合律$(\boldsymbol{\alpha}+\boldsymbol{\beta})+\boldsymbol{\gamma}=\boldsymbol{\alpha}+(\boldsymbol{\beta}+\boldsymbol{\gamma})$；
+        \item 存在零元，因为要保证$\exists \boldsymbol{x}\text{, s.t. } \boldsymbol{\alpha}+\boldsymbol{x}=\boldsymbol{\alpha}$，这时候$\boldsymbol{x}$就是零元，记为$\boldsymbol{0}$；
+        \item 存在逆元，因为要保证$\exists \boldsymbol{x}\text{, s.t. } \boldsymbol{\alpha}+\boldsymbol{x}=\boldsymbol{0}$，这时候$\boldsymbol{x}$就是$\boldsymbol{\alpha}$的逆元，记为$-\boldsymbol{\alpha}$；
+    \end{itemize}
+    \item 对向量数乘满足：
+    \begin{itemize}
+        \item 标量间乘法和数乘的结合性：$k(l\boldsymbol{\alpha}) = (kl)\boldsymbol{\alpha}$;
+        \item 存在数乘单位元：$1 \boldsymbol{\alpha} = \boldsymbol{\alpha}$;
+    \end{itemize}
+    \item 对向量加法和数乘满足：
+    \begin{itemize}
+        \item 数乘对向量加法的分配律：$k(\boldsymbol{\alpha} + \boldsymbol{\beta}) = k\boldsymbol{\alpha} + k\boldsymbol{\beta}$；
+        \item 数乘对标量间加法的分配律：$(k+l)\boldsymbol{\alpha} = k\boldsymbol{\alpha} + l\boldsymbol{\alpha}$；
+    \end{itemize}
+\end{itemize}
+
+% Here's a specific example where the distributive axiom $a(\boldsymbol{u} + \boldsymbol{v}) = a\boldsymbol{u} + a\boldsymbol{v}$ is not included in the definition of a linear space, resulting in inconsistencies and distortions:
+
+% Consider a set $V = \{\boldsymbol{u}, \boldsymbol{v}\}$ where $\boldsymbol{u} = (1, 0)$ and $\boldsymbol{v} = (0, 1)$, along with a scalar field $\mathbb{R}$. We define vector addition and scalar multiplication as follows:
+
+% Vector addition:
+% $\boldsymbol{u} + \boldsymbol{u} = \boldsymbol{u}$
+% $\boldsymbol{v} + \boldsymbol{v} = \boldsymbol{v}$
+% $\boldsymbol{u} + \boldsymbol{v} = \boldsymbol{v} + \boldsymbol{u} = \boldsymbol{u}$
+
+% Scalar multiplication (violating the distributive axiom):
+% $a\boldsymbol{u} = (a, 0)$ for all $a \in \mathbb{R}$
+% $a\boldsymbol{v} = (0, a^2)$ for all $a \in \mathbb{R}$
+
+% In this example, the distributive axiom does not hold:
+
+% $a(\boldsymbol{u} + \boldsymbol{v}) = a\boldsymbol{u} = (a, 0)$
+
+% However,
+% $a\boldsymbol{u} + a\boldsymbol{v} = (a, 0) + (0, a^2) = (a, a^2)$
+
+% Clearly, $a(\boldsymbol{u} + \boldsymbol{v}) \neq a\boldsymbol{u} + a\boldsymbol{v}$.
+
+% This violation of the distributive axiom leads to inconsistencies and distortions in the geometric properties of the space. For example, if we consider a linear transformation $T$ defined by $T(\boldsymbol{u}) = \boldsymbol{v}$ and $T(\boldsymbol{v}) = \boldsymbol{u}$, then:
+
+% $T(2\boldsymbol{u}) = T((2, 0)) = (0, 4)$
+
+% However,
+% $2T(\boldsymbol{u}) = 2\boldsymbol{v} = (0, 4)$
+
+% In this case, the linear transformation $T$ does not preserve the scalar multiplication property, leading to inconsistencies in the geometric properties of the space.
+
+% This example demonstrates that without the distributive axiom, the resulting space does not behave consistently as a linear space, and geometric properties can be distorted or contradictory.
+
+% \begin{proof}
+%     要证明线性变换保持形状、平行性和交叉点的位置，我们可以具体考虑两条直线及其在线性变换下的表现。
+
+% \underline{1. 形状保持}：假设有一条直线 \(L_1\)，其方程为 \(y = mx + n\)，其中 \(m\) 是斜率，\(n\) 是截距。我们考虑两个点 \(P_1(x_1, y_1),P_2(x_2, y_2)\) 在这条直线上，即 \(y_1 = mx_1 + n, y_2 = mx_2 + n\)。
+
+% 现在，应用变换 \(T\)，用矩阵表示为 \(\begin{pmatrix} a & b \\ c & d \end{pmatrix}\)，于是有
+% \[ T(P_1) = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x_1 \\ mx_1 + n \end{pmatrix},\quad
+% T(P_2) = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x_2 \\ mx_2 + n \end{pmatrix}
+% % = \begin{pmatrix} ax + b(mx + n) \\ cx + d(mx + n) \end{pmatrix} 
+% % = \begin{pmatrix} (a + bm) x + bn \\ (c + dm)x + dn \end{pmatrix} 
+% \]
+% 可以验证，变换后的点 \(T(P_1), T(P_2)\) 处在一条斜率为$\frac{bm}{a}$的直线上，这表明原来直线的“形状”（即“直的线”）得到了保持\textcolor{red}{（验证过程留做习题）}。
+
+% \underline{2. 平行性保持}：考虑两条平行直线 \(L_1: y = m_1x + n_1\) 和 \(L_2: y = m_2x + n_2\)，因为它们平行，所以 \(m_1 = m_2\)。
+
+% 应用变换 \(T\) 到这两条直线上，我们可以得到新的两条直线。计算出两条新直线的斜率可以发现二者仍然相等，即保持了平行性\textcolor{red}{（验证过程留做习题）}。
+
+% \underline{3. 交叉点保持}：假设两条直线 \(L_1: y = m_1x + n_1\) 和 \(L_2: y = m_2x + n_2\) 交于点 \(P(x, y)\)，即满足
+% \[ m_1x + n_1 = m_2x + n_2 \]
+% 解这个方程可以得到交点 \(P\) 的坐标。在变换 \(T\) 下，两条直线变为 \(T(L_1)\) 和 \(T(L_2)\)。
+% 可以验证，\(T(L_1)\) 和 \(T(L_2)\)的交点为$T(P)$\textcolor{red}{（验证过程留做习题）}。
+% % 由于线性变换是结构保持的，原有的交点 \(P\) 在变换后的直线上的对应点 \(T(P)\) 保持为这两条新直线的交点。换句话说，如果两条直线在变换前相交，它们在变换后仍然相交于对应的点，这是因为线性变换保持了方程组的解的结构，即交点。
+
+% \end{proof}
+
+% 证明的关键点：
+
+% \begin{itemize}
+%     \item 形状保持的证明关键在于展示变换\(T\)的作用下，直线方程仍保持为直线方程，即证明变换后的输出仍满足直线方程的一般形式。
+%     \item 平行性保持的证明依赖于展示如果两直线在变换前平行（斜率相等），则在变换后仍然平行。这可以通过比较变换后两条直线的斜率来证明。
+%     \item 交叉点保持的证明需要表明如果两直线在变换前有交点，那么在变换后它们仍然会在某点交汇，且该点是原交点变换后的点。
+% \end{itemize}
+
+\begin{definition}[线性空间]
+\label{def:线性空间}
+设 $V$ 是一个非空集合, $\mathcal{F}$ 是一个\textcolor{third}{\bf 数域}，在数域$\mathcal{F}$中，\underline{数的加法和乘法}能够顺利按照我们小学所学习的规则进行. 在集合 $V$ 的元素之间定义了一种代数运算，叫做\underline{加法}；即给出了一个法则，对于 $V$ 中任意两个元素 $\alpha$ 与 $\boldsymbol{\beta}$, 在 $V$ 中都有唯一的一个元素 $\gamma$与它们对应,称为 $\boldsymbol{\alpha}$ 与 $\boldsymbol{\beta}$ 的和, 记为 $\gamma=\alpha+\boldsymbol{\beta}$. 在数域 $\mathcal{F}$ 与集合 $V$的元素之间还定义了一种运算, 叫做\underline{数量乘法}；这就是说, 对于数域 $\mathcal{F}$ 中任一数 $k$ 与 $V$ 中任一元素 $\alpha$, 在 $V$ 中都有唯一的一个元素$\delta$与它们对应, 称为 $k$ 与 $\alpha$ 的数量乘积, 记为 $\delta=k \boldsymbol{\alpha}$. 如果加法与数量乘法满足上面8条规则, 那么 $V$ 称为数域 $\mathcal{F}$ 上的\textcolor{third}{\bf 线性空间}（也称\textcolor{third}{\bf 向量空间}）.
+\end{definition}
+
+定义中，数域这一概念的严格定义一般在抽象代数课程里讨论，我们这里将其理解为一个保证加法和乘法能够顺利进行的数的集合即可。可以将其想象为一种“通用货币系统”，在这个系统里，我们可以自由地进行交易（加法和乘法运算）而不用担心交换规则突然改变。就像在日常生活中，无论我们是在商店购物还是在银行存取款项，货币的基本价值和使用规则保持不变，使得经济交易可以顺利进行。
+
+为什么要煞有介事的重新定义加法和数量乘法，显得多此一举，直接用平面向量的加法和数量乘法不行吗？确实不行，因为定义\ref{def:线性空间}中集合$V$的元素不一定是数字或我们上面讨论的各种空间中的向量，即我们希望传达一个观点，一大类数学对象各自形成的集合都是线性空间。下面举几个例子
+
+\textbf{1. 多项式空间。}多项式空间是所有具有特定最高次数的多项式的集合。例如，考虑所有最高次数为 2 的实系数多项式的集合，记为 \(P_2(\mathbb{R})\)。这个空间包括形如 \(ax^2 + bx + c\) 的所有多项式，其中 \(a, b, c\) 是实数系数。
+
+\begin{itemize}
+    \item 向量加法：两个多项式相加，就是它们对应系数的和。例如，如果我们有 \(p_1(x) = 2x^2 + 3x + 1\) 和 \(p_2(x) = x^2 - 2x + 4\)，它们的和 \(p_1(x) + p_2(x) = (2x^2 + x^2) + (3x - 2x) + (1 + 4) = 3x^2 + x + 5\) 也在 \(P_2(\mathbb{R})\) 中。
+    \item 标量乘法：一个多项式乘以一个标量，就是每个系数乘以这个标量。例如，如果 \(k = 3\) 和 \(p_1(x) = 2x^2 + 3x + 1\)，则 \(kp_1(x) = 3(2x^2 + 3x + 1) = 6x^2 + 9x + 3\)。
+\end{itemize}
+
+\textbf{2. 实函数空间。}考虑所有定义在实数上，取值也为实数的连续函数的集合，记为 \(C(\mathbb{R})\)。这是一个非常广泛的向量空间，包括如直线、抛物线等基本函数。
+
+\begin{itemize}
+    \item 向量加法：两个函数的和是一个新的函数，其值在每一点上都是原来两个函数值的和。例如，如果 \(f(x) = x^2\) 和 \(g(x) = 2x\)，那么它们的和 \(h(x) = f(x) + g(x) = x^2 + 2x\)。
+    \item 标量乘法：一个函数乘以一个标量，结果是一个新的函数，其值在每一点上都是原来函数值乘以该标量。例如，如果 \(k = 2\) 和 \(f(x) = x^2\)，那么 \(kf(x) = 2f(x) = 2x^2\)。
+\end{itemize}
+
+\textbf{3. 实矩阵空间。}考虑所有 \(2 \times 2\) 的实数矩阵的集合，记为 \(M_{2,2}(\mathbb{R})\)。这个空间包括所有形如 \(\begin{pmatrix} a & b \\ c & d \end{pmatrix}\) 的矩阵，其中 \(a, b, c, d\) 是实数。
+
+\begin{itemize}
+    \item 向量加法：两个矩阵相加，就是它们对应元素的和。例如，如果我们有 \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\) 和 \(B = \begin{pmatrix} 4 & 3 \\ 2 & 1 \end{pmatrix}\)，它们的和 \(A + B = \begin{pmatrix} 1+4 & 2+3 \\ 3+2 & 4+1 \end{pmatrix} = \begin{pmatrix} 5 & 5 \\ 5 & 5 \end{pmatrix}\)。
+    \item 标量乘法：一个矩阵乘以一个标量，就是每个元素乘以这个标量。例如，如果 \(k = 2\) 和 \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\)，则 \(kA = 2 \cdot \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} = \begin{pmatrix} 2 & 4 \\ 6 & 8 \end{pmatrix}\)。
+\end{itemize}
+
+\begin{definition}[线性变换]
+    \textcolor{third}{\bf 线性变换}是从一个线性空间到另一个线性空间的映射 \(\mathcal{A}: V \rightarrow W\)，对于所有的 \(\boldsymbol{\alpha}, \boldsymbol{\beta} \in V\) 和任意标量 \(k_1, k_2\)，满足以下两个条件：
+
+    \begin{enumerate}
+        \item \textbf{加法保持性：}\(\mathcal{A}(\boldsymbol{\alpha} + \boldsymbol{\beta}) = \mathcal{A}(\boldsymbol{\alpha}) + \mathcal{A}(\boldsymbol{\beta})\)
+        \item \textbf{数量乘法保持性：}\(\mathcal{A}(k\boldsymbol{\alpha}) = k\mathcal{A}(\boldsymbol{\alpha})\)
+    \end{enumerate}
+\end{definition}
+
+上述两条可以写成一条：设 $\mathcal{A}$ 是平面上一个线性变换, $\boldsymbol{\alpha}, \boldsymbol{\beta}$ 是平面上的任意两个向量, $k_1, k_2$ 是任意两个 实数, 则
+\begin{equation}
+  \mathcal{A}\left(k_1 \boldsymbol{\alpha}+k_2 \boldsymbol{\beta}\right)=k_1 \mathcal{A} (\boldsymbol{\alpha})+k_2 \mathcal{A} (\boldsymbol{\beta})
+\end{equation}
+
 \section{矩阵的运算}
+
+\begin{note}
+矩阵乘法的规则是\textcolor{red}{“行乘列”}。这一点在计算结果时很重要，但无助于理解矩阵乘法的本质，我们应该从线性变换和线性组合的角度理解矩阵乘法。
+\end{note}
 
 \subsection{向量与向量间的乘法运算}
 
@@ -1311,7 +1393,13 @@ x y^T = \begin{bmatrix}
 \end{exercise}
 
 
-\subsection{用矩阵做线性变换}
+\subsection{矩阵与向量间的乘法运算}
+
+\begin{note}
+    矩阵乘向量就是对向量做某一个线性变换。
+\end{note}
+
+\vspace{0.3cm}
 
 在第\ref{subsec:几种特殊几何变换}节中，我们通过将线性变换写成坐标变换方程的方法，
 指出平面上线性变换和二阶方阵之间存在着一一对应的关系，即我们实现了用矩阵表示线性变换。
@@ -1342,13 +1430,13 @@ x y^T = \begin{bmatrix}
 % \newcolumntype{S}{>{\columncolor{softgreen}}c}
 % \newcolumntype{R}{>{\columncolor{coralred}}c}
 
-\begin{equation*}
+\begin{equation}
   \left(\begin{array}{c}
     \cellcolor{softyellow} x^{\prime} \\
     \cellcolor{softorange} y^{\prime}
   \end{array}\right)=\left(\begin{array}{cc}
-    \cellcolor{softgreen} \cos \theta & \cellcolor{softgreen} -\sin \theta \\
-    \cellcolor{softblue} \sin \theta & \cellcolor{softblue} \cos \theta
+    \cellcolor{softyellow} \cos \theta & \cellcolor{softyellow} -\sin \theta \\
+    \cellcolor{softorange} \sin \theta & \cellcolor{softorange} \cos \theta
     \end{array}\right) \cdot \left(\begin{array}{>{\columncolor{coralred}}c}
   x \\
   y
@@ -1356,16 +1444,17 @@ x y^T = \begin{bmatrix}
     \cellcolor{softyellow} (\cos \theta) \cdot x + (-\sin \theta) \cdot y \\
     \cellcolor{softorange} (\sin \theta) \cdot x + (\cos \theta) \cdot y
     \end{array}\right)
-\end{equation*}
+\label{eq:旋转作为矩阵和向量的乘法的例子}
+\end{equation}
 
-我们把第一个等号对应的关系称为\textcolor{third}{\bf 矩阵与向量间的乘法运算}。
+我们把第二个等号对应的关系称为\textcolor{third}{\bf 矩阵与向量间的乘法运算}。
 将一个矩阵与一个向量相乘，就是对该向量进行该矩阵所表示的线性变换。
-
+\vspace{0.3cm}
 \begin{note}
   学生可以尝试把之前的几何变换的坐标变换公式写成矩阵与向量间的乘法运算。
 \end{note}
 
-\subsection{矩阵与向量间的乘法运算}
+\vspace{0.3cm}
 
 \begin{definition}[矩阵与向量间的乘法运算] \label{def:mat-vec-multi}
 
@@ -1382,29 +1471,69 @@ $$
 其中 $a_{r, i}^T$ 是行向量, $a_{c, j}$ 是 $A$ 的列向量, $x_i$ 是 $x$ 的元素。
 \end{definition}
 
+我们注意到，式(\ref{eq:旋转作为矩阵和向量的乘法的例子})还有另一种写法：
+\begin{equation}
+    \left(\begin{array}{cc}
+    \cellcolor{softyellow} \cos \theta & \cellcolor{softorange} -\sin \theta \\
+    \cellcolor{softyellow} \sin \theta & \cellcolor{softorange} \cos \theta
+    \end{array}\right) \cdot 
+    \left(\begin{array}{cc}
+      \cellcolor{softyellow}{x} \\
+      \cellcolor{softorange}{y}
+  \end{array}\right)
+    = \hlsoftyellow{$x$} \left(\begin{array}{c}\cellcolor{softyellow}{\cos \theta} \\ \cellcolor{softyellow}{\sin \theta}\end{array}\right) + \hlsoftorange{$y$} \left(\begin{array}{c}\cellcolor{softorange}{-\sin \theta} \\ \cellcolor{softorange}{\cos \theta}\end{array}\right)
+\label{eq:旋转作为将矩阵视为列向量线性组合的例子}
+\end{equation}
+
+我们称式(\ref{eq:旋转作为将矩阵视为列向量线性组合的例子})为对向量$\left(\begin{array}{c}
+\cos \theta \\
+\sin \theta
+\end{array}\right)$和向量$\left(\begin{array}{c}
+-\sin \theta \\
+\cos \theta
+\end{array}\right)$的\textcolor{third}{\bf 线性组合}，$x,y$称为组合系数。
+在这个例子中，初学者可能会可能会混淆混淆线性变换和线性组合，线性变换指的是利用
+$\left(\begin{array}{cc}
+\cos \theta & -\sin \theta \\
+\sin \theta & \cos \theta
+\end{array}\right)$对
+$\left(\begin{array}{c}
+x \\
+y
+\end{array}\right)$进行变换，而线性组合指的是$x,y$作为组合系数对向量$\left(\begin{array}{c}
+\cos \theta \\
+\sin \theta
+\end{array}\right)$和向量$\left(\begin{array}{c}
+-\sin \theta \\
+\cos \theta
+\end{array}\right)$进行组合。
+线性组合是理解矩阵和向量的乘法的关键，这是Gilbert Strang的线性代数教材中介绍的第一个概念。下面给出Strang教材中的定义。
+\begin{definition}[线性组合]
+    The heart of linear algebra is in two operations--both with vectors. We add vectors to get $\boldsymbol{v}+\boldsymbol{w}$. We multiply them by numbers $c$ and $d$ to get $c \boldsymbol{v}$ and $d \boldsymbol{w}$. Combining those two operations (adding $c \boldsymbol{v}$ to $d \boldsymbol{w}$ ) gives the \textcolor{third}{\bf linear combination} $c \boldsymbol{v}+d \boldsymbol{w}$.
+\end{definition}
+
+有了我们上面的诸多铺垫，我们早已认识到加法和乘法在线性代数中的核心地位，也比较容易理解为什么“线性组合”这一名称中带有“线性”二字，因为这两个操作是线性变换的基本组成部分。线性变换保留向量空间的线性结构，意味着向量加法和标量乘法的结果仍然在原向量空间内。
+
 \begin{exercise}
-    假设我们有一个2x3的矩阵 $A$ 与一个3维向量 $x$ 相乘。
+    假设我们有一个$2\times 3$的矩阵 $A$ 与一个3维向量 $x$ 相乘。
 
 矩阵 $A$ 和向量 $x$ 的值如下：
 
-\[
+\begin{equation*}
 A = \begin{bmatrix}
 1 & 2 & 3 \\
 4 & 5 & 6 \\
-\end{bmatrix}
-\]
-
-\[
+\end{bmatrix},\quad
 x = \begin{bmatrix}
 2 \\
 3 \\
 1 \\
 \end{bmatrix}
-\]
+\end{equation*}
 
 现在，让我们根据定义，计算 $Ax$ 的乘积：
 
-\[
+\begin{equation*}
 Ax = \begin{bmatrix}
 1 & 2 & 3 \\
 4 & 5 & 6 \\
@@ -1413,7 +1542,7 @@ Ax = \begin{bmatrix}
 3 \\
 1 \\
 \end{bmatrix}
-\]
+\end{equation*}
 
 我们首先计算每一行与向量 $x$ 的内积，然后将结果组合成一个新的向量：
 
@@ -1424,17 +1553,71 @@ Ax = \begin{bmatrix}
 因此，$Ax$ 的结果是一个大小为 $\mathbb{R}^2$ 的向量，其元素分别是 $11$ 和 $29$。
 \end{exercise}
 
-\subsection{初等变换与矩阵的乘法}
+\begin{exercise}
+    假设我们有一个$2\times 2$的矩阵 $A$ 与一个2维向量 $x$ 相乘。
 
-\begin{proposition}[TODO]
-    特别重要，\textcolor{red}{任意矩阵左乘初等矩阵就相当于做初等行变换，右乘初等矩阵就相当于做初等列变换。}那么如果说任何矩阵都可以通过初等行变换化为上三角，通过初等列变化化为下三角，那么就可以把任意矩阵分解成对角矩阵和一堆初等矩阵的乘积，比如$A=P_{1}^{T}P_{2}^{T}\cdots P_{s}^{T}\Lambda Q_{1} Q_{2} \cdots Q_{t}$
-\end{proposition}
+矩阵 $A$ 和向量 $x$ 的值如下：
 
-\begin{note}
-这一节主要是要让学生明白向量/矩阵的乘法核心是\textcolor{red}{“行乘列”}。
-\end{note}
+\begin{equation*}
+A = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix},\quad
+x = \begin{bmatrix}
+2 \\
+3 \\
+\end{bmatrix}
+\end{equation*}
+\end{exercise}
+
+单位矩阵乘以任何向量等于向量本身，单位矩阵表示恒等变换。
 
 \subsection{矩阵与矩阵间的乘法运算}
+
+\begin{note}
+    矩阵和矩阵的乘法是两个线性变换的复合。
+\end{note}
+
+\vspace{0.3cm}
+
+我们从线性变换的角度引入矩阵和矩阵之间的乘法。我们考虑平面上的点$P(1,0)$，我们首先将其逆时针旋转$90^{\circ}$，对应的变换矩阵为
+$
+\begin{bmatrix}
+0 & -1 \\
+1 & 0 \\
+\end{bmatrix}
+$，
+得到点$P^{\prime} (0, 1)$，然后按照$x$轴对称，变换矩阵为
+$
+\begin{bmatrix}
+1 & 0 \\
+0 & -1 \\
+\end{bmatrix}
+$，
+得到点$P^{\prime\prime}(0,-1)$。
+注意到，这两个变换的复合结果等效于将点$P(1,0)$沿着直线$y=-x$进行反射，该变换的变换矩阵是
+$\begin{bmatrix}
+0 & -1 \\
+-1 & 0 \\
+\end{bmatrix}$。
+这样的现象在线性空间中普遍存在。因为我们把线性变换的复合在矩阵上的表现抽象出来定义为一种运算，这种运算就是矩阵和矩阵之间的乘法。
+
+\begin{equation*}
+    \left(\begin{array}{cc}
+    \cellcolor{softyellow}{0} & \cellcolor{softyellow}{-1} \\
+    \cellcolor{softorange}{1} & \cellcolor{softorange}{0} \\
+    \end{array}\right)
+    \cdot
+    \left(\begin{array}{cc}
+    \cellcolor{softyellow}{1} & \cellcolor{softorange}{0} \\
+    \cellcolor{softyellow}{0} & \cellcolor{softorange}{-1} \\
+    \end{array}\right)
+    =
+    \left(\begin{array}{cc}
+    \cellcolor{softyellow}{0} & -1 \\
+    -1 & \cellcolor{softorange}{0} \\
+    \end{array}\right)
+\end{equation*}
 
 \begin{definition}[矩阵和矩阵的乘法] \label{def:mat-mat-multi}
     
@@ -1452,28 +1635,26 @@ $$
 \end{definition}
 
 \begin{exercise}
-    我们将使用一个2x3的矩阵 $A$ 与一个3x2的矩阵 $B$ 相乘。
+    我们将使用一个$2\times 3$的矩阵 $A$ 与一个$3\times 2$的矩阵 $B$ 相乘。
 
 首先，让我们定义矩阵 $A$ 和矩阵 $B$：
 
-\[
+\begin{equation*}
 A = \begin{bmatrix}
 1 & 2 & 3 \\
 4 & 5 & 6 \\
 \end{bmatrix}
-\]
-
-\[
+,\quad
 B = \begin{bmatrix}
 2 & 3 \\
 4 & 5 \\
 6 & 7 \\
 \end{bmatrix}
-\]
+\end{equation*}
 
 现在，让我们使用这个新的矩阵 $B$ 与之前定义的矩阵 $A$ 相乘，以演示矩阵乘法的过程：
 
-\[
+\begin{equation*}
 AB = \begin{bmatrix}
 1 & 2 & 3 \\
 4 & 5 & 6 \\
@@ -1482,7 +1663,7 @@ AB = \begin{bmatrix}
 4 & 5 \\
 6 & 7 \\
 \end{bmatrix}
-\]
+\end{equation*}
 
 计算每一行与每一列的内积，并生成新的矩阵 $AB$：
 
@@ -1496,16 +1677,128 @@ AB = \begin{bmatrix}
 
 因此，$AB$ 的结果是一个大小为 $\mathbb{R}^{2 \times 2}$ 的矩阵，其元素如下：
 
-\[
+\begin{equation*}
 AB = \begin{bmatrix}
 28 & 34 \\
 64 & 79 \\
 \end{bmatrix}
-\]
+\end{equation*}
 
 \end{exercise}
 
-\textcolor{red}{\bf 讲到这里记得回去解释单位矩阵的定义。}
+\subsection{初等变换与矩阵的乘法}
+\label{subsec:初等变换与矩阵的乘法}
+
+在第\ref{subsec:高斯-若尔当消元法}节中，我们给出了行变换的概念。事实上，在解方程组的过程中，只有三种基本的行变换：
+\begin{itemize}
+    \item 行交换(Row-switching transformations): 交换矩阵中的两行；
+    \item 行乘以非零系数(Row-multiplying transformations): 将某一行所有的元素乘以一个非零常数；
+    \item 行加减(Row-addition transformations): 将某一行的若干倍加到另一行上。
+\end{itemize}
+
+我们在单位矩阵上进行三种行变换，看看会发生什么。二阶单位矩阵是一个简单的矩阵，其形式为：
+
+\[ I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \]
+
+这个单位矩阵将作为我们变换的基础。
+% 通过对这个单位矩阵应用三种基本的行变换，我们可以生成三种不同的初等矩阵。
+
+\textbf{行交换。}如果我们交换这个单位矩阵的两行，我们得到一个矩阵：
+
+\[ T_{1,2} = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \]
+
+$T_{i,j}$表示交换矩阵的第$i$行和第$j$行。
+
+\textbf{行倍乘。}如果我们将第一行乘以一个非零常数，比如2，我们得到：
+
+\[ D_{1}(2) = \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix} \]
+
+$D_{i}(m)$代表对矩阵的第$i$行的所有元素乘以标量$m$。按照我们之前的讨论知，它起到伸缩变换的效果。其形式可概括为：除了第 i 个位置（此处为 m）外，所有对角元素均为 1的对角矩阵。
+
+\textbf{行加减。}如果我们将第二行的2倍加到第一行上，我们得到：
+
+\[ L_{12}(2) = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} \]
+
+矩阵 $L_{ij}(m)$ 将行 $j$ 乘以标量 $m$ 加到行 $i$，其形式可概括为单位矩阵在 $(i, j)$ 位置有一个 $m$。
+
+$T_{i,j}, D_{i}(m)\text{和}L_{ij}(m)$三种矩阵是初等行变换对应的矩阵，我们将其称为\textcolor{third}{\bf 初等矩阵}。
+现在，让我们通过一个例子来展示如何使用这些初等矩阵。
+
+\begin{exercise}
+考虑一个二阶矩阵\(A\)：
+
+\[ A = \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} \]
+
+当我们使用 $T_{1,2} $左边乘矩阵\(A\)（又称\textbf{左乘}\(A\)）时，我们有
+
+\[ T_{1,2} \cdot A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} = \begin{pmatrix} 5 & 6 \\ 3 & 4 \end{pmatrix} \]
+
+可见，相乘的结果是矩阵\(A\)的第一行和第二行被交换了。
+
+当我们使用 $D_{1}(2) $从左乘矩阵\(A\)时，我们有
+
+\[ D_{1}(2) \cdot A = \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} = \begin{pmatrix} 2 \times 3 & 2 \times 4 \\ 5 & 6 \end{pmatrix} = \begin{pmatrix} 6 & 8 \\ 5 & 6 \end{pmatrix} \]
+
+这个结果展示了行倍乘的效果，即矩阵\(A\)的第一行的每一个元素都乘了2。
+
+当我们使用 $L_{ij}(m) $左乘矩阵\(A\)时，我们有
+
+\[ L_{ij}(m) \cdot A = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} = \begin{pmatrix} 3 + 2 \times 5 & 4 + 2 \times 6 \\ 5 & 6 \end{pmatrix} = \begin{pmatrix} 13 & 16 \\ 5 & 6 \end{pmatrix} \]
+
+这个操作将第二行的两倍加到第一行上，改变了矩阵\(A\)的第一行，而第二行保持不变，展现了切变变换的效果。
+
+\end{exercise}
+
+至此，我们通过对单位矩阵应用行交换、行倍乘和行相加构造了初等矩阵，并通过具体的例子理解了这些初等矩阵如何通过矩阵乘法初等行变换作用于其他矩阵。
+
+\vspace{0.2cm}
+
+\begin{note}
+    用初等矩阵左乘矩阵$A$等同于对$A$做对应的初等行变换。
+\end{note}
+
+\vspace{0.2cm}
+
+一个很自然的问题是，为什么一定要左乘？为什么不右乘？我们可以试试看。
+
+\begin{exercise}
+考虑一个二阶矩阵\(A\)：
+
+\[ A = \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} \]
+
+当我们使用 $T_{1,2} $右乘矩阵\(A\)时，我们有
+
+\[ A \cdot T_{1,2} = \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 4 & 3 \\ 6 & 5 \end{pmatrix} \]
+
+可见，相乘的结果是矩阵\(A\)的\underline{第一列和第二列}被交换了。
+
+当我们使用 $D_{1}(2) $右乘矩阵\(A\)时，我们有
+
+\[ A \cdot D_{1}(2) = \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 2 \times 3 & 4 \\ 2 \times 5 & 6 \end{pmatrix} = \begin{pmatrix} 6 & 4 \\ 10 & 6 \end{pmatrix} \]
+
+这个结果展示了\underline{列倍乘}的效果，即矩阵\(A\)的\underline{第一列}的每一个元素都乘了2。
+
+当我们使用 $L_{ij}(m) $右乘矩阵\(A\)时，我们有
+
+\[ L_{ij}(m) \cdot A = \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 3 & 4 + 3 \times 2 \\ 5 & 6 + 5 \times 2 \end{pmatrix} = \begin{pmatrix} 3 & 10 \\ 5 & 16 \end{pmatrix} \]
+
+这个操作将\underline{第一列}的两倍加到\underline{第二列}上，改变了矩阵\(A\)的\underline{第二列}。
+
+\end{exercise}
+
+我们看到，初等变换右乘矩阵$A$的效果是将初等行变换那样的操作作用到列上，这些变换称为\textcolor{third}{\bf 初等列变换}。
+
+\vspace{0.2cm}
+
+\begin{note}
+    用初等矩阵右乘矩阵$A$等同于对$A$做对应的初等列变换。
+\end{note}
+
+\vspace{0.2cm}
+
+% \begin{proposition}[TODO]
+%     特别重要，\textcolor{red}{任意矩阵左乘初等矩阵就相当于做初等行变换，右乘初等矩阵就相当于做初等列变换。}那么如果说任何矩阵都可以通过初等行变换化为上三角，通过初等列变化化为下三角，那么就可以把任意矩阵分解成对角矩阵和一堆初等矩阵的乘积，比如$A=P_{1}^{T}P_{2}^{T}\cdots P_{s}^{T}\Lambda Q_{1} Q_{2} \cdots Q_{t}$
+% \end{proposition}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1563,15 +1856,46 @@ $$
 \subsection{矩阵的逆}
 
 \begin{definition} \label{def:invertible-mat}
-    给定一个 $n$ 阶方阵 $\mathbf{A}$, 若存在一个 $n$ 阶方阵 $\mathbf{B}$, 使得 $\mathbf{A B}=\mathbf{B} \mathbf{A}=\mathbf{I}_n$, 其中 $\mathbf{I}_n$ 为 $n$ 阶单位矩阵, 则称 $\mathbf{A}$ 是可逆的, 且 $\mathbf{B}$ 是 $\mathbf{A}$ 的逆矩 阵, 记作 $\mathbf{A}^{-1}$ 。
+    设$A$为一个$n \times n$的方阵。如果存在另一个同样大小的矩阵$B$使得：
+
+$$AB = BA = I_n$$
+
+其中$I_n$是$n \times n$的单位矩阵。则称矩阵$B$为$A$的逆矩阵，记作$A^{-1}$。
 \end{definition}
 
-根据定义\ref{def:invertible-mat}，有
+换句话说，矩阵$A$的逆矩阵是一个矩阵$A^{-1}$，使得与$A$相乘，无论是左乘还是右乘，都能得到单位矩阵。逆矩阵“抵消”了原矩阵的效果，很像除法抵消了实数乘法的效果。即根据定义\ref{def:invertible-mat}，我们有
 $$
 A A^{-1}=A^{-1} A=I
 $$
 
-不是所有方阵都是可逆的。不可逆矩阵也叫奇异矩阵或退化矩阵，它们的特点是行列式的值为0。下面是一些不可逆矩阵的例子：
+矩阵的逆可以被看作是对应线性变换的逆变换。如果有一个线性变换可以通过矩阵 \(A\) 来表示，那么该线性变换的逆变换（如果存在）可以通过矩阵 \(A\) 的逆矩阵 \(A^{-1}\) 来表示。这意味着，如果 \(A\) 是将向量 \(x\) 映射到向量 \(y\) 的矩阵，则 \(A^{-1}\) 将 \(y\) 映射回 \(x\)。
+
+为了更具体地说明这一点，让我们考虑两个具有直观几何意义的线性变换：反射和旋转。
+
+\textbf{反射变换。}假设我们有一个关于 \(x\) 轴的反射变换。这个变换可以通过以下矩阵表示：
+
+\[ A_{\text{反射}} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \]
+
+这个矩阵将点 \( (x, y) \) 反射到 \( (x, -y) \)。因为关于 \(x\) 轴的反射是自己的逆变换（即，再次反射将会恢复原状），\(A_{\text{反射}}\) 的逆矩阵仍然是它自己：
+
+\[ A_{\text{反射}}^{-1} = A_{\text{反射}} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \]
+
+\textbf{旋转变换。}考虑一个围绕原点逆时针旋转 \(90^\circ\) 的变换。这个变换可以通过以下矩阵表示：
+
+\[ A_{\text{旋转}} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \]
+
+这个矩阵将点 \( (x, y) \) 旋转到 \( (-y, x) \)。其逆变换，也就是顺时针旋转 \(90^\circ\)，可以通过计算 \(A_{\text{旋转}}\) 的逆得到。根据矩阵逆的定义，我们找到 \(A_{\text{旋转}}^{-1}\)：
+
+\[ A_{\text{旋转}}^{-1} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} \]
+
+这个矩阵将点 \( (x, y) \) 旋转到 \( (y, -x) \)，也就是顺时针旋转 \(90^\circ\)。
+
+这两个例子清晰地展示了线性变换的逆变换在几何上是如何工作的。反射变换的逆变换就是它本身，因为两次反射将会抵消彼此的效果。旋转变换的逆变换是反方向的旋转，以此来抵消原始旋转的效果。
+
+然而，并不是所有的方阵都有逆矩阵。一个矩阵$A$是可逆的，当且仅当其行列式非零，即$\det(A)\neq 0$。
+根据第\ref{subsec:矩阵的行列式}节中介绍的行列式的几何意义可知，如果行列式为零，则变换将正方形或立方体分别折叠成一条线或一个平面，即行列式为零的矩阵对应的线性变换会导致几何图形维度的坍缩。可以说，行列式为零的矩阵就是线性代数世界中的二向箔，被降维的过程是不可逆的，因为损失了还原原始几何题的必要信息，
+
+不可逆矩阵也叫奇异矩阵或退化矩阵，它们的行列式的值为0。下面是一些不可逆矩阵的例子：
 
 \begin{enumerate}
 \item 全零矩阵：
@@ -1608,10 +1932,82 @@ $$
 
 这些例子中的矩阵都不能找到一个逆矩阵来满足矩阵乘法的单位矩阵条件。
 
-\begin{theorem}[矩阵的逆运算的性质]
+\textcolor{red}{待补充：矩阵的逆和列空间的关系。}
+
+\begin{theorem}[矩阵的逆的运算性质]
     对可逆矩阵 $A, B$, 我们有 $(A B)^{-1}=B^{-1} A^{-1}$。\textcolor{red}{（提示：套定义和原矩阵相乘就可以证明）}
 \end{theorem}
+
+那么，如何计算矩阵\(A\)的逆呢？一个最容易理解的方法是借助初等变换的求逆法。初等变换包括行交换、行乘以非零常数、行加上另一行的非零常数倍。正如第\ref{subsec:初等变换与矩阵的乘法}节所述，这些操作对应于左乘不同的初等矩阵。矩阵\(A\)的逆可以通过对矩阵\(A\)和单位矩阵\(I\)同时进行初等行变换来求得。具体步骤如下：
+
+\begin{enumerate}
+    \item \textbf{设置矩阵:} 从矩阵\(A\)开始，旁边写上同阶的单位矩阵\(I\)。这个组合记为\([A|I]\)。
+    \item \textbf{进行初等行变换:} 目标是通过初等行变换将\(A\)转换为单位矩阵\(I\)。对于每一个在\(A\)上执行的操作，同样的操作也要在\(I\)上执行。
+    \item \textbf{获得逆矩阵:} 如果\(A\)可以通过行变换变为单位矩阵\(I\)，那么在\(I\)位置上变换得到的矩阵就是\(A\)的逆矩阵\(A^{-1}\)。
+\end{enumerate}
+
+该方法的动机和合理性来源于线性代数中的一个基本定理：\textcolor{red}{任何可逆矩阵都可以通过一系列初等行变换变为单位矩阵。}\footnote{
+反证法：给定一个可逆矩阵 \(A\)，我们首先执行一系列初等行变换将其转换为行最简形式。由于 \(A\) 是可逆的，其行最简形式必定是单位矩阵 \(I\)。这是因为如果 \(A\) 的行最简形式不是 \(I\)，则会存在零行，意味着 \(A\) 不是满秩的，与 \(A\) 可逆（意味着满秩）相矛盾。
+}这种方法背后的直觉是，当我们对矩阵\(A\)和单位矩阵\(I\)同时执行相同的初等行变换时，实际上我们是在记录下从\(A\)变换到\(I\)所需的每一步操作。这些操作，反过来应用于单位矩阵\(I\)，可以生成\(A\)的逆矩阵\(A^{-1}\)，因为它们描述了如何通过一系列操作将\(A\)变换为\(I\)。
+
+\begin{exercise}
+假设我们有一个矩阵\(A\)：
+
+\[A = \begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix}\]
+
+我们要找到它的逆。首先，我们将\(A\)与单位矩阵\(I\)并排写下：
+
+\begin{align*}
+[A|I] = \left[\begin{array}{cc|cc}
+2 & 1 & 1 & 0 \\
+3 & 2 & 0 & 1 \\
+\end{array}\right]
+\end{align*}
+
+步骤1: 将第一行乘以\(\frac{1}{2}\)，使\(A\)的第一行第一个元素变为1
+
+\begin{align*}
+\left[\begin{array}{cc|cc}
+1 & \frac{1}{2} & \frac{1}{2} & 0 \\
+3 & 2 & 0 & 1 \\
+\end{array}\right]
+\end{align*}
+
+步骤2: 将第一行的\(-3\)倍加到第二行上，使\(A\)的第二行第一个元素变为0
+
+\begin{align*}
+\left[\begin{array}{cc|cc}
+1 & \frac{1}{2} & \frac{1}{2} & 0 \\
+0 & \frac{1}{2} & -\frac{3}{2} & 1 \\
+\end{array}\right]
+\end{align*}
+
+步骤3: 将第二行乘以2，使\(A\)的第二行第二个元素变为1
+
+\begin{align*}
+\left[\begin{array}{cc|cc}
+1 & \frac{1}{2} & \frac{1}{2} & 0 \\
+0 & 1 & -3 & 2 \\
+\end{array}\right]
+\end{align*}
+
+步骤4: 将第二行的\(-\frac{1}{2}\)倍加到第一行上，使\(A\)的第一行第二个元素变为0
+
+\begin{align*}
+\left[\begin{array}{cc|cc}
+1 & 0 & 2 & -1 \\
+0 & 1 & -3 & 2 \\
+\end{array}\right]
+\end{align*}
+
+在完成这些步骤之后，\(A\)变为了单位矩阵，而我们在\(I\)的位置得到的矩阵就是\(A\)的逆：
+
+\[A^{-1} = \begin{pmatrix} 2 & -1 \\ -3 & 2 \end{pmatrix}\]
+
+\end{exercise}
 
 使用Python求矩阵的逆：
 
 \lstinputlisting[language=Python]{scripts/code-unnamed-用python求解矩阵的逆.py}
+
+

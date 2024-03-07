@@ -3,7 +3,7 @@
 \title{计算语言学中的数学方法}
 \subtitle{2023级用}
 
-\author{王予沛 \& \texttt{ChatGPT}}
+\author{王予沛 \& \texttt{ChatGPT} \& \texttt{Claude}}
 \institute{北京师范大学中文信息处理研究所}
 % \date{2022/12/31}
 % \version{4.5}
@@ -42,6 +42,14 @@
 \definecolor{myorange}{rgb}{1.0, 0.5, 0.0}
 \definecolor{mybrown}{rgb}{0.6, 0.4, 0.2}
 \definecolor{mypurple}{rgb}{0.6, 0.2, 0.6}
+
+\newcommand{\hlsoftorange}[1]{%
+  \tikz[baseline=(X.base)]\node[rectangle, fill=softorange] (X) {#1};%
+}
+
+\newcommand{\hlsoftyellow}[1]{%
+  \tikz[baseline=(X.base)]\node[rectangle, fill=softyellow] (X) {#1};%
+}
 
 \addbibresource[location=local]{reference.bib} % 参考文献，不要删除
 
