@@ -241,7 +241,7 @@ x_1 = -2, \quad x_2 = 3
 
 \end{definition}
 
-一般地，我们称\textcolor{second}{“先通过行变换将矩阵化为行阶梯矩阵，然后进一步做行变换，将其化为简化行阶梯形矩阵进而直接\textbf{读出}方程组的解”}这样的解方程的方法为\textcolor{third}{\bf 高斯-若尔当消元法}。可以证明，任何矩阵都可以通过高斯-若尔当消元法转换为简化行阶梯形形式。高斯-若尔当消元法实际上是高斯消元法的一个扩展。
+一般地，我们称\textcolor{second}{“先通过行变换将矩阵化为行阶梯矩阵，然后进一步做行变换，将其化为简化行阶梯形矩阵进而直接\textbf{读出}方程组的解”}这样的解方程的方法为\textcolor{third}{\bf 高斯-若尔当消元法}。可以证明，任何矩阵都可以通过高斯-若尔当消元法转换为简化行阶梯形形式。高斯-若尔当消元法实际上是高斯消元法的一个扩展。需要指出的是，虽然我们这里借助高斯消元法行变换来引入行变换，但是行变换并不是只能在增广矩阵上进行，因为行变换是一种矩阵变形的方法，并不限定于某种特殊的矩阵。
 
 \subsection{矩阵的行列式}
 \label{subsec:矩阵的行列式}
@@ -1295,7 +1295,15 @@ $$
 
 定义中，数域这一概念的严格定义一般在抽象代数课程里讨论，我们这里将其理解为一个保证加法和乘法能够顺利进行的数的集合即可。可以将其想象为一种“通用货币系统”，在这个系统里，我们可以自由地进行交易（加法和乘法运算）而不用担心交换规则突然改变。就像在日常生活中，无论我们是在商店购物还是在银行存取款项，货币的基本价值和使用规则保持不变，使得经济交易可以顺利进行。
 
-为什么要煞有介事的重新定义加法和数量乘法，显得多此一举，直接用平面向量的加法和数量乘法不行吗？确实不行，因为定义\ref{def:线性空间}中集合$V$的元素不一定是数字或我们上面讨论的各种空间中的向量，即我们希望传达一个观点，一大类数学对象各自形成的集合都是线性空间。下面举几个例子
+\vspace{0.3cm}
+
+\begin{note}
+    线性空间的定义可以简记为：对加法和数量乘法满足封闭性+8条公理。实际上这个定义是有冗余的，因为满足封闭性就必须要有8条公理。
+\end{note}
+
+\vspace{0.3cm}
+
+为什么要煞有介事的重新定义加法和数量乘法，显得多此一举，直接用平面向量的加法和数量乘法不行吗？确实不行，因为定义\ref{def:线性空间}中集合$V$的元素不一定是数字或我们上面讨论的各种空间中的向量，即我们希望传达一个观点，一大类数学对象各自形成的集合都是线性空间。下面举几个例子：
 
 \textbf{1. 多项式空间。}多项式空间是所有具有特定最高次数的多项式的集合。例如，考虑所有最高次数为 2 的实系数多项式的集合，记为 \(P_2(\mathbb{R})\)。这个空间包括形如 \(ax^2 + bx + c\) 的所有多项式，其中 \(a, b, c\) 是实数系数。
 
@@ -1471,49 +1479,6 @@ $$
 其中 $a_{r, i}^T$ 是行向量, $a_{c, j}$ 是 $A$ 的列向量, $x_i$ 是 $x$ 的元素。
 \end{definition}
 
-我们注意到，式(\ref{eq:旋转作为矩阵和向量的乘法的例子})还有另一种写法：
-\begin{equation}
-    \left(\begin{array}{cc}
-    \cellcolor{softyellow} \cos \theta & \cellcolor{softorange} -\sin \theta \\
-    \cellcolor{softyellow} \sin \theta & \cellcolor{softorange} \cos \theta
-    \end{array}\right) \cdot 
-    \left(\begin{array}{cc}
-      \cellcolor{softyellow}{x} \\
-      \cellcolor{softorange}{y}
-  \end{array}\right)
-    = \hlsoftyellow{$x$} \left(\begin{array}{c}\cellcolor{softyellow}{\cos \theta} \\ \cellcolor{softyellow}{\sin \theta}\end{array}\right) + \hlsoftorange{$y$} \left(\begin{array}{c}\cellcolor{softorange}{-\sin \theta} \\ \cellcolor{softorange}{\cos \theta}\end{array}\right)
-\label{eq:旋转作为将矩阵视为列向量线性组合的例子}
-\end{equation}
-
-我们称式(\ref{eq:旋转作为将矩阵视为列向量线性组合的例子})为对向量$\left(\begin{array}{c}
-\cos \theta \\
-\sin \theta
-\end{array}\right)$和向量$\left(\begin{array}{c}
--\sin \theta \\
-\cos \theta
-\end{array}\right)$的\textcolor{third}{\bf 线性组合}，$x,y$称为组合系数。
-在这个例子中，初学者可能会可能会混淆混淆线性变换和线性组合，线性变换指的是利用
-$\left(\begin{array}{cc}
-\cos \theta & -\sin \theta \\
-\sin \theta & \cos \theta
-\end{array}\right)$对
-$\left(\begin{array}{c}
-x \\
-y
-\end{array}\right)$进行变换，而线性组合指的是$x,y$作为组合系数对向量$\left(\begin{array}{c}
-\cos \theta \\
-\sin \theta
-\end{array}\right)$和向量$\left(\begin{array}{c}
--\sin \theta \\
-\cos \theta
-\end{array}\right)$进行组合。
-线性组合是理解矩阵和向量的乘法的关键，这是Gilbert Strang的线性代数教材中介绍的第一个概念。下面给出Strang教材中的定义。
-\begin{definition}[线性组合]
-    The heart of linear algebra is in two operations--both with vectors. We add vectors to get $\boldsymbol{v}+\boldsymbol{w}$. We multiply them by numbers $c$ and $d$ to get $c \boldsymbol{v}$ and $d \boldsymbol{w}$. Combining those two operations (adding $c \boldsymbol{v}$ to $d \boldsymbol{w}$ ) gives the \textcolor{third}{\bf linear combination} $c \boldsymbol{v}+d \boldsymbol{w}$.
-\end{definition}
-
-有了我们上面的诸多铺垫，我们早已认识到加法和乘法在线性代数中的核心地位，也比较容易理解为什么“线性组合”这一名称中带有“线性”二字，因为这两个操作是线性变换的基本组成部分。线性变换保留向量空间的线性结构，意味着向量加法和标量乘法的结果仍然在原向量空间内。
-
 \begin{exercise}
     假设我们有一个$2\times 3$的矩阵 $A$ 与一个3维向量 $x$ 相乘。
 
@@ -1571,6 +1536,59 @@ x = \begin{bmatrix}
 \end{exercise}
 
 单位矩阵乘以任何向量等于向量本身，单位矩阵表示恒等变换。
+
+我们注意到，式(\ref{eq:旋转作为矩阵和向量的乘法的例子})还有另一种写法：
+\begin{equation}
+    \left(\begin{array}{cc}
+    \cellcolor{softyellow} \cos \theta & \cellcolor{softorange} -\sin \theta \\
+    \cellcolor{softyellow} \sin \theta & \cellcolor{softorange} \cos \theta
+    \end{array}\right) \cdot 
+    \left(\begin{array}{cc}
+      \cellcolor{softyellow}{x} \\
+      \cellcolor{softorange}{y}
+  \end{array}\right)
+    = \hlsoftyellow{$x$} \left(\begin{array}{c}\cellcolor{softyellow}{\cos \theta} \\ \cellcolor{softyellow}{\sin \theta}\end{array}\right) + \hlsoftorange{$y$} \left(\begin{array}{c}\cellcolor{softorange}{-\sin \theta} \\ \cellcolor{softorange}{\cos \theta}\end{array}\right)
+\label{eq:旋转作为将矩阵视为列向量线性组合的例子}
+\end{equation}
+
+我们称式(\ref{eq:旋转作为将矩阵视为列向量线性组合的例子})为对向量$\left(\begin{array}{c}
+\cos \theta \\
+\sin \theta
+\end{array}\right)$和向量$\left(\begin{array}{c}
+-\sin \theta \\
+\cos \theta
+\end{array}\right)$的\textcolor{third}{\bf 线性组合}，$x,y$称为组合系数。
+在这个例子中，初学者可能会可能会混淆混淆线性变换和线性组合，线性变换指的是利用
+$\left(\begin{array}{cc}
+\cos \theta & -\sin \theta \\
+\sin \theta & \cos \theta
+\end{array}\right)$对
+$\left(\begin{array}{c}
+x \\
+y
+\end{array}\right)$进行变换，而线性组合指的是$x,y$作为组合系数对向量$\left(\begin{array}{c}
+\cos \theta \\
+\sin \theta
+\end{array}\right)$和向量$\left(\begin{array}{c}
+-\sin \theta \\
+\cos \theta
+\end{array}\right)$进行组合。
+线性组合是理解矩阵和向量的乘法的关键，这是Gilbert Strang的线性代数教材中介绍的第一个概念。下面给出Strang教材中的定义。
+\begin{definition}[线性组合]
+    The heart of linear algebra is in two operations--both with vectors. We add vectors to get $\boldsymbol{v}+\boldsymbol{w}$. We multiply them by numbers $c$ and $d$ to get $c \boldsymbol{v}$ and $d \boldsymbol{w}$. Combining those two operations (adding $c \boldsymbol{v}$ to $d \boldsymbol{w}$ ) gives the \textcolor{third}{\bf linear combination} $c \boldsymbol{v}+d \boldsymbol{w}$.
+\end{definition}
+
+\vspace{0.3cm}
+
+\begin{note}
+    特别地，零向量是任何一组向量的线性组合，请思考原因。
+\end{note}
+
+\vspace{0.3cm}
+
+有了我们上面的诸多铺垫，我们早已认识到加法和乘法在线性代数中的核心地位，也比较容易理解为什么“线性组合”这一名称中带有“线性”二字，因为这两个操作是线性变换的基本组成部分。线性变换保留向量空间的线性结构，意味着向量加法和标量乘法的结果仍然在原向量空间内。
+
+在上面的例子告诉我们，矩阵和向量的乘法可以视为用向量的每一个分量对矩阵的各个列对应的向量进行线性组合，我们称矩阵的列对应的向量是\textcolor{third}{\bf 矩阵的列向量}，当然，对偶地，我们也称矩阵的行对应的向量为\textcolor{third}{\bf 矩阵的行向量}。
 
 \subsection{矩阵与矩阵间的乘法运算}
 
@@ -1801,19 +1819,370 @@ $T_{i,j}, D_{i}(m)\text{和}L_{ij}(m)$三种矩阵是初等行变换对应的矩
 % \end{proposition}
 
 
+\section{线性方程解的结构}
+\label{sec:线性方程解的结构}
+
+%这里感觉引入得不好
+至此，我们已经探讨了向量之间的线性组合（这有助于我们理解矩阵和向量的乘法）、线性变换，以及线性空间的概念。在这一节中，我们将讨论线性方程组与线性空间的关系。我们将看到，线性方程组的每个解集合形成了原空间中的一个子空间，称为解空间，这个解空间包含了所有满足方程组条件的向解量，即给定线性方程组的所有可能解。
+
+在介绍线性方程的解的结构之前，我们先来认识向量空间中的向量可能存在的关系，这种关系有助于我们理解线性方程解的性质。
+
+\subsection{线性方程组}
+\label{subsec:线性方程组}
+
+线性方程（Linear equation）是指最高次数为一次的多项式方程。在线性代数中，一个线性方程通常表示为一系列变量的和，每个变量都乘以一个常数（该变量的系数），等于一个常数。在一元线性方程的情况下，其一般形式可以表示为：
+
+\[ ax + b = 0 \]
+
+这里的 \( x \) 是变量，而 \( a \) 和 \( b \) 是系数，其中 \( a \neq 0 \)。如果 \( a = 0 \)，那么方程退化成一个常数项等于0的非线性方程。
+
+在多元线性方程的情况下，其一般形式可以表示为：
+
+\[ a_1x_1 + a_2x_2 + \cdots + a_nx_n + b = 0 \]
+
+这里的 \( x_1, x_2, \ldots, x_n \) 是变量，而 \( a_1, a_2, \ldots, a_n \) 和 \( b \) 是系数。
+
+线性方程的主要特点是：
+
+\begin{itemize}
+    \item 每项是常数或者常数乘以一个变量；
+    \item 没有变量的乘方、根号或其他非线性操作；
+    \item 变量之间没有乘积（例如没有项是 \( x_1x_2 \) 或 \( x_1^2 \)）
+\end{itemize}
+
+在几何上，二维空间中的一个线性方程代表一条直线，三维空间中的一个线性方程代表一个平面。更高维度的线性方程代表超平面。
+
+线性方程的一个重要特性是解的叠加原理：如果 \( x_1 \) 和 \( x_2 \) 分别是两个线性方程的解，则它们的任意线性组合 \( c_1x_1 + c_2x_2 \) 也是该线性方程的解，其中 \( c_1 \) 和 \( c_2 \) 是任意常数。
+
+线性方程组是由多个线性方程构成的集合，通常我们寻求这些方程共同满足的解。
+
+\subsection{线性相关与线性无关}
+\label{subsec:线性相关与线性无关}
+
+\begin{note}
+    复习：
+    \begin{itemize}
+        \item 线性组合
+        \item $n$维单位向量可以线性表出任意$n$维向量，就像直角坐标系里的坐标一样，就用二维和三位空间举例，
+    \end{itemize}
+\end{note}
+
+\begin{definition}[线性表出]
+    当向量 $\boldsymbol{\alpha}$ 是向量组 $\boldsymbol{\beta}_1, \boldsymbol{\beta}_2, \cdots, \boldsymbol{\beta}_s$, 的一个线性组合时, 我们也说 $\boldsymbol{\alpha}$ 可以经向量组 $\boldsymbol{\beta}_1, \boldsymbol{\beta}_2, \cdots, \boldsymbol{\beta}_s$\textcolor{third}{\bf 线性表出}.
+\end{definition}
+
+\begin{definition}[向量组等价]
+    如果向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_t$ 中每一个向量 $\boldsymbol{\alpha}_i(i=1$, $2, \cdots, t)$ 都可以经向量组 $\boldsymbol{\beta}_1, \boldsymbol{\beta}_2, \cdots, \boldsymbol{\beta}_s$ 线性表出, 那么向量组 $\boldsymbol{\alpha}_1$, $\boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_t$ 就称为可以经向量组 $\boldsymbol{\beta}_1, \boldsymbol{\beta}_2, \cdots, \boldsymbol{\beta}_s$, 线性表出如果两个向量组互相可以线性表出它们就称为\textcolor{third}{\bf 等价}.
+\end{definition}
+
+\begin{exercise}
+设
+$$
+\begin{aligned}
+& \boldsymbol{\alpha}_1=(1,1,1), \boldsymbol{\alpha}_2=(1,2,0) ; \\
+& \boldsymbol{\beta}_1=(1,0,2), \boldsymbol{\beta}_2=(0,1,-1) .
+\end{aligned}
+$$
+
+则向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2$ 与向量组 $\boldsymbol{\beta}_1, \boldsymbol{\beta}_2$ 是等价的.
+\end{exercise}
+
+\begin{definition}[向量组的线性相关]
+如果向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_s(s \geqslant 2)$ 中有\textbf{一个}向量可以由其余的向量线性表出,那么向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_s$ 称为\textcolor{third}{\bf 线性相关}的.
+\end{definition}
+
+\begin{exercise}
+向量组 $\boldsymbol{\alpha}_1=(2,-1,3,1), \boldsymbol{\alpha}_2=(4,-2,5,4), \boldsymbol{\alpha}_3=(2$, $-1,4,-1)$ 是线性相关的, 因为
+$$
+3 \boldsymbol{\alpha}_1-\boldsymbol{\alpha}_2=\boldsymbol{\alpha}_3 .
+$$
+\end{exercise}
+
+从定义可以看出任意一个包含零向量的向量组一定是线性相关的. 还可看出, 向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2$ 线性相关就衣示 $\boldsymbol{\alpha}_1=k \boldsymbol{\alpha}_2$ 或者 $\boldsymbol{\alpha}_2=k \boldsymbol{\alpha}_1($ 这两个式子不一定能同时成立，例如当其中有一个是零向量的时候).
+
+\begin{definition}[线性相关难懂版]
+    向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_s(s \geqslant 1)$ 称为\textcolor{third}{\bf 线性相关}, 如果有数域 $\mathcal{F}$ 中不全为零的数 $k_1, k_2, \cdots, k_{\text {s }}$, 使
+$$
+k_1 \boldsymbol{\alpha}_1+k_2 \boldsymbol{\alpha}_2+\cdots+k_s \boldsymbol{\alpha}_s=\mathbf{0}
+$$
+\end{definition}
+
+为什么要写这个难懂版呢？是因为要对称地给出线性无关的定义。
+
+\begin{definition}[向量组线性无关]
+    一向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}(s \geqslant 1)$ 不线性相关，即没有不全为零的数 $k_1, k_2, \cdots, k_s$ 使
+$$
+k_1 \boldsymbol{\alpha}_1+k_2 \boldsymbol{\alpha}_2+\cdots+k_s \boldsymbol{\alpha}_s=\mathbf{0},
+$$
+
+就称为线性无关；或者说，一向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}$ 称为\textcolor{third}{\bf 线性无关}，如果由
+$$
+k_1 \boldsymbol{\alpha}_1+k_2 \boldsymbol{\alpha}_2+\cdots+k_s \boldsymbol{\alpha}_s=0
+$$
+可以推出
+$$
+k_1=k_2=\cdots=k_1=0
+$$
+\end{definition}
+
+% 由定义立即得出，如果一向量组的一部分线性相关，那么这个向量组就线性相关。
+% 设向量组为 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_s, \cdots, \boldsymbol{\alpha} r(s \leqslant r)$, 其中一部分, 譬如说 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_s$ 线性相关, 即有不全为 0 的数 $k_1$,
+
+一些结论，如果这些结论一看就懂，那说明你初步理解了上面的概念：
+
+\begin{itemize}
+    \item 如果一向量组的一部分线性相关，那么这个向量组就线性相关。
+    \item 设 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_r$ 与 $\boldsymbol{\beta}_1, \boldsymbol{\beta}_2, \cdots, \boldsymbol{\beta}$, 是两个向量组. 有下面一组逆否命题：
+    \begin{itemize}
+        \item  如果向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}$ 可以经 $\boldsymbol{\beta}_1, \boldsymbol{\beta}_2, \cdots, \boldsymbol{\beta}$, 线性表出且 $r>s$,那么向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}_r$ 必线性相关.
+
+        \item 如果向量组 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}$, 可以经向量组 $\boldsymbol{\beta}_1, \boldsymbol{\beta}_2, \cdots$, $\boldsymbol{\beta}$ ，线性表出，且 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \cdots, \boldsymbol{\alpha}$ ，线性无关，那么 $r \leqslant s$.
+    \end{itemize}
+    \item 任意 $n+1$ 个 $n$ 维向量必线性相关.
+    \item 两个线性无关的等价的向量组,必含有相同个数的向量.
+\end{itemize}
+
+\begin{definition}[最大线性无关组]
+    一向量组的一个部分组称为一个最大线性无关组,如果这个部分组本身是线性无关的, 并且从这向量组中任意添一个向量 (如果还有的话), 所得的部分向量组都线性相关.
+\end{definition}
+
+\begin{exercise}
+    在向量组 $\boldsymbol{\alpha}_1=(2,-1,3,1), \boldsymbol{\alpha}_2=(4,-2,5,4), \boldsymbol{\alpha}_3=$ $(2,-1,4,-1)$ 中,由 $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2$ 组成的部分组就是一个最大线性无关组. 首先, $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2$ 线性无关,因为由
+$$
+\begin{aligned}
+k_1 \boldsymbol{\alpha}_1+k_2 \boldsymbol{\alpha}_2 & =k_1(2,-1,3,1)+k_2(4,-2,5,4) \\
+& =\left(2 k_1+4 k_2,-k_1-2 k_2, 3 k_1+5 k_2, k_1+4 k_2\right) \\
+& =(0,0,0,0),
+\end{aligned}
+$$
+
+就有 $k_1=k_2=0$. 同时我们知道, $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \boldsymbol{\alpha}_3$ 线性相关. 不难看出， $\boldsymbol{\alpha}_2, \boldsymbol{\alpha}_3$ 也是一个最大线性无关组.
+\end{exercise}
+
+一些结论：
+\begin{itemize}
+    \item 一个线性无关向量组的最大线性无关组就是这个向量组自身.
+    \item 最大线性无关组的一个基本性质是, 任意一个最大线性无关组都与向量组本身等价.
+\end{itemize}
+
+\begin{definition}
+    向量组的极大线性无关组所含向量的个数称为这个向量组的秩.
+\end{definition}
+
+\begin{exercise}
+    向量组 $\boldsymbol{\alpha}_1=(2,-1,3,1), \boldsymbol{\alpha}_2=(4,-2,5,4), \boldsymbol{\alpha}_3=$ $(2,-1,4,-1)$ 的秩就是 2 .
+\end{exercise}
+
+因为线性无关的向量组就是它自身的极大线性无关组,所以一向量组线性无关的充分必要条件为它的秩与它所含向量的个数相同.
+
+\subsection{矩阵的秩}
+\label{subsec:矩阵的秩}                                                
+
+考虑矩阵$A$，将其化为简化行阶梯形
+
+\begin{equation*}
+A=\left[\begin{array}{rrrr}
+1 & 2 & 2 & 4 \\
+3 & 8 & 6 & 14
+\end{array}\right]    
+\longrightarrow
+\operatorname{rref}(A)=\left[\begin{array}{llll}
+1 & 0 & 2 & 2 \\
+0 & 1 & 0 & 1
+\end{array}\right]
+\label{eq:矩阵的秩例子1}
+\end{equation*}
+
+我们发现第一列和第二列无法被其他列线性表出。这个现象不是巧合，因为我们在利用行变换将矩阵$A$变为简化行阶梯形的过程中选取了第一列的第一个元素和第二列的第二个元素作为基准元素（它们被称为\textbf{主元}，见第\ref{subsec:高斯-若尔当消元法}节），并且通过行变换将它们所在的列中的其他元素变为0。在这个过程中，主元的位置是固定的，并且在每一行的最左边。主元的存在保证了矩阵的行简化形式是唯一的。我们将主元所在的列以外的列成为\textcolor{third}{\bf 主元列}(pivot column)，主元列以外的列称为\textcolor{third}{\bf 自由列}(free column).自由列可以通过主列的线性组合来表示，因此它们是自由的。自由列的数量决定了线性方程组的自由度（注意方程的自由度不是解的个数）。
+
+我们可以再看一个例子。考虑矩阵$B$，
+
+\begin{equation*}
+B=\left[\begin{array}{rrr}
+1 & 2 & 3 \\
+2 & 4 & 6
+\end{array}\right]
+\longrightarrow
+\operatorname{rref}(B)=\left[\begin{array}{rrr}
+1 & 2 & 3 \\
+0 & 0 & 0
+\end{array}\right]
+\label{eq:矩阵的秩例子2}
+\end{equation*}
+
+这个矩阵只有一个主元列，另外两列都是自由列。自由列也都可以被主元列线性表出。
+
+综合以上两个例子，我们看到，主元在矩阵的行变换过程中非常重要，主元的个数就是矩阵$A$对应的线性方程组中有效方程的个数，这个数字可以认为是矩阵$A$“真正的大小”（true size），这个“真正的大小”很重要，我们将其称为\textbf{矩阵的秩}。
+
+\begin{definition}[矩阵的秩]
+    矩阵$A$的主元个数成为矩阵$A$的\textcolor{third}{\bf 秩}（rank），一般简记为$r$。
+\end{definition}
+
+\subsection{线性子空间}
+\label{subsec:线性子空间}
+
+\begin{note}
+    本节核心概念：
+    \begin{itemize}
+        \item 子空间
+        \item “张成一个空间”的含义
+        \item 子空间的基
+        \item 空间的维度
+        \item 矩阵的列空间和行空间
+    \end{itemize}
+\end{note}
+
+\begin{definition}[子空间--Gilbert Strang教材]
+    向量空间中一组包含$\boldsymbol{0}$的向量对加法和数乘满足封闭性，则这组向量构成原来向量空间的一个\textcolor{third}{\bf 子空间}。
+\end{definition}
+
+举个例子，平面上的直线都是平面的子空间，三维空间中的平面和直线都是三维空间的子空间。此外，平面和三维空间分别是它们自己的子空间。
+
+\begin{proposition}
+    包含向量$\boldsymbol{u},\boldsymbol{v}$的子空间一定包含二者的所有线性组合。
+\end{proposition}
+
+\begin{definition}[Span--Gilbert Strang]
+    一组向量\textcolor{third}{\bf 张成}一个空间，如果它们的线性组合布满的整个空间。\\
+    A set of vectors \textcolor{third}{\bf span} a space if their linear combinations fill the space.
+\end{definition}
+
+\begin{definition}[基和基向量]
+向量空间的\textcolor{third}{\bf 基}（basis）是能够张成这个空间的一组线性无关的向量。我们称构成基的向量是该空间的\textcolor{third}{\bf 基向量}（base）。
+\end{definition}
+
+\vspace{0.3cm}
+
+\begin{note}
+    结合最大线性无关组的概念，我们知道，线性空间的基就是该空间内所有向量的最大线性无关组。
+\end{note}
+
+\vspace{0.3cm}
+
+在 $n$ 维线性空间 $V$ 中, $n$ 个线性无关的向量 $\varepsilon_1$, $\varepsilon_1, \cdots, \varepsilon_n$ 称为 $V$ 的一组基. 设 $\alpha$ 是 $V$ 中任一向量,于是 $\varepsilon_1, \varepsilon_2, \cdots$, $\varepsilon_1, \alpha$ 线性相关,因此 $\boldsymbol{\alpha}$ 可以被基 $\boldsymbol{\varepsilon}_1, \boldsymbol{\varepsilon}_2, \cdots, \boldsymbol{\varepsilon}_n$ 线性表出:
+$$
+\alpha=a_1 \varepsilon_1+a_2 \varepsilon_2+\cdots+a_n \varepsilon_n,
+$$
+
+其中系数 $a_1, a_2, \cdots, a_n$ 是被向量 $\boldsymbol{\alpha}$ 和基 $\varepsilon_1, \varepsilon_2, \cdots, \varepsilon_n$ 唯一确定的,这组数就称为 $\boldsymbol{\alpha}$ 在基 $\varepsilon_1, \varepsilon_2, \cdots, \boldsymbol{\varepsilon}_n$ 下的坐标, 记为 $\left(a_1, a_2, \cdots, a_n\right)$.
+
+\begin{definition}[向量空间的维度]
+    向量空间的维度（维数）是它的每一组基中基向量的个数。
+\end{definition}
+
+这个定义是良定义的（well-defined），当且仅当向量空间的每一组基中基向量的数量都相等。
+
+现在，我们使用上面的概念来重新审视矩阵。我们之前有如下的理解矩阵的方法：
+
+\begin{itemize}
+    \item 矩阵$A$表示线性方程组$Ax=c$的系数；
+    \item 矩阵$A$表示空间中某一个线性变换；
+\end{itemize}
+
+我们发现，矩阵$A$的列向量也可以张成一个维度至少为1的空间，我们称这个空间为矩阵$A$的\textcolor{third}{\bf 列空间}，记为$C(A)$。对偶地，矩阵$A$的行向量也可以张成一个维度至少为1的空，我们称这个空间为矩阵$A$的\textcolor{third}{\bf 行空间}。
+
+从现在开始我们几乎不再像中学时那样写出完整的线性方程组，而更多地使用向量形式，即$Ax=c$，这看起来像是一个公式，称之为方程组虽然是对的但有些怪，故从现在起我们使用它的一个贴近本质的名称--\textcolor{third}{\bf 线性系统}（linear system），从而线性方程组的解就是线性系统的解。借助列空间的概念，我们可以获得对线性系统的解的一种解释。
+
+\begin{theorem}
+    线性系统$Ax=c$有解当且仅当$c$在$A$的列空间中。
+\end{theorem}
+
+考察第\ref{subsec:矩阵的秩}节中的两个例子。我们发现，例子\ref{eq:矩阵的秩例子1}中列空间的维度是2，行空间的维度也是2；而例子\ref{eq:矩阵的秩例子2}中列空间的维度是1，行空间的维度也是1.
+
+\begin{theorem}
+    矩阵的行空间的维度等于矩阵列空间的维度等于矩阵的秩。
+\end{theorem}
+
+你可能会到别处看到矩阵的行秩和列秩的概念，这二者分别对应于矩阵行空间的维度和列空间的维度，二者永远相等。
+
+\begin{definition}
+    一个$m\times n$的矩阵$A$,如果满足以下任一条件,则称$A$是\textcolor{third}{满秩矩阵}:
+    \begin{itemize}
+        \item 矩阵$A$的秩等于$\min(m,n)$。也就是说,矩阵的秩达到了最大可能值；
+        \item 矩阵$A$的所有行向量线性无关；
+        \item 矩阵$A$的所有列向量线性无关；
+        \item 如果$m\geq n$，则$A$有$n$个线性无关的列向量；如果$m \leq n$，则$A$有$m$个线性无关的行向量
+    \end{itemize}
+\end{definition}
+
+% \subsubsection{齐次线性方程的解}
+% \label{subsec:齐次线性方程的解}
+
+% 一般地，$Ax=0$的求解被称为求解零空间或零向量的问题。例如，现有线性方程：
+% \begin{equation*}
+%     \left\{
+%     \begin{array}{c}
+%     x_1 + 2x_2 = 0  \\
+%     3x_1 + 4x_2 = 0  \\
+%     5x_1 + 6x_2 = 0
+%     \end{array}
+%     \right.
+% \end{equation*}
+
+% 将其表达为矩阵形式：
+% \[
+% \begin{bmatrix}
+% 1 & 2 \\
+% 3 & 4 \\
+% 4 & 8
+% \end{bmatrix}
+% \begin{bmatrix}
+% x_1 \\ x_2
+% \end{bmatrix}
+% =
+% \begin{bmatrix}
+% 0 \\ 0 \\ 0
+% \end{bmatrix}
+% \]
+
+% 使用高斯-若尔当消元法将其变为简化行阶梯形：
+% \[
+% \begin{bmatrix}
+% 1 & 0 \\
+% 0 & 1 \\
+% 0 & 0
+% \end{bmatrix}
+% \begin{bmatrix}
+% x_1 \\ x_2
+% \end{bmatrix}
+% =
+% \begin{bmatrix}
+% 0 \\ 0 \\ 0
+% \end{bmatrix}
+% \]
+
+% 可以看出这是一个欠定的线性方程组（即方程数少于未知数的数量）。对于此类问题，我们通常的目标是寻找所有可能的解，这称为求解该线性系统的零空间。
+
+% \begin{table}[h!]
+% \centering
+% \input{tables/linear_equation_solution_space}
+% \caption{Table caption}
+% \end{table}
+
+\subsection{线性代数基本定理}
+
+\begin{note}
+    \begin{itemize}
+        \item 线性系统$Ax=0$的解答
+        \item 矩阵的零空间
+        \item 线性系统$Ax=c$的解答等于一个$Ax=c$的特解加上$Ax=0$的通解
+        \item 秩-零化度定理
+    \end{itemize}
+\end{note}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{基础矩阵操作}
 
-\begin{proposition}[TODO]
+% \begin{proposition}[TODO]
 
-\begin{itemize}
-    \item  矩阵转置的性质$(AB)^{T}=B^{T} A^{T}$
-    \item 逆矩阵的本质是线性变换的逆变换，举例说明，并求给出用单位阵辅助求出逆矩阵的方法，介绍转置的性质$(AB)^{-1}=B^{-1} A^{-1}$最后给出python做法；
-    \item 矩阵的行列式的计算方法（只讲二阶和三阶），并讲清楚几何意义：面积比和右手螺旋定则；
-    \item 介绍矩阵的迹，以及特殊矩阵的行列式和他们的迹的关系。
-\end{itemize}
+% \begin{itemize}
+%     \item  矩阵转置的性质$(AB)^{T}=B^{T} A^{T}$
+%     \item 逆矩阵的本质是线性变换的逆变换，举例说明，并求给出用单位阵辅助求出逆矩阵的方法，介绍转置的性质$(AB)^{-1}=B^{-1} A^{-1}$最后给出python做法；
+%     \item 矩阵的行列式的计算方法（只讲二阶和三阶），并讲清楚几何意义：面积比和右手螺旋定则；
+%     \item 介绍矩阵的迹，以及特殊矩阵的行列式和他们的迹的关系。
+% \end{itemize}
 
-\end{proposition}
+% \end{proposition}
 
 \subsection{矩阵的转置}
 
@@ -1826,8 +2195,7 @@ $$
 \end{definition}
 
 \begin{exercise}
-    假设我们有一个 $2 \times 3$ 的矩阵：
-
+假设我们有一个 $2 \times 3$ 的矩阵：
 $$
 A = \begin{bmatrix}
 1 & 2 & 3 \\
@@ -1836,7 +2204,6 @@ A = \begin{bmatrix}
 $$
 
 现在，让我们计算矩阵 $A$ 的转置 $A^T$。转置操作将原矩阵的行变成列，列变成行，如下所示：
-
 $$
 A^T = \begin{bmatrix}
 1 & 4 \\
@@ -1846,7 +2213,6 @@ A^T = \begin{bmatrix}
 $$
 
 这里，我们可以清晰地看到原始矩阵 $A$ 的行变成了 $A^T$ 的列，而原始矩阵的列变成了 $A^T$ 的行。
-
 \end{exercise}
 
 \begin{theorem}[转置运算的性质] \label{thm:transpose-property}
@@ -1857,9 +2223,7 @@ $$
 
 \begin{definition} \label{def:invertible-mat}
     设$A$为一个$n \times n$的方阵。如果存在另一个同样大小的矩阵$B$使得：
-
 $$AB = BA = I_n$$
-
 其中$I_n$是$n \times n$的单位矩阵。则称矩阵$B$为$A$的逆矩阵，记作$A^{-1}$。
 \end{definition}
 
@@ -1932,7 +2296,7 @@ $$
 
 这些例子中的矩阵都不能找到一个逆矩阵来满足矩阵乘法的单位矩阵条件。
 
-\textcolor{red}{待补充：矩阵的逆和列空间的关系。}
+% \textcolor{red}{待补充：矩阵的逆和列空间的关系。}
 
 \begin{theorem}[矩阵的逆的运算性质]
     对可逆矩阵 $A, B$, 我们有 $(A B)^{-1}=B^{-1} A^{-1}$。\textcolor{red}{（提示：套定义和原矩阵相乘就可以证明）}
@@ -1952,11 +2316,9 @@ $$
 
 \begin{exercise}
 假设我们有一个矩阵\(A\)：
-
 \[A = \begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix}\]
 
 我们要找到它的逆。首先，我们将\(A\)与单位矩阵\(I\)并排写下：
-
 \begin{align*}
 [A|I] = \left[\begin{array}{cc|cc}
 2 & 1 & 1 & 0 \\
@@ -1964,8 +2326,7 @@ $$
 \end{array}\right]
 \end{align*}
 
-步骤1: 将第一行乘以\(\frac{1}{2}\)，使\(A\)的第一行第一个元素变为1
-
+步骤1: 将第一行乘以\(\frac{1}{2}\)，使\(A\)的第一行第一个元素变为1：
 \begin{align*}
 \left[\begin{array}{cc|cc}
 1 & \frac{1}{2} & \frac{1}{2} & 0 \\
@@ -1973,8 +2334,7 @@ $$
 \end{array}\right]
 \end{align*}
 
-步骤2: 将第一行的\(-3\)倍加到第二行上，使\(A\)的第二行第一个元素变为0
-
+步骤2: 将第一行的\(-3\)倍加到第二行上，使\(A\)的第二行第一个元素变为0：
 \begin{align*}
 \left[\begin{array}{cc|cc}
 1 & \frac{1}{2} & \frac{1}{2} & 0 \\
@@ -1982,8 +2342,7 @@ $$
 \end{array}\right]
 \end{align*}
 
-步骤3: 将第二行乘以2，使\(A\)的第二行第二个元素变为1
-
+步骤3: 将第二行乘以2，使\(A\)的第二行第二个元素变为1：
 \begin{align*}
 \left[\begin{array}{cc|cc}
 1 & \frac{1}{2} & \frac{1}{2} & 0 \\
@@ -1991,8 +2350,7 @@ $$
 \end{array}\right]
 \end{align*}
 
-步骤4: 将第二行的\(-\frac{1}{2}\)倍加到第一行上，使\(A\)的第一行第二个元素变为0
-
+步骤4: 将第二行的\(-\frac{1}{2}\)倍加到第一行上，使\(A\)的第一行第二个元素变为0：
 \begin{align*}
 \left[\begin{array}{cc|cc}
 1 & 0 & 2 & -1 \\
@@ -2001,7 +2359,6 @@ $$
 \end{align*}
 
 在完成这些步骤之后，\(A\)变为了单位矩阵，而我们在\(I\)的位置得到的矩阵就是\(A\)的逆：
-
 \[A^{-1} = \begin{pmatrix} 2 & -1 \\ -3 & 2 \end{pmatrix}\]
 
 \end{exercise}

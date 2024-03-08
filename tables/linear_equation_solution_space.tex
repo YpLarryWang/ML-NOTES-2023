@@ -1,0 +1,20 @@
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+ &  &  & dim(Nul(A))=n-r & dim(Nul(A^⊤))=m-r &  & \\
+ & A的 &  & 列向量线性相关性 & 行向量线性相关性 & 齐次方程Ax=0解的情况 & Ax=b \\
+ & Echelon Form & Rank(A) & Ax=b 解的唯一性 & Ax=b 解的存在性 & 永远存在x=0的解 & 解的情况 \\
+ & (mxn) &  & n-r=0:唯一解或无解 & m-r=0: 一定有解 & 所以不可能无解 &  \\
+ &  &  & n-r>0: 无数解或无解 & m-r>0: 可能无解 &  &  \\ \hline
+ & $\begin{pmatrix} a_{12} & a_{13} \\ 0 & a_{23} \\ 0 & 0 \end{pmatrix}$ & r=n<m & 0 & >0 & 唯一解 & 唯一解或无解 \\
+m>n &  &  & 列向量线性无关 &  & x=0 &  \\ \cline{2-7} 
+ & $\begin{pmatrix} a_{12} & a_{13} \\ 0 & a_{23} \\ 0 & 0 \end{pmatrix}$ & r<n<m & >0 & >0 & 无数解 & 无数解或无解 \\
+ &  &  &  &  &  &  \\ \hline
+ & $\begin{pmatrix} a_{11} & a_{12} \\ 0 & a_{22} \\ 0 & a_{32} \end{pmatrix}$ & r=n=m & 0 & 0 & 唯一解 & 唯一解 \\
+m=n &  &  & 列向量线性无关 & 行向量线性无关 & x=0 &  \\ \cline{2-7} 
+ & $\begin{pmatrix} a_{11} & a_{12} \\ 0 & a_{22} \\ 0 & 0 \end{pmatrix}$ & r<n=m & >0 & >0 & 无数解 & 无数解或无解 \\
+ &  &  &  &  &  &  \\ \hline
+ & $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ 0 & a_{22} & a_{23} \\ 0 & 0 & a_{33} \end{pmatrix}$ & r=m<n & >0 & 0 & 无数解 & 无数解 \\
+m<n &  &  &  & 行向量线性无关 &  &  \\ \cline{2-7} 
+ & $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ 0 & a_{22} & a_{23} \\ 0 & 0 & 0 \end{pmatrix}$ & r<m<n & >0 & >0 & 无数解 & 无数解或无解 \\
+ &  &  &  &  &  &  \\ \hline
+\end{tabular}
