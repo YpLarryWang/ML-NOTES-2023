@@ -3,7 +3,6 @@
 *.aux
 *.bcf
 *.out
-*.pdf
 *.xml
 *.gz
 *.toc
