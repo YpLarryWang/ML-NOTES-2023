@@ -134,7 +134,7 @@ x_1 = -2, \quad x_2 = 3
 \label{eq:系数矩阵示例}
 \end{equation}
 
-如果我们在系数矩阵右边增加一列$c$，用于记录方程的右端项（right hand side, RHS），则方程组(\ref{eq:二元一次方程组示例})可以写作$Ax=c$。我们用一根竖线隔开表示系数的数表和表示右端项的数列，得到的整个新数表称为方程组\ref{eq:二元一次方程组示例}的\textcolor{third}{\bf 增广矩阵}，如式\ref{eq:增广矩阵示例}所示：
+如果我们在系数矩阵右边增加一列$c$，用于记录方程的右端项（right hand side, RHS），则方程组(\ref{eq:二元一次方程组示例})可以写作$Ax=\boldsymbol{b}$。我们用一根竖线隔开表示系数的数表和表示右端项的数列，得到的整个新数表称为方程组\ref{eq:二元一次方程组示例}的\textcolor{third}{\bf 增广矩阵}，如式\ref{eq:增广矩阵示例}所示：
 \begin{equation}
     [A \mid c]=\left(\begin{array}{cc|c}
 2 & 3 & 5 \\
@@ -630,7 +630,7 @@ y^{\prime}=x \sin \theta+y \cos \theta .
 \subsubsection{反射变换}
 \label{subsubsec:反射变换}
 
-如图 \ref{fig:反射变换} 所示, 在直角坐标系 $O x y$ 内, 关于 $x$ 轴的反射变换把任意一点 $P(x, y)$ 变成它关于 $x$ 轴的对称点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$。此时 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
+如图 \ref{fig:反射变换} 所示, 在直角坐标系 $O x y$ 内, 关于 $y$ 轴的反射变换把任意一点 $P(x, y)$ 变成它关于 $y$ 轴的对称点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$。此时 $x^{\prime}, y^{\prime}$ 与 $x, y$ 有如下关系：
 
 \begin{equation}
 \left\{\begin{array}{l}
@@ -666,12 +666,12 @@ y^{\prime}=y .
 \caption{反射变换示意图\label{fig:反射变换}}
 \end{figure}
 
-我们将式(\ref{eq:反射变换的表达式})称为关于 $x$ 轴的\textcolor{third}{\bf 反射变换}的表达式。我们可以对式\ref{eq:反射变换的表达式}进行简单改写，如式\ref{eq:反射变换的方程}所示：
+我们将式(\ref{eq:反射变换的表达式})称为关于 $y$ 轴的\textcolor{third}{\bf 反射变换}的表达式。我们可以对式\ref{eq:反射变换的表达式}进行简单改写，如式\ref{eq:反射变换的方程}所示：
 
 \begin{equation}
 \left\{\begin{array}{l}
-x^{\prime}=1 \cdot x + 0\cdot y, \\
-y^{\prime}= 0\cdot x + (-1) \cdot y .
+x^{\prime}= (-1) \cdot x + 0\cdot y, \\
+y^{\prime}= 0\cdot x + 1 \cdot y .
 \end{array}\right.
 \label{eq:反射变换的方程}
 \end{equation}
@@ -692,7 +692,7 @@ y^{\prime}= 0\cdot x + (-1) \cdot y .
 
 \begin{exercise}
 \begin{enumerate}
-    \item 关于 \textbf{$y$ 轴}的反射变换把直角坐标系 $O x y$ 内的任意一点 $P(x, y)$ 变成它关于 $y$ 轴的对称点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$. 相应的坐标变换公式和变换矩阵分别是什么？
+    \item 关于 \textbf{$x$ 轴}的反射变换把直角坐标系 $O x y$ 内的任意一点 $P(x, y)$ 变成它关于 $x$ 轴的对称点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$. 相应的坐标变换公式和变换矩阵分别是什么？
     \item 关于 \textbf{直线$y=x$}的反射变换把直角坐标系 $O x y$ 内的任意一点 $P(x, y)$ 变成它关于直线$y=x$的对称点 $P^{\prime}\left(x^{\prime}, y^{\prime}\right)$. 相应的坐标变换公式和变换矩阵分别是什么？
 \end{enumerate}
 \end{exercise}
@@ -700,7 +700,7 @@ y^{\prime}= 0\cdot x + (-1) \cdot y .
 \begin{solution}
 
 \begin{enumerate}
-    \item 关于 \textbf{$y$ 轴}的反射变换，其相应的坐标变换公式是
+    \item 关于 \textbf{$x$ 轴}的反射变换，其相应的坐标变换公式是
 $$
 \left\{\begin{array}{c}
 x^{\prime}=-x, \\
@@ -1863,7 +1863,17 @@ $T_{i,j}, D_{i}(m)\text{和}L_{ij}(m)$三种矩阵是初等行变换对应的矩
     复习：
     \begin{itemize}
         \item 线性组合
-        \item $n$维单位向量可以线性表出任意$n$维向量，就像直角坐标系里的坐标一样，就用二维和三位空间举例，
+        \item $n$维单位向量可以线性表出任意$n$维向量，就像直角坐标系里的坐标一样，用二维和三位空间举例
+    \end{itemize}
+    本节内容：
+    \begin{itemize}
+        \item 线性表出
+        \item 向量组等价
+        \item 线性相关和线性无关
+        \item 最大线性无关组
+        \item 向量组的秩
+        \item 行向量组、行秩、列向量组、列秩、主元、主元列，自由列、矩阵的秩
+        \item 矩阵等价
     \end{itemize}
 \end{note}
 
@@ -1959,14 +1969,18 @@ $$
 就有 $k_1=k_2=0$. 同时我们知道, $\boldsymbol{\alpha}_1, \boldsymbol{\alpha}_2, \boldsymbol{\alpha}_3$ 线性相关. 不难看出， $\boldsymbol{\alpha}_2, \boldsymbol{\alpha}_3$ 也是一个最大线性无关组.
 \end{exercise}
 
-一些结论：
-\begin{itemize}
+% 一些结论：
+
+\begin{proposition}
+    \begin{itemize}
     \item 一个线性无关向量组的最大线性无关组就是这个向量组自身.
     \item 最大线性无关组的一个基本性质是, 任意一个最大线性无关组都与向量组本身等价.
+    \item 一个向量组的所有最大线性无关组中的向量数量都是相等的.
 \end{itemize}
+\end{proposition}
 
-\begin{definition}
-    向量组的极大线性无关组所含向量的个数称为这个向量组的秩.
+\begin{definition}[向量组的秩]
+    向量组的极大线性无关组所含向量的个数称为这个\textcolor{third}{\bf 向量组的秩}.
 \end{definition}
 
 \begin{exercise}
@@ -1976,7 +1990,7 @@ $$
 因为线性无关的向量组就是它自身的极大线性无关组,所以一向量组线性无关的充分必要条件为它的秩与它所含向量的个数相同.
 
 \subsection{矩阵的秩}
-\label{subsec:矩阵的秩}                                                
+\label{subsec:矩阵的秩}                    
 
 考虑矩阵$A$，将其化为简化行阶梯形
 
@@ -1993,7 +2007,28 @@ A=\left[\begin{array}{rrrr}
 \label{eq:矩阵的秩例子1}
 \end{equation*}
 
-我们发现第一列和第二列无法被其他列线性表出。这个现象不是巧合，因为我们在利用行变换将矩阵$A$变为简化行阶梯形的过程中选取了第一列的第一个元素和第二列的第二个元素作为基准元素（它们被称为\textbf{主元}，见第\ref{subsec:高斯-若尔当消元法}节），并且通过行变换将它们所在的列中的其他元素变为0。在这个过程中，主元的位置是固定的，并且在每一行的最左边。主元的存在保证了矩阵的行简化形式是唯一的。我们将主元所在的列以外的列成为\textcolor{third}{\bf 主元列}(pivot column)，主元列以外的列称为\textcolor{third}{\bf 自由列}(free column).自由列可以通过主列的线性组合来表示，因此它们是自由的。自由列的数量决定了线性方程组的自由度（注意方程的自由度不是解的个数）。
+我们可以把矩阵$A$中的每一列看成一个2维向量，由此我们发现，在$\operatorname{rref}(A)$中，第一列和第二列无法相互线性表出，但它们可以将第三列和第四列线性表出。如果把$\operatorname{rref}(A)$的列向量看成一组，称之为\textcolor{third}{\bf 列向量组}，则$\operatorname{rref}(A)$的列向量组的秩为2，我们将列向量组的秩称为矩阵$A$的\textcolor{third}{\bf 列秩}。反过来，第一列和第二列却不（一定）能够被其他列线性表出。这个现象不是巧合，因为我们在利用行变换将矩阵$A$变为简化行阶梯形的过程中选取了第一列的第一个元素和第二列的第二个元素作为基准元素（它们被称为\textcolor{third}{\bf 主元}，见第\ref{subsec:高斯-若尔当消元法}节），并且通过行变换将它们所在的列中的其他元素变为0。在这个过程中，主元的位置是固定的，并且在每一行的最左边。主元的存在保证了矩阵的行简化形式是唯一的。我们将主元所在的列以外的列成为\textcolor{third}{\bf 主元列} (pivot column)，主元列以外的列称为\textcolor{third}{\bf 自由列} (free column).自由列可以通过主列的线性组合来表示，因此它们是自由的。例如在$\operatorname{rref}(A)$中主元列的数量为2，自由列的数量也为2.
+
+如果矩阵$A$中的每一行看成一个4维向量，这些向量视为一组，成为矩阵$A$的\textcolor{third}{\bf 行向量组}。显然，矩阵$A$的列向量组的秩也为2，我们将行向量组的秩称为矩阵$A$的\textcolor{third}{\bf 行秩}。
+
+\vspace{0.3cm}
+
+\begin{note}
+    \begin{itemize}
+        \item 可以验证，矩阵$A$的列向量组的秩和$\operatorname{rref}(A)$的列向量组的秩相等（在矩阵$A$中第一列乘二即为第三列，第一列的两倍和第二列相加即为第四列）。
+        % 考虑高斯-若尔当消元法在操作过程中所做的行变换：
+        % \begin{itemize}
+        %     \item 交换两行的位置：当我们交换矩阵的两行时，并不会改变列向量本身，只是改变了列向量的线性组合中系数的顺序。这不会影响由列向量生成的空间，因为空间的定义与向量的顺序无关。
+
+        %     \item 将一行乘以非零常数：这个变换相当于将一个列向量的线性组合中的某个系数乘以一个非零常数。由于这个操作只是缩放了原始线性组合中的系数，它并不会改变列空间的方向或维度。
+
+        %     \item 将一行的非零倍数加到另一行上：这个变换相当于对一个列向量的线性组合进行另一个线性组合的加法。这种操作会改变某些系数，但不会创建任何新的列向量或消除现有的列向量。因此，生成的空间仍然相同。
+        % \end{itemize}
+        \item 自由列的数量决定了线性方程组的自由度（注意方程的自由度不是解的个数）。
+    \end{itemize}
+\end{note}
+
+\vspace{0.3cm}
 
 我们可以再看一个例子。考虑矩阵$B$，
 
@@ -2010,13 +2045,58 @@ B=\left[\begin{array}{rrr}
 \label{eq:矩阵的秩例子2}
 \end{equation*}
 
-这个矩阵只有一个主元列，另外两列都是自由列。自由列也都可以被主元列线性表出。
+矩阵$B$只有一个主元列，另外两列都是自由列。自由列也都可以被主元列线性表出。显然，矩阵$B$的行向量组和列秩都为1，和矩阵$A$一样，列向量组的秩和行秩相等。这同样不是巧合（具体证明我们就略过了）。
+
+\begin{theorem}
+    矩阵行秩和列秩相等。
+\end{theorem}
 
 综合以上两个例子，我们看到，主元在矩阵的行变换过程中非常重要，主元的个数就是矩阵$A$对应的线性方程组中有效方程的个数，这个数字可以认为是矩阵$A$“真正的大小”（true size），这个“真正的大小”很重要，我们将其称为\textbf{矩阵的秩}。
 
-\begin{definition}[矩阵的秩]
-    矩阵$A$的主元个数成为矩阵$A$的\textcolor{third}{\bf 秩}（rank），一般简记为$r$。
+\begin{definition}[矩阵的秩-Gilber Strang教材]
+    矩阵$A$的主元个数成为矩阵$A$的\textcolor{third}{\bf 秩}（rank），记为$\operatorname{\operatorname{rank}}(A)$一般简记为$r$。
 \end{definition}
+
+对于矩阵$A$和矩阵$B$，我们发现，将其化为简化行阶梯后，主元个数（即矩阵的秩）和矩阵的行秩和列秩相等。这同样不是巧合（具体证明我们就略过了）。
+
+\begin{theorem}
+    矩阵行秩等于矩阵的列秩等于矩阵的秩。
+\end{theorem}
+
+\subsection{矩阵等价}
+\label{subsec:矩阵等价}
+
+根据之前的研究过程，我们有如下几点发现：
+
+\begin{itemize}
+    \item 初等变换不改变线性方程组的解；
+    \item 初等变换不改变矩阵的行向量组的秩和列向量组的秩；
+\end{itemize}
+
+\begin{definition}[矩阵等价]
+    矩阵 $A$ 与 $B$ 称为\textcolor{third}{\bf 等价}的, 如果 $B$ 可以由 $A$ 经过一系列初等变换得到.
+\end{definition}
+
+等价是矩阵间的一种关系. 不难证明, 它具有自反性、对称性与传递性.
+
+\begin{theorem}[任何矩阵都等价于一个同尺寸的标准型]
+    任意一个$s\times n$矩阵$A$都与一个形式为
+    \begin{equation*}
+    \left(\begin{array}{cccccc}1 & 0 & \cdots & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0 & \cdots & 0 \\ \vdots & \vdots & & \vdots & & \vdots \\ 0 & 0 & \cdots & 1 & \cdots & 0 \\ 0 & 0 & \cdots & 0 & \cdots & 0 \\ \vdots & \vdots & & \vdots & & \vdots \\ 0 & 0 & \cdots & 0 & \cdots & 0\end{array}\right)
+    \end{equation*}
+    的矩阵等价, 它称为矩阵 $\boldsymbol{A}$ 的\textcolor{third}{\bf 标准形}, 主对角线上 1 的个数等于 $\boldsymbol{A}$的秩（1 的个数可以是零）.
+\end{theorem}
+
+\begin{note}
+    标准型可以是方阵，也可以不是方阵，其特征是从左上方到右下方$45^\circ$线上（类似方阵中的主对角线）的元素均为1，其余元素均为0.
+\end{note}
+
+\begin{theorem}
+矩阵 $\boldsymbol{A}, \boldsymbol{B}$ 等价的充分必要条件是有初等矩阵 $\boldsymbol{P}_1, \cdots, \boldsymbol{P}_l, \boldsymbol{Q}_1, \cdots, \boldsymbol{Q}_{\text {l }}$ 使
+\begin{equation*}
+\boldsymbol{A}=\boldsymbol{P}_1 \boldsymbol{P}_2 \cdots \boldsymbol{P}_l \boldsymbol{B} \boldsymbol{Q}_1 \boldsymbol{Q}_2 \cdots \boldsymbol{Q}_t 
+\end{equation*}
+\end{theorem}
 
 \subsection{线性子空间}
 \label{subsec:线性子空间}
@@ -2042,7 +2122,7 @@ B=\left[\begin{array}{rrr}
     包含向量$\boldsymbol{u},\boldsymbol{v}$的子空间一定包含二者的所有线性组合。
 \end{proposition}
 
-\begin{definition}[Span--Gilbert Strang]
+\begin{definition}[Span--Gilbert Strang教材]
     一组向量\textcolor{third}{\bf 张成}一个空间，如果它们的线性组合布满的整个空间。\\
     A set of vectors \textcolor{third}{\bf span} a space if their linear combinations fill the space.
 \end{definition}
@@ -2054,37 +2134,53 @@ B=\left[\begin{array}{rrr}
 \vspace{0.3cm}
 
 \begin{note}
-    结合最大线性无关组的概念，我们知道，线性空间的基就是该空间内所有向量的最大线性无关组。
+    结合最大线性无关组的概念，我们知道，线性空间的基一定是该空间内所有向量构成的向量组的一个最大线性无关组。
 \end{note}
 
 \vspace{0.3cm}
 
 在 $n$ 维线性空间 $V$ 中, $n$ 个线性无关的向量 $\varepsilon_1$, $\varepsilon_1, \cdots, \varepsilon_n$ 称为 $V$ 的一组基. 设 $\alpha$ 是 $V$ 中任一向量,于是 $\varepsilon_1, \varepsilon_2, \cdots$, $\varepsilon_1, \alpha$ 线性相关,因此 $\boldsymbol{\alpha}$ 可以被基 $\boldsymbol{\varepsilon}_1, \boldsymbol{\varepsilon}_2, \cdots, \boldsymbol{\varepsilon}_n$ 线性表出:
 $$
-\alpha=a_1 \varepsilon_1+a_2 \varepsilon_2+\cdots+a_n \varepsilon_n,
+\boldsymbol{\alpha}=a_1 \varepsilon_1+a_2 \varepsilon_2+\cdots+a_n \varepsilon_n,
 $$
 
 其中系数 $a_1, a_2, \cdots, a_n$ 是被向量 $\boldsymbol{\alpha}$ 和基 $\varepsilon_1, \varepsilon_2, \cdots, \varepsilon_n$ 唯一确定的,这组数就称为 $\boldsymbol{\alpha}$ 在基 $\varepsilon_1, \varepsilon_2, \cdots, \boldsymbol{\varepsilon}_n$ 下的坐标, 记为 $\left(a_1, a_2, \cdots, a_n\right)$.
 
+\vspace{0.3cm}
+
+\begin{note}
+    当我们写出向量的坐标时，我们在写什么？
+    
+    \underline{坐标与基的关系。}当我们把一个向量表示为 $\boldsymbol{\alpha}=(1,2,3)$ 时,这组数字 $(1,2,3)$ 是向量在某个基下的坐标。这意味着向量 $\boldsymbol{\alpha}$ 可以通过将这组基向量分别乘以这些数字 $(1,2,3)$, 然后加在一起来得到。
+
+    \underline{默认的标准基。}在没有明确说明的情况下，我们通常默认使用标准基，也就是直角坐标系中的单位向量作为基。在 $\mathbb{R}^3$ 空间中, 标准基通常是 $\varepsilon_1=(1,0,0), \varepsilon_2=(0,1,0), \varepsilon_3=$ $(0,0,1)$ 。于是, 当我们说 $\boldsymbol{\alpha}=(1,2,3)$ 时, 默认情况下, 我们实际上是说:
+    $$
+    \boldsymbol{\alpha}=1 \cdot \varepsilon_1+2 \cdot \varepsilon_2+3 \cdot \varepsilon_3
+    $$
+\end{note}
+
+\vspace{0.3cm}
+
 \begin{definition}[向量空间的维度]
-    向量空间的维度（维数）是它的每一组基中基向量的个数。
+    向量空间的\textcolor{third}{\bf 维度}（维数）是它的每一组基中基向量的个数。
 \end{definition}
 
-这个定义是良定义的（well-defined），当且仅当向量空间的每一组基中基向量的数量都相等。
+这个定义是良定义的（well-defined）\footnote{数学中，良定义（或良好定义）指无歧义的、不会导致矛盾的、符合其应满足的所有要求的定义。}，当且仅当向量空间的每一组基中基向量的数量都相等。由于我们知道，向量空间的一组基就是该空间的所有向量构成的向量组的一个最大线性无关组，而最大线性无关组中的向量数量一定相等，所以该定义确实是良定义的。
 
 现在，我们使用上面的概念来重新审视矩阵。我们之前有如下的理解矩阵的方法：
 
 \begin{itemize}
-    \item 矩阵$A$表示线性方程组$Ax=c$的系数；
+    \item 矩阵$A$表示线性方程组$Ax=\boldsymbol{b}$的系数；
     \item 矩阵$A$表示空间中某一个线性变换；
 \end{itemize}
 
-我们发现，矩阵$A$的列向量也可以张成一个维度至少为1的空间，我们称这个空间为矩阵$A$的\textcolor{third}{\bf 列空间}，记为$C(A)$。对偶地，矩阵$A$的行向量也可以张成一个维度至少为1的空，我们称这个空间为矩阵$A$的\textcolor{third}{\bf 行空间}。
+我们发现，矩阵$A$的列向量也可以张成一个维度至少为1的空间，我们称这个空间为矩阵$A$的\textcolor{third}{\bf 列空间}，记为$C(A)$。对偶地，矩阵$A$的行向量也可以张成一个维度至少为1的空间，我们称这个空间为矩阵$A$的\textcolor{third}{\bf 行空间}。
 
-从现在开始我们几乎不再像中学时那样写出完整的线性方程组，而更多地使用向量形式，即$Ax=c$，这看起来像是一个公式，称之为方程组虽然是对的但有些怪，故从现在起我们使用它的一个贴近本质的名称--\textcolor{third}{\bf 线性系统}（linear system），从而线性方程组的解就是线性系统的解。借助列空间的概念，我们可以获得对线性系统的解的一种解释。
+% 从现在开始我们几乎不再像中学时那样写出完整的线性方程组，而更多地使用向量形式，即$Ax=\boldsymbol{b}$，这看起来像是一个公式，称之为方程组虽然是对的但有些怪，故从现在起我们使用它的一个贴近本质的名称--\textcolor{third}{\bf 线性系统}（linear system），从而线性方程组的解就是线性系统的解。借助列空间的概念，我们可以获得对线性系统的解的一种解释。
+从现在开始，我们在处理线性方程组时，将不再总是像我们在中学时期那样写出它们的完整形式。相反，我们更多地采用向量和矩阵的形式来表示这些方程组，即使用表达式 $Ax=\boldsymbol{b}$。这不仅仅是一个简单的符号替换：它反映了我们处理问题的方式的根本变化。因此，虽然将 $Ax=\boldsymbol{b}$ 称为“方程组”在技术上是正确的，但这样的称呼在某种程度上忽略了其背后的代数结构和意义。因此，我们将这样的表达形式称为“\textcolor{third}{\bf 线性系统}”（linear system），其优点是更加贴近我们分析这类问题时所依赖的基本概念。在这个框架下，原先所说的“解线性方程组”就转变为“解线性系统”。通过引入列空间等概念，我们可以更深入地理解线性系统的解的性质。
 
 \begin{theorem}
-    线性系统$Ax=c$有解当且仅当$c$在$A$的列空间中。
+    线性系统$Ax=\boldsymbol{b}$有解当且仅当$c$在$A$的列空间中。
 \end{theorem}
 
 考察第\ref{subsec:矩阵的秩}节中的两个例子。我们发现，例子\ref{eq:矩阵的秩例子1}中列空间的维度是2，行空间的维度也是2；而例子\ref{eq:矩阵的秩例子2}中列空间的维度是1，行空间的维度也是1.
@@ -2093,22 +2189,33 @@ $$
     矩阵的行空间的维度等于矩阵列空间的维度等于矩阵的秩。
 \end{theorem}
 
-你可能会到别处看到矩阵的行秩和列秩的概念，这二者分别对应于矩阵行空间的维度和列空间的维度，二者永远相等。
+% 你可能会到别处看到矩阵的行秩和列秩的概念，这二者分别对应于矩阵行空间的维度和列空间的维度，二者永远相等。
+根据第\ref{subsec:矩阵的秩}节的结论可知，矩阵的行空间的维度就是行秩，矩阵的列空间的维度就是列秩。
 
-\begin{definition}
-    一个$m\times n$的矩阵$A$,如果满足以下任一条件,则称$A$是\textcolor{third}{满秩矩阵}:
+\begin{definition}[满秩矩阵]
+    一个$m\times n$的矩阵$A$，如果其秩等于其行数和列数中的最小值，则称$A$是一个\textcolor{third}{\bf 满秩矩阵}。这意味着：:
     \begin{itemize}
-        \item 矩阵$A$的秩等于$\min(m,n)$。也就是说,矩阵的秩达到了最大可能值；
-        \item 矩阵$A$的所有行向量线性无关；
-        \item 矩阵$A$的所有列向量线性无关；
-        \item 如果$m\geq n$，则$A$有$n$个线性无关的列向量；如果$m \leq n$，则$A$有$m$个线性无关的行向量
+        \item 如果 $m \leq n$（行数小于等于列数），那么 $A$ 满秩当且仅当其所有的行都是线性独立的；
+        \item 如果 $m \geq n$（行数大于等于列数），那么 $A$ 满秩当且仅当其所有的列都是线性独立的
     \end{itemize}
 \end{definition}
+
+% \begin{note}
+%     至此，我们可以验证第\ref{subsec:矩阵的秩}中产生的疑问：使用高斯-若尔当消元法将$A$转变为$\operatorname{rref}(A)$后，如何保证“$\operatorname{rref}(A)$还是矩阵$A$”？
+%     考虑高斯-若尔当消元法在操作过程中所做的行变换：
+%     \begin{itemize}
+%         \item \underline{交换两行的位置：}当我们交换矩阵的两行时，并不会改变列向量本身，只是改变了列向量的线性组合中系数的顺序。这不会影响由列向量生成的空间，因为空间的定义与向量的顺序无关。
+
+%         \item \underline{将一行乘以非零常数：}这个变换相当于将一个列向量的线性组合中的某个系数乘以一个非零常数。由于这个操作只是缩放了原始线性组合中的系数，它并不会改变列空间的方向或维度。
+
+%         \item \underline{将一行的非零倍数加到另一行上：}这个变换相当于对一个列向量的线性组合进行另一个线性组合的加法。这种操作会改变某些系数，但不会创建任何新的列向量或消除现有的列向量。因此，生成的空间仍然相同。
+%     \end{itemize}
+% \end{note}
 
 % \subsubsection{齐次线性方程的解}
 % \label{subsec:齐次线性方程的解}
 
-% 一般地，$Ax=0$的求解被称为求解零空间或零向量的问题。例如，现有线性方程：
+% 一般地，$Ax=\boldsymbol{0}$的求解被称为求解零空间或零向量的问题。例如，现有线性方程：
 % \begin{equation*}
 %     \left\{
 %     \begin{array}{c}
@@ -2159,16 +2266,248 @@ $$
 % \caption{Table caption}
 % \end{table}
 
-\subsection{线性代数基本定理}
+\subsection{线性方程组解的结构}
 
 \begin{note}
     \begin{itemize}
-        \item 线性系统$Ax=0$的解答
+        \item 线性系统$Ax=\boldsymbol{0}$的解
         \item 矩阵的零空间
-        \item 线性系统$Ax=c$的解答等于一个$Ax=c$的特解加上$Ax=0$的通解
-        \item 秩-零化度定理
+        \item 线性系统$Ax=\boldsymbol{b}$的解等于一个$Ax=\boldsymbol{b}$的特解加上$Ax=\boldsymbol{0}$的通解
+        \item 秩-零化度定理*
     \end{itemize}
 \end{note}
+
+\subsection{齐次线性方程组的解}
+
+线性系统 $Ax = 0$ 描述了一个线性方程组，这个线性方程组的常数项全部为零，这样的线性方程组称为\textcolor{third}{\bf 齐次线性方程组}，这样的线性系统称为\textcolor{third}{\bf 齐次线性系统}。其中，$A$ 是一个 $m \times n$ 矩阵，$x$ 是一个 $n$ 维列向量。这个系统的解取决于系数矩阵 $A$ 的秩（记作 $\operatorname{rank}(A)$）以及矩阵的列数 $n$。
+
+对于这个系统，可以有以下两种情况：
+
+\begin{enumerate}
+    \item \textbf{唯一解（零解）:}
+   如果 $\operatorname{rank}(A) = n$，则线性系统 $Ax = 0$ 有唯一解，即零解 $x = 0$。这意味着矩阵 $A$ 的列向量是线性独立的，不可能通过线性组合得到非零解。
+   \item \textbf{无限多解：}
+   如果 $\operatorname{rank}(A) < n$，则线性系统 $Ax = 0$ 有无限多解。这是因为至少有一个自由变量（即，不是主变量的变量）。在这种情况下，解集形成了一个由 $n - \operatorname{rank}(A)$ 维的子空间，称为 $A$ 的\textcolor{third}{\bf 零空间}或\textcolor{third}{\bf 核}，记作$N(A)$。
+   % \item \textbf{无解：}
+   % 对于齐次线性方程组 $Ax = 0$，实际上不可能出现无解的情况，因为 $x = 0$ 总是一个解。无解的情况通常出现在非齐次线性方程组（即 $Ax = b$，其中 $b \neq 0$）中，且仅当系数矩阵与增广矩阵的秩不同的时候，即 $\operatorname{rank}(A) \neq \operatorname{rank}([A|b])$。
+\end{enumerate}
+
+对于线性系统 $Ax = 0$，要么有唯一解（零解），要么有无限多解，但不会出现无解的情况。
+
+\subsection{非齐次线性方程组的解}
+
+线性方程组 $Ax = b$（其中 $b \neq 0$）成为\textcolor{third}{\bf 非齐次线性系统}，表示一个\textcolor{third}{\bf 非齐次线性方程组}，其解集的结构与齐次线性系统 $Ax = 0$ 的解集结构具有紧密的联系。
+如果非齐次线性方程组有解，那么它至少有一个特解 $x_p$。特解是指满足方程 $Ax = b$ 的任意一个特定解。除此之外，非齐次线性方程组的任意解都可以表示为其特解与齐次线性方程组解的和：
+
+$$ x = x_h+x_p, $$
+
+其中 $x_h$ 是齐次线性方程组 $Ax = 0$ 的解。
+
+\begin{proposition}
+    当齐次线性方程组 $A x=0$ 有解时，我们将其解集记为$X_h$, 当非齐次线性方程组 $A x=b$ 有解时，
+我们将其一个特解记为 $x_p$ 。
+此时，对于任意一出 $A x=b$ 的解 $x$ ，都存在 $x_h \in X_h$
+使得
+$$
+x=x_h+x_p .
+$$
+\end{proposition}
+
+\begin{proof}
+（反证法）假设存在一个 $A x=b(b \neq 0)$ 的解 $x_0$ ，
+对于任意一个 $x_h \in X_h$ ，都有
+$$
+x_0 \neq x_h+x_p,
+$$
+
+由于 $x_0$ 是 $A x=b$ 的解，故 
+$$
+A x_0=b,
+$$
+
+同时 $A\left(x_h+x_p\right)=A x_h+A x_p=0 + b = b$. 故
+$$
+A x_0 - A\left(x_h+x_p\right) = b-b=0,
+$$
+
+即
+$$
+A\left(x_0 - (x_h+x_p)\right) = 0,
+$$
+
+又因 $x_0 \neq x_h+x_p$ ，故 $x_0-\left(x_h+x_p\right) \neq 0$.进而可以得出 $A=O$ (零矩阵)。此时线性系统写作 $ O x=b$，显然这这个线性系统是无解的。\textcolor{red}{\bf 这与$A x=b$ 有解的条件矛盾。}
+因此，不存在$A x=b(b \neq 0)$ 的解$x_0$，对于任意一个 $x_h \in X_h$ ，都有
+$$
+x_0 \neq x_h+x_p,
+$$
+
+即任意一个$A x=b(b \neq 0)$ 的解$x$，都存在$x_h \in X_h$使得，
+$$
+x_0 = x_h+x_p.
+$$
+\end{proof}
+
+\vspace{0.3cm}
+
+这个结论表明，非齐次线性系统 $Ax = b$ 的所有解可以看作是齐次线性系统 $Ax = 0$ 的解集（零空间）经由特解向量 $x_p$ 平移得到的。
+从系数矩阵的秩的角度看，如果 $\operatorname{rank}(A) = n$，则非齐次线性方程组有唯一解。如果 $\operatorname{rank}(A) < n$ 且 $\operatorname{rank}(A) = \operatorname{rank}([A|b])$，则有无限多解。
+
+显然，如果非齐次线性方程组没有解，那么其增广矩阵 $[A|b]$ 的秩将大于系数矩阵 $A$ 的秩，即 $\operatorname{rank}(A) < \operatorname{\operatorname{rank}}([A|b])$。
+这个条件意味着向量 $b$ 不在系数矩阵 $A$ 列空间的范围内，因此不存在一个向量 $x$ 使得 $Ax = b$。这种情况下，方程组中至少有一个方程与其他方程矛盾，使得整个系统不可能同时满足所有方程。
+
+直观上，如果你将方程组中的方程想象成在多维空间中的超平面，无解的情况就意味着这些超平面没有交点。或者更准确地说，至少有一个超平面与其他超平面形成的交集空间不相交。
+举个简单的例子，考虑两个方程在二维空间中代表的直线：
+
+$$
+\left\{\begin{array}{c}
+2x + y = 5, \\
+4x + 2y = 10 .
+\end{array}\right.
+$$
+
+这两个方程实际上是相同的直线（第二个方程是第一个方程的两倍），所以它们有无限多个共同解。
+
+但是，如果我们对其中一个方程稍作修改：
+
+$$
+\left\{\begin{array}{c}
+2x + y = 5, \\
+4x + 2y = 11 .
+\end{array}\right.
+$$
+
+这时，第二个方程代表的直线与第一个方程代表的直线平行，但不重合，所以没有交点。因此，这个方程组无解。
+
+%\subsection{秩-零化度定理*}
+
+% 考虑以下的线性方程组：
+
+% $$
+% \left\{\begin{array}{c}
+% x + 2y + 3z = 4 \\
+% 2x + 4y + 6z = 8 \\
+% 3x + 6y + 9z = 12 \\
+% \end{array}\right.
+% $$
+
+% 这个方程组可以用矩阵表示为$A\boldsymbol{x}=\boldsymbol{b}$，其中
+
+% $$
+% A = \begin{bmatrix}
+% 1 & 2 & 3 \\
+% 2 & 4 & 6 \\
+% 3 & 6 & 9 \\
+% \end{bmatrix}
+% , \quad
+% \boldsymbol{x} = \begin{bmatrix}
+% x \\
+% y \\
+% z \\
+% \end{bmatrix}
+% , \quad
+% \boldsymbol{b} = \begin{bmatrix}
+% 4 \\
+% 8 \\
+% 12 \\
+% \end{bmatrix}
+% $$
+
+% 这个系统的增广矩阵是：
+
+% $$
+% \left(\begin{array}{ccc|c}
+% 1 & 2 & 3 & 4 \\
+% 2 & 4 & 6 & 8 \\
+% 3 & 6 & 9 & 12 \\
+% \end{array}\right)
+% $$
+
+% 我们可以通过初等行变换将其化简为阶梯形式：
+
+% $$
+% \left(\begin{array}{ccc|c}
+% 1 & 2 & 3 & 4 \\
+% 0 & 0 & 0 & 0 \\
+% 0 & 0 & 0 & 0 \\
+% \end{array}\right)
+% $$
+
+% ### 分析
+
+% - **线性方程组的秩（r）**：在阶梯形式的矩阵中，只有第一行不全为零，因此系数矩阵 $A$ 的秩 \( r = 1 \)。
+% - **线性方程组的零化度（k）**：由于我们的系数矩阵 $A$ 是一个 $3 \times 3$ 矩阵，并且其秩是 $1$，根据秩-零化度定理，零化度 \( k = n - r = 3 - 1 = 2 \)。
+% - **线性方程组的解**：因为这个方程组的秩等于增广矩阵的秩，所以它是相容的。它有无限多解，解的维度由零化度给出，这里是 $2$。
+
+% 因此，我们可以得到一个自由变量，例如选择 $y$ 和 $z$ 为自由变量，然后用来表达 $x$：
+
+% $$
+% \begin{align*}
+% x &= 4 - 2y - 3z \\
+% y &= y \\
+% z &= z \\
+% \end{align*}
+% $$
+
+% 解集可以表示为：
+
+% $$
+% \begin{bmatrix}
+% x \\
+% y \\
+% z \\
+% \end{bmatrix} = 
+% \begin{bmatrix}
+% 4 \\
+% 0 \\
+% 0 \\
+% \end{bmatrix} +
+% y \cdot
+% \begin{bmatrix}
+% -2 \\
+% 1 \\
+% 0 \\
+% \end{bmatrix} +
+% z \cdot
+% \begin{bmatrix}
+% -3 \\
+% 0 \\
+% 1 \\
+% \end{bmatrix}
+% $$
+
+% 这就意味着 $x$ 的值依赖于 $y$ 和 $z$ 的选择，而 $y$ 和 $z$ 可以是任意的实数。
+
+% ### 结论
+
+% 这个例子展示了如何通过秩和零化度来确定线性方程组的解的结构。秩-零化度定理不仅帮助我们确定了方程组的解的存在性和数量，而且还描述了解的自由度。在这个例子中，自由度是 $2$，这意味着我们可以选择两个自由变量来表达通解。
+
+% **秩-零化度定理（Rank-Nullity Theorem）** 是线性代数中的一个基本定理，用于描述线性变换的一些基本性质。定理内容如下：
+
+% \begin{theorem}[秩-零化度定理]
+%     设 $V$ 和 $W$ 是有限维向量空间，且 $T: V \rightarrow W$ 是一个线性变换。记 $V$ 的维数为 $n$，$T$ 的秩（即 $T$ 的像的维数）为 $r$，$T$ 的零化度（即 $T$ 的核的维数）为 $k$。那么：
+
+% $$ n = r + k $$
+% \end{theorem}
+
+% 换言之，线性变换的定义域的维数等于它的像的维数（秩）加上核的维数（零化度）。这个定理揭示了一个线性变换中自由变量和基变量的总数是不变的。
+
+% ### 与线性方程组的联系
+
+% 考虑一个线性方程组 $Ax = b$，其中 $A$ 是一个 $m \times n$ 矩阵，$x$ 是一个未知向量，$b$ 是一个已知向量。
+
+% - **秩**（rank）：矩阵 $A$ 的秩表示线性方程组中，线性独立方程的最大数量，也就是 $A$ 的列向量中线性独立向量的最大数量。
+% - **零化度**（nullity）：矩阵 $A$ 的零化度表示解向量 $x$ 中自由变量的数量，即 $Ax = 0$ 这个齐次线性方程组的基础解系的向量数。
+
+% 秩-零化度定理告诉我们，矩阵的列数（$n$）等于它的秩（$r$）加上它的零化度（$k$）。这对于理解线性方程组的解的性质非常有用。特别是，如果一个线性方程组是相容的，那么其解的维数正好等于零化度。
+
+% ### 与线性空间的内在联系
+
+% 在线性空间的框架下，秩-零化度定理揭示了线性变换的核和像作为子空间的内在关系。核和像分别是线性变换失败和成功的度量。核展示了哪些向量被映射到零向量，而像展示了哪些向量可以通过映射获得。
+
+% - **核（Kernel）**：所有被映射到目标空间零向量的源空间向量的集合。核是一个线性子空间。
+% - **像（Image）**：所有通过映射从源空间获得的目标空间向量的集合。像也是一个线性子空间。
+
+% 秩-零化度定理因此连接了这两个子空间的维数，并通过定义域的维数将它们联系起来。这个定理是线性代数中描述线性变换性质的基础概念之一，对于理解线性映射和线性系统的结构具有重要意义。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{基础矩阵操作}
@@ -2234,6 +2573,8 @@ $$
 
 矩阵的逆可以被看作是对应线性变换的逆变换。如果有一个线性变换可以通过矩阵 \(A\) 来表示，那么该线性变换的逆变换（如果存在）可以通过矩阵 \(A\) 的逆矩阵 \(A^{-1}\) 来表示。这意味着，如果 \(A\) 是将向量 \(x\) 映射到向量 \(y\) 的矩阵，则 \(A^{-1}\) 将 \(y\) 映射回 \(x\)。
 
+\vspace{0.5cm}
+
 为了更具体地说明这一点，让我们考虑两个具有直观几何意义的线性变换：反射和旋转。
 
 \textbf{反射变换。}假设我们有一个关于 \(x\) 轴的反射变换。这个变换可以通过以下矩阵表示：
@@ -2244,6 +2585,8 @@ $$
 
 \[ A_{\text{反射}}^{-1} = A_{\text{反射}} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \]
 
+可见，反射变换的逆变换就是它本身，因为两次反射将会抵消彼此的效果。
+
 \textbf{旋转变换。}考虑一个围绕原点逆时针旋转 \(90^\circ\) 的变换。这个变换可以通过以下矩阵表示：
 
 \[ A_{\text{旋转}} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \]
@@ -2252,12 +2595,14 @@ $$
 
 \[ A_{\text{旋转}}^{-1} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} \]
 
-这个矩阵将点 \( (x, y) \) 旋转到 \( (y, -x) \)，也就是顺时针旋转 \(90^\circ\)。
+这个矩阵将点 \( (x, y) \) 旋转到 \( (y, -x) \)，也就是顺时针旋转 \(90^\circ\)。可见，旋转变换的逆变换是反方向的旋转，以此来抵消原始旋转的效果。
 
-这两个例子清晰地展示了线性变换的逆变换在几何上是如何工作的。反射变换的逆变换就是它本身，因为两次反射将会抵消彼此的效果。旋转变换的逆变换是反方向的旋转，以此来抵消原始旋转的效果。
+% 这两个例子清晰地展示了线性变换的逆变换在几何上是如何工作的。反射变换的逆变换就是它本身，因为两次反射将会抵消彼此的效果。旋转变换的逆变换是反方向的旋转，以此来抵消原始旋转的效果。
 
 然而，并不是所有的方阵都有逆矩阵。一个矩阵$A$是可逆的，当且仅当其行列式非零，即$\det(A)\neq 0$。
-根据第\ref{subsec:矩阵的行列式}节中介绍的行列式的几何意义可知，如果行列式为零，则变换将正方形或立方体分别折叠成一条线或一个平面，即行列式为零的矩阵对应的线性变换会导致几何图形维度的坍缩。可以说，行列式为零的矩阵就是线性代数世界中的二向箔，被降维的过程是不可逆的，因为损失了还原原始几何题的必要信息，
+根据第\ref{subsec:矩阵的行列式}节中介绍的行列式的几何意义可知，如果行列式为零，则变换将正方形或立方体分别折叠成一条线或一个平面，即行列式为零的矩阵对应的线性变换会导致几何图形维度的坍缩。可以说，行列式为零的矩阵就是线性代数世界中的二向箔，被降维的过程是不可逆的，因为损失了还原原始几何体必需的信息。
+
+\vspace{0.5cm}
 
 不可逆矩阵也叫奇异矩阵或退化矩阵，它们的行列式的值为0。下面是一些不可逆矩阵的例子：
 
@@ -2298,9 +2643,27 @@ $$
 
 % \textcolor{red}{待补充：矩阵的逆和列空间的关系。}
 
-\begin{theorem}[矩阵的逆的运算性质]
+\begin{proposition}[矩阵的逆的运算性质]
     对可逆矩阵 $A, B$, 我们有 $(A B)^{-1}=B^{-1} A^{-1}$。\textcolor{red}{（提示：套定义和原矩阵相乘就可以证明）}
+\end{proposition}
+
+\begin{theorem}[矩阵可逆的充分必要条件]
+$n$ 级矩阵 $A$ 为可逆的充分必要条件是它能表成一些初等矩阵的乘积:
+$$
+\boldsymbol{A}=\boldsymbol{Q}_1 \boldsymbol{Q}_2 \cdots \boldsymbol{Q}_m .
+$$
 \end{theorem}
+
+一些推论：
+\begin{itemize}
+    \item 两个 $s \times n$ 矩阵 $\boldsymbol{A}, \boldsymbol{B}$ 等价的充分必要条件为, 存在可逆的 $s$ 级矩阵 $\boldsymbol{P}$ 与可逆的 $n$ 级矩阵 $\boldsymbol{Q}$ 使
+$$
+A=P B Q
+$$
+    \item 可逆矩阵总可以经过一系列初等行变换化成单位矩阵\footnote{反证法：给定一个可逆矩阵 \(A\)，我们首先执行一系列初等行变换将其转换为行最简形式。由于 \(A\) 是可逆的，其行最简形式必定是单位矩阵 \(I\)。这是因为如果 \(A\) 的行最简形式不是 \(I\)，则会存在零行，意味着 \(A\) 不是满秩的，与 \(A\) 可逆（意味着满秩）相矛盾。}.
+\end{itemize}
+
+\vspace{0.5cm}
 
 那么，如何计算矩阵\(A\)的逆呢？一个最容易理解的方法是借助初等变换的求逆法。初等变换包括行交换、行乘以非零常数、行加上另一行的非零常数倍。正如第\ref{subsec:初等变换与矩阵的乘法}节所述，这些操作对应于左乘不同的初等矩阵。矩阵\(A\)的逆可以通过对矩阵\(A\)和单位矩阵\(I\)同时进行初等行变换来求得。具体步骤如下：
 
@@ -2310,9 +2673,12 @@ $$
     \item \textbf{获得逆矩阵:} 如果\(A\)可以通过行变换变为单位矩阵\(I\)，那么在\(I\)位置上变换得到的矩阵就是\(A\)的逆矩阵\(A^{-1}\)。
 \end{enumerate}
 
-该方法的动机和合理性来源于线性代数中的一个基本定理：\textcolor{red}{任何可逆矩阵都可以通过一系列初等行变换变为单位矩阵。}\footnote{
-反证法：给定一个可逆矩阵 \(A\)，我们首先执行一系列初等行变换将其转换为行最简形式。由于 \(A\) 是可逆的，其行最简形式必定是单位矩阵 \(I\)。这是因为如果 \(A\) 的行最简形式不是 \(I\)，则会存在零行，意味着 \(A\) 不是满秩的，与 \(A\) 可逆（意味着满秩）相矛盾。
-}这种方法背后的直觉是，当我们对矩阵\(A\)和单位矩阵\(I\)同时执行相同的初等行变换时，实际上我们是在记录下从\(A\)变换到\(I\)所需的每一步操作。这些操作，反过来应用于单位矩阵\(I\)，可以生成\(A\)的逆矩阵\(A^{-1}\)，因为它们描述了如何通过一系列操作将\(A\)变换为\(I\)。
+% 该方法的动机和合理性来源于线性代数中的一个基本定理：\textcolor{red}{任何可逆矩阵都可以通过一系列初等行变换变为单位矩阵。}\footnote{
+% 反证法：给定一个可逆矩阵 \(A\)，我们首先执行一系列初等行变换将其转换为行最简形式。由于 \(A\) 是可逆的，其行最简形式必定是单位矩阵 \(I\)。这是因为如果 \(A\) 的行最简形式不是 \(I\)，则会存在零行，意味着 \(A\) 不是满秩的，与 \(A\) 可逆（意味着满秩）相矛盾。
+% }
+这种方法背后的直觉是，当我们对矩阵\(A\)和单位矩阵\(I\)同时执行相同的初等行变换时，实际上我们是在记录下从\(A\)变换到\(I\)所需的每一步操作。这些操作，反过来应用于单位矩阵\(I\)，可以生成\(A\)的逆矩阵\(A^{-1}\)，因为它们描述了如何通过一系列操作将\(A\)变换为\(I\)。
+
+\vspace{0.5cm}
 
 \begin{exercise}
 假设我们有一个矩阵\(A\)：
